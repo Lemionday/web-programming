@@ -2,13 +2,13 @@
 // Use Ctrl+Space inside a snippet or a string literal to trigger completions.
 
 const database = 'carres_test';
-const collection = 'accounts';
+const collections = 'accounts';
 
 // Create a new database.
 use(database);
 
 // Create a new collection.
-db.createCollection(collection);
+db.createCollection(collections);
 
 // The prototype form to create a collection:
 /* db.createCollection( <name>,

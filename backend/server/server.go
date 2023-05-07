@@ -16,6 +16,8 @@ import (
 	"github.com/theLemionday/web-programming/conf"
 	"github.com/theLemionday/web-programming/database"
 	"github.com/theLemionday/web-programming/logging"
+	"github.com/theLemionday/web-programming/server/middleware"
+	"github.com/theLemionday/web-programming/server/router"
 )
 
 func getAbsPath() (absPath string) {
@@ -27,7 +29,10 @@ func getAbsPath() (absPath string) {
 }
 
 func Start(cfg *conf.Config) {
-	// database.NewConnection(cfg)
+	// database
+	database.NewConnection(cfg)
+	// database.CheckConnection()
+	defer database.CloseConnection()
 
 	app := fiber.New(fiber.Config{
 		// Prefork:       true,
@@ -54,7 +59,11 @@ func Start(cfg *conf.Config) {
 	}
 	app.Use(logger.New(logCfg))
 
-	registerRoute(app)
+	router.RegisterPublicRoutes(app)
+
+	middleware.SetupJWT(app, cfg.JwtSecret)
+
+	router.RegisterPublicRoutes(app)
 
 	listenAddr := cfg.Host + ":" + cfg.Port
 	go func() {

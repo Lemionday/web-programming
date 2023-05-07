@@ -14,6 +14,7 @@ type Config struct {
 	MongoUser   string
 	MongoPass   string
 	MongoDbName string
+	JwtSecret   string
 	Env         string
 }
 
@@ -47,6 +48,10 @@ func LoadConfig() *Config {
 
 	if config.MongoDbName, ok = os.LookupEnv("MONGO_DB"); !ok {
 		logAndPanic("MONGO_DB")
+	}
+
+	if config.JwtSecret, ok = os.LookupEnv("JWT_SECRET"); !ok {
+		logAndPanic("JWT_SECRET")
 	}
 
 	if config.Env, ok = os.LookupEnv("ENV"); !ok {

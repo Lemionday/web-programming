@@ -7,3 +7,16 @@ type Owner struct {
 	IsPerson bool    `binding:"required"`
 	CarsList []int16 `bson:"car_list"`
 }
+
+type CompanyType int
+
+const (
+	Limited CompanyType = iota
+)
+
+type CompanyOwner struct {
+	Number                 int16  `bson:"_id"`
+	RegisteredOfficeAdress string `bson:"registerd_office_address"`
+	Status                 bool   `bson:",omitempty"`
+	CompanyType
+}

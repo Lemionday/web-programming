@@ -1,0 +1,4 @@
+set dotenv-load
+
+start-server:
+    go run cmd/rfb/main.go

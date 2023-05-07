@@ -12,8 +12,8 @@ import (
 )
 
 type Account struct {
-	Username       string `bson:"_id" binding:"required,min=5,max=30"`
-	Password       string `bson:"-"`
+	Username       string `json: "username" bson:"_id" binding:"required,min=5,max=30"`
+	Password       string `json: "password" bson:"-"`
 	HashedPassword []byte `json:"-"`
 	Salt           []byte `json:"-"`
 	Department     string

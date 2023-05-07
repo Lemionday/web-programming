@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Công ty TNHH KINH DOANH và DU LỊCH ĐỒN KIỆT",
+        "type": 1,
+        "office_address": "Số 5, đường Trần Lư, Xã Ayun, Huyện Mang Yang, Tỉnh Gia Lai",
+        "legal representative": "Ngô Thành Tín"
+    },
+    {
+        "name": "Công ty CỔ PHẦN TẬP ĐOÀN NÔNG NGHIỆP HIỂN CÂY",
+        "type": 1,
+        "office_address": "Tầng 0, tòa nhà Ares, Xã Chấn Hưng, Huyện Vĩnh Tường, Tỉnh Vĩnh Phúc",
+        "legal representative": "Trần Liên Hậu"
+    },
+    {
+        "name": "Công ty TNHH MTV THIẾT KẾ và THƯƠNG MẠI TUYỂN THẢO",
+        "type": 1,
+        "office_address": "Tầng 6, tòa nhà Zeus, Xã Lương Điền, Huyện Cẩm Giàng, Tỉnh Hải Dương",
+        "legal representative": "Đặng Quyên Sang"
+    },
+    {
+        "name": "Công ty CỔ PHẦN DỊCH VỤ CHUYỂN PHÁT, CƠ ĐIỆN LẠNH và CƠ KHÍ PHÚC ĐỊA",
+        "type": 1,
+        "office_address": "Tầng 34, tòa nhà Poseidon, Xã Long Giang, Huyện Chợ Mới, Tỉnh An Giang",
+        "legal representative": "Hồ Lộc Hoa Khoa"
+    },
+    {
+        "name": "Công ty TNHH MTV ĐIỆN TỬ và NỘI THẤT ĐỜI QUÍ",
+        "type": 1,
+        "office_address": "Số 40, đường Giữa Làng, Xã Thanh Sơn, Huyện Hữu Lũng, Tỉnh Lạng Sơn",
+        "legal representative": "Hồ Ngọc Minh Uyên"
+    },
+    {
+        "name": "Công ty TNHH ĐIỆN TỬ và THIẾT KẾ BẢO HÀO",
+        "type": 1,
+        "office_address": "Tầng 2, tòa nhà Artemis, Phường 4, Thành phố Trà Vinh, Tỉnh Trà Vinh",
+        "legal representative": "Trần Tâm Lân Nhã"
+    },
+    {
+        "name": "Công ty TNHH VẬN TẢI, THIẾT KẾ và KIẾN TRÚC TRỊNH NHÂN",
+        "type": 1,
+        "office_address": "Số 4, đường Tỉnh 411c, Phường Rạch Dừa, Thành phố Vũng Tàu, Tỉnh Bà Rịa - Vũng Tàu",
+        "legal representative": "Phan Thủy Tuyết Tuấn"
+    },
+    {
+        "name": "Công ty CỔ PHẦN XÂY DỰNG ĐẨU THỨC",
+        "type": 1,
+        "office_address": "Tầng 4, tòa nhà Poseidon, Xã Phú Xuân, Huyện Nhà Bè, Thành phố Hồ Chí Minh",
+        "legal representative": "Phạm Giang Trân Văn"
+    },
+    {
+        "name": "Công ty TNHH KINH DOANH, THIẾT KẾ và VẬN TẢI HỘI MẾN",
+        "type": 1,
+        "office_address": "Tầng 5, tòa nhà Dionysus, Xã Cổ Lũng, Huyện Bá Thước, Tỉnh Thanh Hóa",
+        "legal representative": "Ngô Tuyết Sơn Ca"
+    },
+    {
+        "name": "Công ty TNHH KỸ THUẬT và NỘI THẤT CHÁNH LẠC",
+        "type": 1,
+        "office_address": "Tầng 03, tòa nhà Hephaestus, Xã Thái Sơn, Huyện Bảo Lâm, Tỉnh Cao Bằng",
+        "legal representative": "Ngô Châu Phong"
+    }
+]
