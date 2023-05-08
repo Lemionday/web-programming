@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/theLemionday/web-programming/schematic"
 )
 
 func RegisterPublicRoutes(app *fiber.App) {
@@ -12,16 +13,18 @@ func RegisterPublicRoutes(app *fiber.App) {
 		})
 	})
 
-	// app.Post("/add", func(c *fiber.Ctx) error {
-	// 	acc := schematic.Account{
-	// 		Username: "tester",
-	// 		Password: "testerpwd",
-	// 	}
-	// 	schematic.AddAccount(&acc)
-	// 	return nil
-	// })
+	app.Post("/add", func(c *fiber.Ctx) error {
+		acc := schematic.Account{
+			Username: "tester",
+			Password: "testerpwd",
+			IsAdmin:  true,
+		}
+		schematic.AddAccount(&acc)
+		return nil
+	})
 
 	app.Post("/login", loginHandler)
+	app.Post("/signup", signupHandler)
 
 	// app.Static("/", "./frontend/build")
 	// app.Static("*", "./frontend/build/index.html")

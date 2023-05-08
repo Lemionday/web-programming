@@ -21,19 +21,8 @@ import { useAuth } from '../../components/hooks/useAuth';
 const theme = createTheme();
 
 export default function LoginPage() {
-    // let navigate = useNavigate();
-    // let location = useLocation();
     let auth = useAuth();
 
-    // let from = location.state?.from?.pathname || "/";
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-
-    //     let formData = new FormData(event.currentTarget);
-    //     let username = formData.get("username");
-
-    // };
     let handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);

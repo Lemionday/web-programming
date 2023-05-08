@@ -1,6 +1,8 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { ProSidebarProvider } from 'react-pro-sidebar';
+import SideBarLayout from '../../SideBarLayout';
 
 export default function ProtectedLayout() {
     let auth = useAuth();
@@ -16,7 +18,9 @@ export default function ProtectedLayout() {
 
     return (
         <div>
-            <Outlet />
+            <SideBarLayout>
+                <Outlet />
+            </SideBarLayout>
         </div>
     );
 }

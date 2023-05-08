@@ -3,7 +3,7 @@ package schematic
 import (
 	"context"
 	"crypto/rand"
-	"fmt"
+	"errors"
 
 	"github.com/theLemionday/web-programming/database"
 	"go.mongodb.org/mongo-driver/bson"
@@ -11,12 +11,17 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+var (
+	ErrUserAlreadyExisted = errors.New("User already existed")
+)
+
 type Account struct {
-	Username       string `json: "username" bson:"_id" binding:"required,min=5,max=30"`
-	Password       string `json: "password" bson:"-"`
+	Username       string `json:"username" bson:"username"`
+	IsAdmin        bool   `json:"-" bson:"admin"`
+	Department     string
+	Password       string `json:"password" bson:"-"`
 	HashedPassword []byte `json:"-"`
 	Salt           []byte `json:"-"`
-	Department     string
 	// CreatedAt      time.Time
 	// ModifiedAt     time.Time
 }
@@ -47,7 +52,8 @@ func AddAccount(account *Account) error {
 	accountsCol := database.GetCol("accounts")
 	_, err = accountsCol.InsertOne(context.TODO(), account)
 	if mongo.IsDuplicateKeyError(err) {
-		fmt.Printf("Account with username %s already exists", account.Username)
+		// fmt.Printf("Account with username %s already exists", account.Username)
+		return ErrUserAlreadyExisted
 	} else if err != nil {
 		return err
 	}
@@ -56,7 +62,7 @@ func AddAccount(account *Account) error {
 
 func Authenticate(username, password string) (*Account, error) {
 	var account Account
-	err := database.GetCol("accounts").FindOne(context.TODO(), bson.D{{"_id", username}}).Decode(&account)
+	err := database.GetCol("accounts").FindOne(context.TODO(), bson.D{{"username", username}}).Decode(&account)
 	if err != nil {
 		return nil, err
 	}

@@ -6,11 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@emotion/react';
 import { RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './components/hooks/useAuth';
+import { ProSidebarProvider } from 'react-pro-sidebar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ProSidebarProvider>
+      <RouterProvider router={router} />
+    </ProSidebarProvider>
   </React.StrictMode>
 );
 
