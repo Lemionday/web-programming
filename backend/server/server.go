@@ -16,7 +16,6 @@ import (
 	"github.com/theLemionday/web-programming/conf"
 	"github.com/theLemionday/web-programming/database"
 	"github.com/theLemionday/web-programming/logging"
-	"github.com/theLemionday/web-programming/server/middleware"
 	"github.com/theLemionday/web-programming/server/router"
 )
 
@@ -59,11 +58,7 @@ func Start(cfg *conf.Config) {
 	}
 	app.Use(logger.New(logCfg))
 
-	router.RegisterPublicRoutes(app)
-
-	middleware.SetupJWT(app, cfg.JwtSecret)
-
-	router.RegisterPublicRoutes(app)
+	router.RegisterRoutes(app, cfg.JwtSecret)
 
 	listenAddr := cfg.Host + ":" + cfg.Port
 	go func() {

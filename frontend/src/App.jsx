@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-// import './App.css';
+import './App.scss';
 import { AuthLayout } from './components/shared/Layout/AuthLayout';
 import ProtectedLayout from './components/shared/Layout/ProtectedLayout';
 import CarList from './pages/CarList/CarList';

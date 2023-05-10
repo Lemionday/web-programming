@@ -7,79 +7,99 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
-import { useState } from "react";
+import { useRef, useState } from "react";
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
 import VisibilityOffTwoToneIcon from '@mui/icons-material/VisibilityOffTwoTone';
 import signUpAction from './signupAction';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import { useAuth } from '../../components/hooks/useAuth';
 
+const beginState = {
+    text: "",
+    error: false,
+    helperText: ""
+};
+
+function ShowPasswordButton({ isShowPassword, showPassword: toggleShowPassword }) {
+    return <InputAdornment position='end'>
+        <IconButton onClick={toggleShowPassword}>
+            {isShowPassword ? <VisibilityTwoToneIcon /> : <VisibilityOffTwoToneIcon />}
+        </IconButton>
+    </InputAdornment>;
+}
 
 export default function RegisterPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
+    const validate = useRef({
+        username: "",
+        password: "",
+        passwordConfirm: ""
+    })
     const [isShowPassword, setIsShowPassword] = useState(false);
-    const [openError, setOpenError] = useState(null);
     const auth = useAuth();
-
-    function passwordMatch() {
-        return password === passwordConfirm;
-    }
 
     function showPassword() {
         setIsShowPassword(!isShowPassword);
     }
 
-    function usernameValidation() {
-        const length = username.length;
-        if (length < 3 || length > 25) {
+    function isError(helperText) {
+        if (helperText.length !== 0) {
             return false;
         }
-
         return true;
     }
 
-    function passwordValidation() {
-        const rules = [
-            /(?=.{8,})/, // >= 8 chars
-            /(?=.*[A-Z])/, // >= 1 uppercase char
-            /(?=.*[a-z])/, // >= 1 lowercase char
-            /(?=.*[0-9])/, // >= 1 digit
-            /([^A-Za-z0-9])/, // >= 1 special char
-        ];
-        let count = 0;
-        if (password.test(rules[0])) {
-            for (const rule of rules.slice(1)) {
-                if (password.test(rule)) {
-                    count += 1;
-                }
-            }
-            switch (count) {
-                case 0 | 1:
-                    return 'weak';
-                case 2:
-                    return 'medium';
-                case 3:
-                    return 'strong';
-            }
+    function usernameValidate(username) {
+        const length = username.length;
+        let helperText = "";
+        if (length < 3) {
+            helperText = "Tên đăng nhập quá ngắn, cần ít nhất 3 ký tự";
+        } else if (length > 25) {
+            helperText = "Tên đăng nhập quá dài, cần ngắn hơn 25 ký tự";
         }
-        return 'very weak';
+
+        validate.current.username = helperText;
+        setUsername(username);
+
+        return isError(helperText);
+    }
+
+    function passwordValidate(password) {
+        const length = password.length;
+        let helperText = "";
+        if (length === 0) {
+            helperText = "Mật khẩu không được để trống";
+        }
+
+        validate.current.password = helperText;
+        setPassword(password);
+
+        return isError(helperText);
+    }
+
+    function passwordConfirmValidate(passwordConfirm) {
+        let helperText = "";
+        if (password !== passwordConfirm) {
+            helperText = "Mật khẩu không khớp";
+        }
+
+        validate.current.passwordConfirm = helperText;
+        setPasswordConfirm(passwordConfirm)
+        return isError(helperText);
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (!passwordMatch) {
-            setOpenError("Passwords don't match!");
-        }
+        if (!usernameValidate(username) || !passwordConfirmValidate(passwordConfirm) || !passwordValidate(password)) return;
+
 
         const newUserCredentials = {
             username: username,
             password: password,
         }
 
-        console.log(newUserCredentials);
-        console.log(auth.token);
         signUpAction(auth.token, newUserCredentials);
     }
 
@@ -91,16 +111,19 @@ export default function RegisterPage() {
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                 <TextField
                     margin="normal"
+                    error={validate.current.username.length === 0 ? false : true}
+                    helperText={validate.current.username}
                     required
                     fullWidth
                     id="username"
                     label="Tên đăng nhập"
-                    name="username"
                     autoFocus
-                    onChange={e => { setUsername(e.target.value); }}
+                    onChange={e => usernameValidate(e.target.value)}
                 />
                 <TextField
                     margin="normal"
+                    error={validate.current.password.length === 0 ? false : true}
+                    helperText={validate.current.password}
                     required
                     fullWidth
                     name="password"
@@ -108,17 +131,15 @@ export default function RegisterPage() {
                     type={isShowPassword ? "input" : "password"}
                     id="password"
                     autoComplete="new-password"
-                    onChange={e => { setPassword(e.target.value); }}
+                    onChange={e => passwordValidate(e.target.value)}
                     InputProps={{
-                        endAdornment: <InputAdornment position='end'>
-                            <IconButton onClick={showPassword}>
-                                {isShowPassword ? <VisibilityTwoToneIcon /> : <VisibilityOffTwoToneIcon />}
-                            </IconButton>
-                        </InputAdornment>,
+                        endAdornment: <ShowPasswordButton isShowPassword={isShowPassword} showPassword={showPassword} />
                     }}
                 />
                 <TextField
                     margin="normal"
+                    error={validate.current.passwordConfirm.length === 0 ? false : true}
+                    helperText={validate.current.passwordConfirm}
                     required
                     fullWidth
                     name="password"
@@ -126,13 +147,9 @@ export default function RegisterPage() {
                     type={isShowPassword ? "input" : "password"}
                     id="passwordConfirm"
                     autoComplete="current-password"
-                    onChange={e => { setPasswordConfirm(e.target.value); }}
+                    onChange={e => passwordConfirmValidate(e.target.value)}
                     InputProps={{
-                        endAdornment: <InputAdornment position='end'>
-                            <IconButton onClick={showPassword}>
-                                {isShowPassword ? <VisibilityTwoToneIcon /> : <VisibilityOffTwoToneIcon />}
-                            </IconButton>
-                        </InputAdornment>,
+                        endAdornment: <ShowPasswordButton isShowPassword={isShowPassword} showPassword={showPassword} />
                     }}
                 />
                 <PasswordStrengthBar password={password} />

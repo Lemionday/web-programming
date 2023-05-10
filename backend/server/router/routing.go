@@ -3,9 +3,10 @@ package router
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/theLemionday/web-programming/schematic"
+	"github.com/theLemionday/web-programming/server/middleware"
 )
 
-func RegisterPublicRoutes(app *fiber.App) {
+func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	// public
 	app.Get("/api", func(c *fiber.Ctx) error {
 		return c.JSON(&fiber.Map{
@@ -24,19 +25,20 @@ func RegisterPublicRoutes(app *fiber.App) {
 	})
 
 	app.Post("/login", loginHandler)
-	app.Post("/signup", signupHandler)
 
+	// jwt
+	middleware.SetupJWT(app, jwtSecret)
+
+	// protected
+	app.Get("/hello", hello)
+	app.Post("/signup", signupHandler)
 	// app.Static("/", "./frontend/build")
 	// app.Static("*", "./frontend/build/index.html")
-	app.Use(func(c *fiber.Ctx) error {
-		return c.SendStatus(fiber.StatusNotFound)
-	})
+	// app.Use(func(c *fiber.Ctx) error {
+	// 	return c.SendStatus(fiber.StatusNotFound)
+	// })
 }
 
 func hello(c *fiber.Ctx) error {
 	return c.SendString("I made a ☕ for you!")
-}
-
-func RegisterProtectedRoutes(app *fiber.App) {
-	app.Get("/hello", hello)
 }

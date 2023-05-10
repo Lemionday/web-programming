@@ -28,7 +28,8 @@ async function loginAPI(accountData) {
 }
 
 export function AuthProvider({ children }) {
-    const [token, setToken] = useState(null);
+    // const [token, setToken] = useState(null);
+    const [token, setToken] = useState(1);
     const navigate = useNavigate();
 
     // call this function when you want to authenticate the user

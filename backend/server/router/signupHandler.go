@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
+	"github.com/rs/zerolog/log"
 	"github.com/theLemionday/web-programming/schematic"
 )
 
@@ -13,6 +14,7 @@ func signupHandler(c *fiber.Ctx) error {
 	if isAdmin {
 		newUser := new(schematic.Account)
 		if err := c.BodyParser(newUser); err != nil {
+			log.Error().Err(err).Msg("Parse account from /signup")
 			return c.SendStatus(404)
 		}
 
