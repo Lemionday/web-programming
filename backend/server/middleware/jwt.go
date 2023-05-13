@@ -24,7 +24,7 @@ func SetupJWT(app *fiber.App, jwtSecret string) {
 func GenerateJWT(user *schematic.Account) (string, error) {
 	claims := jwt.MapClaims{
 		"username": user.Username,
-		"admin":    user.IsAdmin,
+		"status":   user.Role,
 		"exp":      time.Now().Add(time.Hour * 1).Unix(),
 	}
 

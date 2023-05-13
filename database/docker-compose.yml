@@ -7,13 +7,12 @@ services:
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongoadmin
-      MONGO_INITDB_ROOT_PASSWORD: "QO%wpm101rO%NO9iYOPQ#4acbz36nj"
-      MONGO_INITDB_DATABASE: carres
+      MONGO_INITDB_ROOT_PASSWORD: QO%wpm101rO%NO9iYOPQ#4acbz36nj
     ports:
       - 27017:27017
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
-      - log:/var/log/mongodb
+      # - log:/var/log/mongodb
 
-volumes:
-  log: null
+      # volumes:
+      #   log:

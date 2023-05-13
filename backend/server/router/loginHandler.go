@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/rs/zerolog/log"
 	"github.com/theLemionday/web-programming/schematic"
 	"github.com/theLemionday/web-programming/server/middleware"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -11,27 +12,32 @@ import (
 )
 
 func loginHandler(c *fiber.Ctx) error {
-	data := new(schematic.Account)
-	if err := c.BodyParser(data); err != nil {
-		return c.SendStatus(404)
-	}
-
-	account, err := schematic.Authenticate(data.Username, data.Password)
+	account, err := schematic.Authenticate(c.Locals("username").(string), c.Locals("password").(string))
 	if err == mongo.ErrNoDocuments {
-		c.SendString(fmt.Sprintf("No account with username %s", c.FormValue("username")))
-		return c.SendStatus(fiber.StatusNotFound)
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"err": fmt.Sprintf("No account with username %s", c.Locals("username")),
+		})
 	} else if err == bcrypt.ErrMismatchedHashAndPassword {
-		return c.Status(fiber.StatusUnauthorized).SendString("Wrong password")
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"err": "Wrong password",
+		})
 	} else if err != nil {
-		return err
+		log.Error().Err(err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"err": err,
+		})
 	}
 
 	token, err := middleware.GenerateJWT(account)
 	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).SendString("Cannot generate token for you!")
+		log.Error().Err(err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"err": "Cannot generate token for you!",
+		})
 	}
 
 	return c.JSON(fiber.Map{
-		"token": token,
+		"token":  token,
+		"status": account.Role,
 	})
 }

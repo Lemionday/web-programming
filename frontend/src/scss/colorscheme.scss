@@ -1,0 +1,9 @@
+body {
+    --color-background: #fafafa;
+    --color-foreground: #1f2023;
+
+    .dark {
+        --color-background: #1f2023;
+        --color-foreground: #efefef;
+    }
+}
