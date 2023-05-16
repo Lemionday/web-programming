@@ -2,9 +2,19 @@ from typing import Any
 from faker.providers.person import Provider as NameProvider
 from collections import OrderedDict
 import rstr
+import csv
 
 
 class Provider(NameProvider):
+    def __init__(self, generator: Any) -> None:
+        super().__init__(generator)
+        with open("name/female.csv") as inFile:
+            csv_reader = csv.reader(inFile, delimiter=";")
+            self.female_names = tuple(id[0] for id in csv_reader)
+        with open("name/male.csv") as inFile:
+            csv_reader = csv.reader(inFile, delimiter=";")
+            self.male_names = tuple(id[0] for id in csv_reader)
+
     first_names = OrderedDict(
         [
             ("Nguyễn", 38.4),
@@ -24,198 +34,40 @@ class Provider(NameProvider):
         ]
     )
 
-    middle_names_1 = (
-        "Thị",
-        "Văn",
-        "Phúc",
-        "Lộc",
-        "Thọ",
-        "Đoan",
-        "Trang",
-        "Tuyết",
-        "Trinh",
-        "Hiền",
-        "Thương",
-        "Hùng",
-        "Dũng",
-        "Bảo",
-        "Trân",
-        "Trọng",
-        "Châu",
-        "Hồng",
-        "Lan",
-        "Huệ",
-        "Loan",
-        "Phụng",
-        "Sơn Ca",
-        "An",
-        "Anh",
-        "Bách",
-        "Bằng",
-        "Bảo",
-        "Bình",
-        "Chân",
-        "Châu",
-        "Cương",
-        "Cường",
-        "Đại",
-        "Dàng",
-        "Danh",
-        "Đào",
-        "Đát",
-        "Đạt",
-        "Dây",
-        "Dĩ",
-        "Diễm",
-        "Dinh",
-        "Đông",
-        "Đức",
-        "Dũng",
-        "Dương",
-        "Duy",
-        "Duyên",
-        "Giang",
-        "Hà",
-        "Hạ",
-        "Hải",
-        "Hằng",
-        "Hậu",
-        "Hiền",
-        "Hiển",
-        "Hiếu",
-        "Hiệu",
-        "Hoa",
-        "Hoài",
-        "Hoàng",
-        "Hoanh",
-        "Hợp",
-        "Huân",
-        "Huệ",
-        "Hùng",
-        "Hưng",
-        "Huy",
-        "Huỳnh",
-        "Kha",
-        "Khang",
-        "Khanh",
-        "Khoa",
-        "Khôi",
-        "Kiên",
-        "Kiều",
-        "Lạc",
-        "Lâm",
-        "Lân",
-        "Lệ",
-        "Liên",
-        "Linh",
-        "Lợi",
-        "Long",
-        "Ly",
-        "Lý",
-        "Mai",
-        "Mạnh",
-        "Minh",
-        "Mụi",
-        "My",
-        "Nam",
-        "Ngân",
-        "Nghĩa",
-        "Ngọc",
-        "Nguyện",
-        "Nguyệt",
-        "Nhã",
-        "Nhi",
-        "Như",
-        "Nhung",
-        "Oanh",
-        "Phát",
-        "Phi",
-        "Phong",
-        "Phú",
-        "Phúc",
-        "Phương",
-        "Quân",
-        "Quang",
-        "Quốc",
-        "Quyên",
-        "Quỳnh",
-        "Sách",
-        "Sang",
-        "Sơn",
-        "Sung",
-        "Tài",
-        "Tâm",
-        "Tạo",
-        "Thái",
-        "Thắm",
-        "Thăng",
-        "Thanh",
-        "Thành",
-        "Thảo",
-        "Thế",
-        "Thiện",
-        "Thơ",
-        "Thoa",
-        "Thông",
-        "Thu",
-        "Thư",
-        "Thuận",
-        "Thương",
-        "Thúy",
-        "Thùy",
-        "Thủy",
-        "Thy",
-        "Tiến",
-        "Tín",
-        "Tính",
-        "Tình",
-        "Trà",
-        "Trâm",
-        "Trân",
-        "Trang",
-        "Trạng",
-        "Tri",
-        "Trí",
-        "Trịnh",
-        "Trúc",
-        "Trung",
-        "Trương",
-        "Trường",
-        "Tứ",
-        "Tuấn",
-        "Tùng",
-        "Tuyền",
-        "Tuyết",
-        "Uyên",
-        "Văn",
-        "Vĩ",
-        "Vinh",
-        "Vũ",
-        "Vui",
-        "Vy",
-        "Vỹ",
-        "Xương",
-        "Yến",
+    female_name_formats = OrderedDict(
+        [
+            ("{{first_name}} {{female_last_name}}", 0.64),
+            ("{{first_name}} Thị {{female_last_name}}", 0.36),
+        ]
     )
 
-    formats = ("{{first_name}} {{last_name}}",)
-
-    name_length = OrderedDict(
+    male_name_formats = OrderedDict(
         [
-            (2, 0.64),
-            (3, 0.35),
-            (1, 0.01),
+            ("{{first_name}} {{male_last_name}}", 0.64),
+            ("{{first_name}} Văn {{male_last_name}}", 0.36),
         ]
     )
 
     def first_name(self) -> str:
         return self.random_element(self.first_names)
 
-    def last_name(self) -> str:
-        length = self.random_elements(self.name_length, length=1, use_weighting=True)[0]
-        return " ".join(
-            self.random_elements(self.middle_names_1, length=length, unique=True)
-        )
+    def female_name(self):
+        pattern = self.random_element(self.female_name_formats)
+        return self.generator.parse(pattern)
 
-    def phonenumber(self) -> str:
-        return rstr.xeger(r"0[0-9]{10}")
+    def male_name(self):
+        pattern = self.random_element(self.male_name_formats)
+        return self.generator.parse(pattern)
+
+    def female_last_name(self) -> str:
+        return self.random_element(self.female_names)
+
+    def male_last_name(self) -> str:
+        return self.random_element(self.male_names)
+
+    def sex_and_name(self) -> tuple[int, str]:
+        sex = self.random_element((True, False))
+        if sex:
+            return 0, self.male_name()
+        else:
+            return 1, self.female_name()

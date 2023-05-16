@@ -1,20 +1,16 @@
-import React from 'react';
-
-import { Sidebar, Menu, MenuItem, useProSidebar, SubMenu, sidebarClasses, menuClasses } from 'react-pro-sidebar';
-import { Link, Outlet } from 'react-router-dom';
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import ToggleDarkModeButton from '../buttons/ToggleDarkMode';
-import { useColorScheme } from '../hooks/useColorScheme';
-import SpaceDashboardTwoToneIcon from '@mui/icons-material/SpaceDashboardTwoTone';
-import GroupTwoToneIcon from '@mui/icons-material/GroupTwoTone';
-import PersonAddAltTwoToneIcon from '@mui/icons-material/PersonAddAltTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import AppRegistrationTwoToneIcon from '@mui/icons-material/AppRegistrationTwoTone';
 import EmojiTransportationTwoToneIcon from '@mui/icons-material/EmojiTransportationTwoTone';
+import GroupTwoToneIcon from '@mui/icons-material/GroupTwoTone';
 import LeaderboardTwoToneIcon from '@mui/icons-material/LeaderboardTwoTone';
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import PersonAddAltTwoToneIcon from '@mui/icons-material/PersonAddAltTwoTone';
+import SpaceDashboardTwoToneIcon from '@mui/icons-material/SpaceDashboardTwoTone';
 import TrendingUpTwoToneIcon from '@mui/icons-material/TrendingUpTwoTone';
+import { Menu, MenuItem, Sidebar, SubMenu, sidebarClasses, useProSidebar } from 'react-pro-sidebar';
+import { Link, Outlet } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { Role } from '../models/Roles';
-import AppRegistrationTwoToneIcon from '@mui/icons-material/AppRegistrationTwoTone';
 
 export default function SideBar() {
     const { collapseSidebar } = useProSidebar();

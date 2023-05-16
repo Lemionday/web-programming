@@ -86,6 +86,7 @@ def inch2mm(inch):
 class CarRegistry:
     def __init__(
         self,
+        car_id,
         car_spec,
         city,
         unique_num,
@@ -97,6 +98,7 @@ class CarRegistry:
         register_number,
         bill_number,
     ) -> None:
+        self.car_id = f"c-{car_id}"
         self.manufacturer = car_spec["manufacturer"]
         self.model = car_spec["model"]
         self.carbody = car_spec["carbody"]
@@ -121,12 +123,15 @@ class CarRegistry:
         self.register_number = register_number
         self.bill_number = bill_number
 
+    def add_owner_id(self, owner_id: str) -> None:
+        self.owner_id = owner_id
+
 
 class CarRegistryFactory(factory.Factory):
     class Meta:
         model = CarRegistry
 
-    car_id = factory.Sequence(lambda n: f"c-{factory.Faker('uuid4')}")
+    car_id = factory.Faker("uuid4")
     car_spec = factory.Faker("car_spec")
 
     city = factory.Faker("plate_city")

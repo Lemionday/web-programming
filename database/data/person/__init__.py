@@ -22,17 +22,19 @@ class Person:
     def __init__(
         self,
         id,
-        name,
-        sex,
+        sex_and_name,
         ssn_city,
-        ssn_sex,
         ssn_year,
         ssn_unique_number,
         birthdate,
     ):
-        self.id = id
-        self.name = name
-        self.sex = sex
+        self.id = f"op-{id}"
+        self.name = sex_and_name[1]
+        self.sex = "nam"
+        ssn_sex = 0
+        if sex_and_name[0] == True:
+            self.sex = "nữ"
+            ssn_sex = 1
         self.birthdate = birthdate.strftime("%-d/%-m/%Y")
         self.ssn = f"{ssn_city[1]}{ssn_sex}{ssn_year}{ssn_unique_number}"
         self.birthplace = ssn_city[0]
@@ -49,16 +51,10 @@ class PersonFactory(factory.Factory):
     class Meta:
         model = Person
 
-    id = factory.Sequence(lambda n: f"op-{factory.Faker('uuid4')}")
-    name = factory.Faker("name", locale="vi_VN")
+    id = factory.Faker("uuid4")
+    sex_and_name = factory.Faker("sex_and_name", locale="vi_VN")
 
     ssn_city = factory.Faker("ssn_city_code", locale="vi_VN")
-    if factory.Faker("pybool"):
-        sex = "nam"
-        ssn_sex = 0
-    else:
-        sex = "nữ"
-        ssn_sex = 1
     birthdate = factory.fuzzy.FuzzyDate(
         datetime.date(1950, 1, 1), datetime.date(1999, 12, 31)
     ).evaluate(2, None, False)

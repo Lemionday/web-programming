@@ -136,10 +136,10 @@ export default function CentersListPage() {
                                 {row.id}
                             </TableCell>
                             <TableCell style={{ width: '40vw' }} align="left">
-                                {row.Name}
+                                {row.name}
                             </TableCell>
                             <TableCell style={{ width: '40vw' }} align="left">
-                                {row.Address}
+                                {row.address}
                             </TableCell>
                         </TableRow>
                     ))}
