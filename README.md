@@ -38,6 +38,7 @@ tham số trong file json
 }
 ```
 
+URL: GET /owner/<id>
 thông tin chủ sở hữu gồm 2 loại chủ sở hữu: trong file people.json và companies.json
 ```json
 {
