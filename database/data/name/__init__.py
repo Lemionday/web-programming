@@ -1,24 +1,28 @@
+from typing import Any
 from faker.providers.person import Provider as NameProvider
 from collections import OrderedDict
+import rstr
 
 
 class Provider(NameProvider):
-    first_names = OrderedDict([
-        ("Nguyễn", 38.4),
-        ("Trần", 12.1),
-        ("Lê", 9.5),
-        ("Phạm", 7),
-        ("Hoàng", 5.1),
-        ("Phan", 4.5),
-        ("Vũ", 3.9),
-        ("Đặng", 2.1),
-        ("Bùi", 2),
-        ("Đỗ", 1.4),
-        ("Hồ", 1.3),
-        ("Ngô", 1.3),
-        ("Dương", 1),
-        ("Lý", 0.5),
-    ])
+    first_names = OrderedDict(
+        [
+            ("Nguyễn", 38.4),
+            ("Trần", 12.1),
+            ("Lê", 9.5),
+            ("Phạm", 7),
+            ("Hoàng", 5.1),
+            ("Phan", 4.5),
+            ("Vũ", 3.9),
+            ("Đặng", 2.1),
+            ("Bùi", 2),
+            ("Đỗ", 1.4),
+            ("Hồ", 1.3),
+            ("Ngô", 1.3),
+            ("Dương", 1),
+            ("Lý", 0.5),
+        ]
+    )
 
     middle_names_1 = (
         "Thị",
@@ -194,20 +198,24 @@ class Provider(NameProvider):
         "Yến",
     )
 
-    formats = (
-        "{{first_name}} {{last_name}}",
-    )
+    formats = ("{{first_name}} {{last_name}}",)
 
-    name_length = OrderedDict([
-        (2, 0.64),
-        (3, 0.35),
-        (1, 0.01),
-    ])
+    name_length = OrderedDict(
+        [
+            (2, 0.64),
+            (3, 0.35),
+            (1, 0.01),
+        ]
+    )
 
     def first_name(self) -> str:
         return self.random_element(self.first_names)
 
     def last_name(self) -> str:
-        length = self.random_elements(
-            self.name_length, length=1, use_weighting=True)[0]
-        return " ".join(self.random_elements(self.middle_names_1, length=length, unique=True))
+        length = self.random_elements(self.name_length, length=1, use_weighting=True)[0]
+        return " ".join(
+            self.random_elements(self.middle_names_1, length=length, unique=True)
+        )
+
+    def phonenumber(self) -> str:
+        return rstr.xeger(r"0[0-9]{10}")

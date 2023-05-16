@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
+	"github.com/rs/zerolog/log"
 	"github.com/theLemionday/web-programming/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -22,8 +23,8 @@ type Account struct {
 	Role           Role   `json:"-" bson:"role"`
 	Department     string `json:"department" bson:"department"`
 	Password       string `json:"password" bson:"-" validate:"required,min=8"`
-	HashedPassword []byte `json:"-"`
-	Salt           []byte `json:"-"`
+	HashedPassword []byte `json:"-" bson:"hashpassword"`
+	Salt           []byte `json:"-" bson:"salt"`
 	// CreatedAt      time.Time
 	// ModifiedAt     time.Time
 }
@@ -45,9 +46,8 @@ func validateAccount(account Account) (errors []*ErrorValidate) {
 func ValidateAccountDataFromRequest(c *fiber.Ctx) error {
 	data := new(Account)
 	if err := c.BodyParser(data); err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"err": err,
-		})
+		log.Error().Stack().Err(err).Msg("")
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
 	errors := validateAccount(*data)
@@ -84,10 +84,13 @@ func AddAccount(account *Account) error {
 	account.Salt = salt
 	account.HashedPassword = hashedPassword
 
+	if account.Role == Unauthorized {
+		account.Role = AuthorizedFromRegistryCenter
+	}
+
 	accountsCol := database.GetCol("accounts")
 	_, err = accountsCol.InsertOne(context.TODO(), account)
 	if mongo.IsDuplicateKeyError(err) {
-		// fmt.Printf("Account with username %s already exists", account.Username)
 		return ErrUserAlreadyExisted
 	} else if err != nil {
 		return err

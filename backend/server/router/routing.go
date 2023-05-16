@@ -15,15 +15,16 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 		})
 	})
 
-	app.Post("/add", func(c *fiber.Ctx) error {
-		acc := schematic.Account{
-			Username: "tester",
-			Password: "testerpwd",
-			Role:     schematic.Admin,
-		}
-		schematic.AddAccount(&acc)
-		return nil
-	})
+	app.Get("/setuptest", addTestAccounts)
+	// app.Post("/add", func(c *fiber.Ctx) error {
+	// 	acc := schematic.Account{
+	// 		Username: "tester",
+	// 		Password: "testerpwd",
+	// 		Role:     schematic.Admin,
+	// 	}
+	// 	schematic.AddAccount(&acc)
+	// 	return nil
+	// })
 
 	app.Post("/login", schematic.ValidateAccountDataFromRequest, loginHandler)
 	app.Get("/centers", func(c *fiber.Ctx) error {

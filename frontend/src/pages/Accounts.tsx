@@ -35,7 +35,7 @@ export default function AccountsPage() {
     ];
 
     return (
-        <div style={{ height: 400, width: '100vw' }}>
+        <div style={{ height: 400, width: '100vw', color: 'inherit' }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -46,6 +46,12 @@ export default function AccountsPage() {
                 }}
                 pageSizeOptions={[5, 10]}
                 checkboxSelection
+                style={
+                    {
+
+                        color: 'inherit'
+                    }
+                }
             />
         </div>
     );

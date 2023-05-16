@@ -13,6 +13,7 @@ import AccountsPage from './pages/Accounts';
 import { BaseLayout } from './components/layout/Base';
 import CentersListPage from './pages/Centers';
 import { config } from './conf/config';
+import AboutPage from './pages/About';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             children: [
               { path: '/login', element: <LoginPage /> }
             ]
+          },
+          {
+            path: '/about',
+            element: <AboutPage />
           },
           {
             path: '/centers',

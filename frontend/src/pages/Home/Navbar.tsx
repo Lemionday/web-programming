@@ -14,7 +14,7 @@ export default function Navbar() {
                         <Link to='/login'>Đăng nhập</Link>
                     </li>
                     <li>
-                        <Link to='/#about'>Liên hệ</Link>
+                        <Link to='/about'>Liên hệ</Link>
                     </li>
                 </ul>
             </Box>

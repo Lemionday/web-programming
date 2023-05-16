@@ -1,3 +1,4 @@
+@import "../../scss/colorscheme.scss";
 $left-right-padding: 10rem;
 $navbar-height: 4rem;
 
@@ -10,25 +11,62 @@ $navbar-height: 4rem;
     margin-top: $navbar-height + 4rem;
     gap: 4rem;
 
+    #hero-title {
+        color: $pastel-green;
+    }
+
     #hero-image {
-        content: url(../../../public/assets/images/Toyota-Vios-White-2.jpg);
+        content: url(../../../public/assets/images/Toyota-Vios-White.jpg);
         margin-left: auto;
         margin-right: auto;
-        height: 70%;
-        width: 70%;
+        height: 60%;
+        width: 60%;
         box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
     }
-}
 
-.member-card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    text-align: center;
-    // padding-top: 1rem;
-
-    .avatar {
-        margin-top: 0.5rem;
-        margin: auto;
-        width: 50%;
-        height: 50%;
+    .hover-btn {
+        margin: 0.5rem;
+        display: inline-block;
+        padding: 0.75rem 1.25rem;
+        border-radius: 10rem;
+        color: $dark-cyan;
+        text-transform: uppercase;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: 0.15rem;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        text-decoration: none;
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $pastel-blue;
+            border-radius: 10rem;
+            z-index: -2;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: darken($pastel-blue, 15%);
+            transition: all 0.3s;
+            border-radius: 10rem;
+            z-index: -1;
+        }
+        &:hover {
+            color: #fff;
+            &:before {
+                width: 100%;
+            }
+        }
     }
 }

@@ -22,10 +22,12 @@ export default function SideBar() {
     return (
         <div style={{ display: 'flex', height: '100vh' }}>
             <Sidebar
+                backgroundColor="#8fd6e8"
+                rtl={false}
                 rootStyles={{
                     [`.${sidebarClasses.container}`]: {
-                        backgroundColor: 'green',
                         alignItems: 'center',
+                        color: '#03131a'
                     }
                 }}>
                 <Menu >
@@ -34,6 +36,7 @@ export default function SideBar() {
                         onClick={() => { collapseSidebar(); }}
                         rootStyles={{
                             textAlign: "right",
+                            color: '#03131a'
                         }}
                     >
                         {" "}
@@ -42,7 +45,7 @@ export default function SideBar() {
                     {session.role === Role.UserFromMainCenter ?
                         (<>
                             <MenuItem icon={<SpaceDashboardTwoToneIcon />} component={<Link to="/dashboard" />}> Trang chủ</MenuItem>
-                            <SubMenu icon={<GroupTwoToneIcon />} label="Accounts">
+                            <SubMenu icon={<GroupTwoToneIcon />} label="Accounts" >
                                 <MenuItem
                                     icon={<PersonAddAltTwoToneIcon />}
                                     component={<Link to="/register" />}
@@ -70,7 +73,7 @@ export default function SideBar() {
                     }
                 </Menu>
             </Sidebar>
-            <main>
+            <main style={{ marginLeft: '5rem' }}>
                 <Outlet />
             </main>
         </div>

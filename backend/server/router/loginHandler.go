@@ -22,10 +22,8 @@ func loginHandler(c *fiber.Ctx) error {
 			"err": "Wrong password",
 		})
 	} else if err != nil {
-		log.Error().Err(err)
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"err": err,
-		})
+		log.Error().Stack().Err(err).Msg("")
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
 	token, err := middleware.GenerateJWT(account)

@@ -124,64 +124,66 @@ export default function RegisterPage() {
     }
 
     return (
-        <Paper>
-            <Avatar>
-                <AccountBoxIcon />
-            </Avatar>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                <TextField
-                    margin="normal"
-                    error={validate.current.username.length === 0 ? false : true}
-                    helperText={validate.current.username}
-                    required
-                    fullWidth
-                    id="username"
-                    label="Tên đăng nhập"
-                    autoFocus
-                    onChange={e => usernameValidate(e.target.value)}
-                />
-                <TextField
-                    margin="normal"
-                    error={validate.current.password.length === 0 ? false : true}
-                    helperText={validate.current.password}
-                    required
-                    fullWidth
-                    name="password"
-                    label="Mật khẩu"
-                    type={isShowPassword ? "input" : "password"}
-                    id="password"
-                    autoComplete="new-password"
-                    onChange={e => passwordValidate(e.target.value)}
-                    InputProps={{
-                        endAdornment: <ShowPasswordButton />
-                    }}
-                />
-                <TextField
-                    margin="normal"
-                    error={validate.current.passwordConfirm.length === 0 ? false : true}
-                    helperText={validate.current.passwordConfirm}
-                    required
-                    fullWidth
-                    name="password"
-                    label="Xác nhận mật khẩu"
-                    type={isShowPassword ? "input" : "password"}
-                    id="passwordConfirm"
-                    autoComplete="current-password"
-                    onChange={e => passwordConfirmValidate(e.target.value)}
-                    InputProps={{
-                        endAdornment: <ShowPasswordButton />
-                    }}
-                />
-                <PasswordStrengthBar password={password} />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                >
-                    Tạo tài khoản
-                </Button>
-            </Box>
-        </Paper>
+        <div style={{ margin: 'auto' }}>
+            <Paper >
+                <Avatar style={{ margin: 'auto' }}>
+                    <AccountBoxIcon />
+                </Avatar>
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                    <TextField
+                        margin="normal"
+                        error={validate.current.username.length === 0 ? false : true}
+                        helperText={validate.current.username}
+                        required
+                        fullWidth
+                        id="username"
+                        label="Tên đăng nhập"
+                        autoFocus
+                        onChange={e => usernameValidate(e.target.value)}
+                    />
+                    <TextField
+                        margin="normal"
+                        error={validate.current.password.length === 0 ? false : true}
+                        helperText={validate.current.password}
+                        required
+                        fullWidth
+                        name="password"
+                        label="Mật khẩu"
+                        type={isShowPassword ? "input" : "password"}
+                        id="password"
+                        autoComplete="new-password"
+                        onChange={e => passwordValidate(e.target.value)}
+                        InputProps={{
+                            endAdornment: <ShowPasswordButton />
+                        }}
+                    />
+                    <TextField
+                        margin="normal"
+                        error={validate.current.passwordConfirm.length === 0 ? false : true}
+                        helperText={validate.current.passwordConfirm}
+                        required
+                        fullWidth
+                        name="password"
+                        label="Xác nhận mật khẩu"
+                        type={isShowPassword ? "input" : "password"}
+                        id="passwordConfirm"
+                        autoComplete="current-password"
+                        onChange={e => passwordConfirmValidate(e.target.value)}
+                        InputProps={{
+                            endAdornment: <ShowPasswordButton />
+                        }}
+                    />
+                    <PasswordStrengthBar password={password} />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Tạo tài khoản
+                    </Button>
+                </Box>
+            </Paper>
+        </div>
     )
 }

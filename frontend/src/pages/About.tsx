@@ -1,6 +1,7 @@
 import { Avatar, Box, Grid, Typography } from "@mui/material";
+import "./About.scss";
 
-export default function About() {
+export default function AboutPage() {
     const members_list = [
         { name: "Lương Nhật Hào", github_account: "Lemionday", msv: "21020196", contact_number: "0988972003", job: "Backend" },
         { name: "Nguyễn Đức Nam", github_account: "ndn2107", msv: "21020222", contact_number: "0345316858", job: "Frontend" },
