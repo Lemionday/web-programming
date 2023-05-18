@@ -1,652 +1,652 @@
 [
     {
-        "id": "oc-dcff697d-d26d-428d-91f1-5ee755e9718e",
-        "name": "CÔNG TY TNHH MTV ĐẦU TƯ XUẤT NHẬP KHẨU VÀ CƠ KHÍ TRƯỜNG THÀNH",
+        "id": "c-rgYqV6vXeLlgco3Ad4s1g",
+        "name": "CÔNG TY TNHH MTV ĐIỆN TỬ THÀNH CÔNG",
         "legal_representative": {
-            "id": "op-e355c369-b931-426d-b26e-8017061f5679",
-            "name": "Dương Văn Bảo Nam",
+            "id": "p-T3CBlj7iWewa7iDCGYhFk",
+            "name": "Lê Đình Nguyên",
             "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "02401961913149",
-            "birthplace": "Bắc Giang"
-        },
-        "office_address": "Tầng 47, tòa nhà Apollo, Xã Thiện Thuật, Huyện Bình Gia, Tỉnh Lạng Sơn"
-    },
-    {
-        "id": "oc-22e9e671-ab34-4860-befd-320bf5efaa99",
-        "name": "CÔNG TY CỔ PHẦN CƠ KHÍ VÀ THIẾT KẾ PHÚC ANH",
-        "legal_representative": {
-            "id": "op-140a642e-10e8-47f8-8986-148f8b3e00e7",
-            "name": "Phạm Tuyết Nhung",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "06211961527200",
-            "birthplace": "Kon Tum"
-        },
-        "office_address": "Tầng 1, tòa nhà Dionysus, Xã Yên Sơn, Huyện Quốc Oai, Thành phố Hà Nội"
-    },
-    {
-        "id": "oc-8fa41d22-46dd-40ac-a0e3-0a4dfbcefcd0",
-        "name": "CÔNG TY TNHH SẢN XUẤT, QUỐC TẾ VÀ KIẾN TRÚC KIM HƯNG",
-        "legal_representative": {
-            "id": "op-039d60ba-9c99-4735-95a6-52a708fce7af",
-            "name": "Lê Tuệ Nhi",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "02711961176682",
-            "birthplace": "Bắc Ninh"
-        },
-        "office_address": "Số 8, đường Nguyễn Quốc Trinh, Xã Hàm Phú, Huyện Hàm Thuận Bắc, Tỉnh Bình Thuận"
-    },
-    {
-        "id": "oc-d214f218-dd3b-4d93-bb8d-dd5b2e665ecb",
-        "name": "CÔNG TY TNHH MTV NỘI THẤT, KỸ THUẬT VÀ VẬN TẢI KIM QUANG",
-        "legal_representative": {
-            "id": "op-94d7f681-d551-4e14-a18d-99ce20fa5cd3",
-            "name": "Bùi Hữu Khoa",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "08201961699946",
-            "birthplace": "Tiền Giang"
-        },
-        "office_address": "Số 7, đường Đi Xã Đại Áng, Xã Yên Hân, Huyện Chợ Mới, Tỉnh Bắc Kạn"
-    },
-    {
-        "id": "oc-ebbcf1f6-dedf-424b-b567-c813bd05bc2c",
-        "name": "CÔNG TY TNHH QUỐC TẾ QUỐC DŨNG",
-        "legal_representative": {
-            "id": "op-a878e876-7f0d-42ca-adc6-c2accbae0e93",
-            "name": "Đỗ Văn Quang Vinh",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "09101961355732",
-            "birthplace": "Kiên Giang"
-        },
-        "office_address": "Số 690, đường Đản Dị, Xã Hà Thượng, Huyện Đại Từ, Tỉnh Thái Nguyên"
-    },
-    {
-        "id": "oc-27e8aeae-24a7-43e3-920a-202fe11a15c3",
-        "name": "CÔNG TY TNHH MTV PHÁT TRIỂN DU LỊCH HÙNG THẮNG",
-        "legal_representative": {
-            "id": "op-4d7e4449-90b6-4394-8482-36e9863c6992",
-            "name": "Vũ Thị Thu Nguyệt",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "08311961097204",
-            "birthplace": "Bến Tre"
-        },
-        "office_address": "Tầng 8, tòa nhà Demeter, Xã Trung Nghĩa, Thành phố Hưng Yên, Tỉnh Hưng Yên"
-    },
-    {
-        "id": "oc-a0ce5b5f-ca56-4921-b942-2f1efed97f9e",
-        "name": "CÔNG TY CỔ PHẦN CÔNG NGHỆ ĐIỆN TỬ PHƯƠNG NAM",
-        "legal_representative": {
-            "id": "op-98bc2c7a-d112-460c-bba1-2642f4a8bcd3",
-            "name": "Nguyễn Hữu Đức",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "08001961415867",
-            "birthplace": "Long An"
-        },
-        "office_address": "Số 4, đường Nguyễn Văn Linh, Xã Bình Hòa Phước, Huyện Long Hồ, Tỉnh Vĩnh Long"
-    },
-    {
-        "id": "oc-680fe5e2-60c3-4cdd-9937-f592185aeb98",
-        "name": "CÔNG TY CỔ PHẦN ĐẦU TƯ ĐIỆN TỬ QUANG HUY",
-        "legal_representative": {
-            "id": "op-3103d904-1742-4bd0-bde5-b4a337ef373e",
-            "name": "Đỗ Gia Huy",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "05401961641353",
-            "birthplace": "Phú Yên"
-        },
-        "office_address": "Tầng 4, tòa nhà Hermes, Thị trấn Phú Thiện, Huyện Phú Thiện, Tỉnh Gia Lai"
-    },
-    {
-        "id": "oc-334f97a4-ec8b-4978-a363-a1f0fcfd3246",
-        "name": "CÔNG TY TNHH TẬP ĐOÀN NÔNG NGHIỆP, KỸ THUẬT VÀ VẬN TẢI SƠN HẢI",
-        "legal_representative": {
-            "id": "op-15ade79c-4e68-4568-8664-56bfe73ce3cc",
-            "name": "Đặng Bảo Anh",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "03711961045831",
-            "birthplace": "Ninh Bình"
-        },
-        "office_address": "Tầng 48, tòa nhà Hephaestus, Xã Cát Thắng, Huyện Phù Cát, Tỉnh Bình Định"
-    },
-    {
-        "id": "oc-02246f10-ce65-4211-a3c9-c8d76ceb1865",
-        "name": "CÔNG TY TNHH MTV KỸ THUẬT VÀ THIẾT KẾ AN BÌNH",
-        "legal_representative": {
-            "id": "op-a0fe9e1b-7910-4825-9057-df41835b8afb",
-            "name": "Phan Thị Bảo Châu",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "07911961205331",
-            "birthplace": "Hồ Chí Minh"
-        },
-        "office_address": "Số 375, đường Đản Dị, Xã Yên Sơn, Huyện Quốc Oai, Thành phố Hà Nội"
-    },
-    {
-        "id": "oc-9602634b-0845-4d3e-a424-d7ef4d433c1f",
-        "name": "CÔNG TY TNHH MTV DỊCH VỤ CƠ ĐIỆN LẠNH, SẢN XUẤT VÀ XÂY DỰNG ÁNH SÁNG",
-        "legal_representative": {
-            "id": "op-746c8933-eee6-4c71-ae16-6b743841ed43",
-            "name": "Vũ Bích Diệp",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "04211961079609",
-            "birthplace": "Hà Tĩnh"
-        },
-        "office_address": "Số 150, đường Đằng Trước, Xã Hoằng Đạo, Huyện Hoằng Hóa, Tỉnh Thanh Hóa"
-    },
-    {
-        "id": "oc-2034663b-aaa9-4ed4-bbe1-251abc125541",
-        "name": "CÔNG TY TNHH MTV DỊCH VỤ KIẾN TRÚC, THƯƠNG MẠI VÀ SẢN XUẤT AN BÌNH",
-        "legal_representative": {
-            "id": "op-333a1d71-52d1-4e24-bf3b-a58ed02fe513",
-            "name": "Lê Văn Việt Dũng",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "03301961548585",
-            "birthplace": "Hưng Yên"
-        },
-        "office_address": "Số 1, đường Tỉnh 301, Xã An Đồng, Huyện Quỳnh Phụ, Tỉnh Thái Bình"
-    },
-    {
-        "id": "oc-7ffc4eea-05f7-40d1-838b-c6ab9ba0b30f",
-        "name": "CÔNG TY CỔ PHẦN ĐIỆN TỬ, KINH DOANH VÀ CƠ KHÍ VẠN PHÚC",
-        "legal_representative": {
-            "id": "op-681be70b-c2e4-4c34-a7f8-3cd9bb2332db",
-            "name": "Vũ Minh Quang",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "09401961112503",
-            "birthplace": "Sóc Trăng"
-        },
-        "office_address": "Tầng 07, tòa nhà Hermes, Phường Hòa Phát, Quận Cẩm Lệ, Thành phố Đà Nẵng"
-    },
-    {
-        "id": "oc-16d91fc5-be85-4394-a0fc-74e80d0d82f9",
-        "name": "CÔNG TY TNHH MTV CƠ KHÍ VẠN LỘC",
-        "legal_representative": {
-            "id": "op-ebde3e11-0ec5-462d-a402-0912b4f6783a",
-            "name": "Hồ Đăng Khoa",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "08401961869756",
-            "birthplace": "Trà Vinh"
-        },
-        "office_address": "Tầng 41, tòa nhà Hephaestus, Xã Tân Thanh Tây, Huyện Mỏ Cày Bắc, Tỉnh Bến Tre"
-    },
-    {
-        "id": "oc-06ab5a91-d83d-424b-bcd8-d4e4b8d056c1",
-        "name": "CÔNG TY TNHH MTV KIẾN TRÚC, XÂY DỰNG VÀ THƯƠNG MẠI KIM QUANG",
-        "legal_representative": {
-            "id": "op-2368db81-da34-4ffa-84cb-4dadd98efec6",
-            "name": "Phan Hải Đăng",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "06701961085312",
-            "birthplace": "Đắk Nông"
-        },
-        "office_address": "Số 032, đường Vành Đai 2, Xã Phú Thuận, Huyện Phú Vang, Tỉnh Thừa Thiên Huế"
-    },
-    {
-        "id": "oc-ce8af4d8-21bf-4a30-9c7d-b21ecfa243f7",
-        "name": "CÔNG TY TNHH MTV GIẢI PHÁP KIẾN TRÚC, CƠ KHÍ VÀ VẬN TẢI AN ĐÔNG",
-        "legal_representative": {
-            "id": "op-e8497caa-531b-4b0e-9be8-2d6c01c5592b",
-            "name": "Dương Văn Đức Việt",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "03101961690424",
-            "birthplace": "Hải Phòng"
-        },
-        "office_address": "Số 2, đường Minh Khai, Xã Mỹ Hiệp, Huyện Phù Mỹ, Tỉnh Bình Định"
-    },
-    {
-        "id": "oc-c6c6c6de-a5dc-41c9-914a-cf8e89b58d29",
-        "name": "CÔNG TY CỔ PHẦN CÔNG NGHỆ SẢN XUẤT ĐẠI PHÚC",
-        "legal_representative": {
-            "id": "op-2cdd9303-9906-4e5b-a237-e31e64b57def",
-            "name": "Nguyễn Hữu Đức",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "03801961356202",
-            "birthplace": "Thanh Hóa"
-        },
-        "office_address": "Tầng 2, tòa nhà Athena, Xã Thanh Bình, Huyện Chương Mỹ, Thành phố Hà Nội"
-    },
-    {
-        "id": "oc-81b377bd-59ea-469a-a09c-93ded12ea61b",
-        "name": "CÔNG TY TNHH DỊCH VỤ CƠ ĐIỆN LẠNH VÀ VẬN TẢI QUANG THỊNH",
-        "legal_representative": {
-            "id": "op-4fc3489b-9c14-4815-924f-8f4351a2fa15",
-            "name": "Hoàng Nguyệt Ánh",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "04011961743532",
-            "birthplace": "Nghệ An"
-        },
-        "office_address": "Số 92, đường Làng, Thị trấn Mù Căng Chải, Huyện Mù Căng Chải, Tỉnh Yên Bái"
-    },
-    {
-        "id": "oc-00ac317a-dd82-4b3e-a868-5bdd02c81d11",
-        "name": "CÔNG TY CỔ PHẦN PHÁT TRIỂN THƯƠNG MẠI VÀ SẢN XUẤT THÀNH ĐỨC",
-        "legal_representative": {
-            "id": "op-39745c90-aaf5-4c09-8de6-8b59c4841813",
-            "name": "Hoàng Văn Hải Đăng",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "05601961979347",
-            "birthplace": "Khánh Hòa"
-        },
-        "office_address": "Tầng 7, tòa nhà Hephaestus, Xã Chà Là, Huyện Dương Minh Châu, Tỉnh Tây Ninh"
-    },
-    {
-        "id": "oc-66c10396-be88-49a6-b1e9-02dd3367d0f2",
-        "name": "CÔNG TY TNHH MTV CƠ KHÍ VÀ THIẾT KẾ PHƯƠNG NAM",
-        "legal_representative": {
-            "id": "op-9383bed6-dbcf-4686-8232-4d7203d03575",
-            "name": "Phan Ngọc Diệp",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "01011961916117",
-            "birthplace": "Lào Cai"
-        },
-        "office_address": "Số 74, đường Nguyễn Quốc Trinh, Phường Nam Bình, Thành phố Ninh Bình, Tỉnh Ninh Bình"
-    },
-    {
-        "id": "oc-041760c1-c3a5-47a2-9041-f147c758ebde",
-        "name": "CÔNG TY CỔ PHẦN CÔNG NGHỆ XUẤT NHẬP KHẨU VÀ ĐIỆN TỬ HÙNG DŨNG",
-        "legal_representative": {
-            "id": "op-ad1c4859-931e-4d80-bc7e-aebb16167a2f",
-            "name": "Trần Thị Kim Ngân",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "02011961836520",
-            "birthplace": "Lạng Sơn"
-        },
-        "office_address": "Tầng 2, tòa nhà Aphrodite, Xã Lang Minh, Huyện Xuân Lộc, Tỉnh Đồng Nai"
-    },
-    {
-        "id": "oc-e90a2364-3a03-473e-bb9b-df46f5930c38",
-        "name": "CÔNG TY TNHH DỊCH VỤ VẬN TẢI HẢI ĐĂNG",
-        "legal_representative": {
-            "id": "op-f275212c-b8f6-40fa-80e5-4cdbdc371dfb",
-            "name": "Vũ Đình Nguyên",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "03601961615776",
-            "birthplace": "Nam Định"
-        },
-        "office_address": "Tầng 09, tòa nhà Athena, Xã Cát Hiệp, Huyện Phù Cát, Tỉnh Bình Định"
-    },
-    {
-        "id": "oc-627ae7a6-d926-45d2-a9b6-6e4b3723642f",
-        "name": "CÔNG TY TNHH KINH DOANH MINH KHANG",
-        "legal_representative": {
-            "id": "op-6b2d3e71-47d0-464d-85b5-35edf5d6f879",
-            "name": "Dương Chí Kiên",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "08601961330383",
-            "birthplace": "Vĩnh Long"
-        },
-        "office_address": "Tầng 8, tòa nhà Aphrodite, Xã Lộc Hiệp, Huyện Lộc Ninh, Tỉnh Bình Phước"
-    },
-    {
-        "id": "oc-c3e3187b-dfae-40ab-ba70-f6053f0a22d2",
-        "name": "CÔNG TY TNHH TẬP ĐOÀN CƠ KHÍ MINH QUỐC",
-        "legal_representative": {
-            "id": "op-31243f80-cfed-4631-9bca-a8e0419ed40a",
-            "name": "Lê Văn Minh An",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "07501961609295",
-            "birthplace": "Đồng Nai"
-        },
-        "office_address": "Số 469, đường Cô Mễ, Xã Ngok Tem, Huyện Kon Plông, Tỉnh Kon Tum"
-    },
-    {
-        "id": "oc-da09fb60-2d27-4d76-86e0-c466b68c76f8",
-        "name": "CÔNG TY TNHH MTV PHÁT TRIỂN KINH DOANH VÀ THIẾT KẾ SƠN THỊNH",
-        "legal_representative": {
-            "id": "op-3ae1ab40-0dfe-44b9-8d1b-85c99427ad92",
-            "name": "Dương Văn Việt Dũng",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "04501961356497",
-            "birthplace": "Quảng Trị"
-        },
-        "office_address": "Tầng 8, tòa nhà Demeter, Xã Lìa, Huyện Hướng Hóa, Tỉnh Quảng Trị"
-    },
-    {
-        "id": "oc-370934f0-53db-4e97-975c-f014b94f6849",
-        "name": "CÔNG TY TNHH VẬN TẢI, ĐIỆN TỬ VÀ KIẾN TRÚC PHƯƠNG NAM",
-        "legal_representative": {
-            "id": "op-b71b5518-810c-415d-b1fd-cc43fd3b1021",
-            "name": "Dương Gia An",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "08001961258558",
-            "birthplace": "Long An"
-        },
-        "office_address": "Số 422, đường Bát Khối, Xã Hiền Hào, Huyện Cát Hải, Thành phố Hải Phòng"
-    },
-    {
-        "id": "oc-8de20f22-af20-4aea-b786-9d49b89b1625",
-        "name": "CÔNG TY TNHH MTV TƯ VẤN SẢN XUẤT, THIẾT KẾ VÀ DU LỊCH MINH QUỐC",
-        "legal_representative": {
-            "id": "op-a556df18-7145-4467-9a0b-37e8769f513a",
-            "name": "Phan Văn Đăng Khoa",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "02601961701673",
-            "birthplace": "Vĩnh Phúc"
-        },
-        "office_address": "Số 2, đường Vân Trai, Phường Thắng Nhì, Thành phố Vũng Tàu, Tỉnh Bà Rịa - Vũng Tàu"
-    },
-    {
-        "id": "oc-3bc35d42-0593-4316-887b-c43feff10c1d",
-        "name": "CÔNG TY TNHH PHÁT TRIỂN SẢN XUẤT, THIẾT KẾ VÀ KIẾN TRÚC MINH ANH",
-        "legal_representative": {
-            "id": "op-1b4c3736-c314-4367-b984-08a60ec003b6",
-            "name": "Hoàng Bảo Châu",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "09111961495716",
-            "birthplace": "Kiên Giang"
-        },
-        "office_address": "Số 815, đường Vành Đai 2, Xã Đại Thắng, Huyện Vụ Bản, Tỉnh Nam Định"
-    },
-    {
-        "id": "oc-13779d45-3cc0-40d9-90ca-65f479da713d",
-        "name": "CÔNG TY TNHH PHÁT TRIỂN KINH DOANH VÀ XUẤT NHẬP KHẨU THÀNH ĐỨC",
-        "legal_representative": {
-            "id": "op-47a010a1-b1dd-4811-8c09-baf401df3805",
-            "name": "Đỗ Văn Hữu Tâm",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "03501961361242",
-            "birthplace": "Hà Nam"
-        },
-        "office_address": "Số 16, đường Mỹ Trung, Xã Đồng ý, Huyện Bắc Sơn, Tỉnh Lạng Sơn"
-    },
-    {
-        "id": "oc-f7844118-6747-424e-92db-5c19c61a423b",
-        "name": "CÔNG TY TNHH MTV XUẤT NHẬP KHẨU, CƠ ĐIỆN LẠNH VÀ KỸ THUẬT MINH QUỐC",
-        "legal_representative": {
-            "id": "op-35951baf-7432-4cbc-983a-f1862d6efa7d",
-            "name": "Hồ Thị Vân Khánh",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "04811961991235",
-            "birthplace": "Đà Nẵng"
-        },
-        "office_address": "Số 75, đường Sau Làng, Xã Khánh Xuân, Huyện Bảo Lạc, Tỉnh Cao Bằng"
-    },
-    {
-        "id": "oc-44466000-cc4c-4717-99b5-b7a386dd3d81",
-        "name": "CÔNG TY TNHH KIẾN TRÚC VÀ SẢN XUẤT AN PHÁT",
-        "legal_representative": {
-            "id": "op-b111abef-0b73-49be-81e9-b9ce17ee5d22",
-            "name": "Ngô Văn Anh Dũng",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "05401961101800",
-            "birthplace": "Phú Yên"
-        },
-        "office_address": "Tầng 89, tòa nhà Dionysus, Xã Chư Răng, Huyện Ia Pa, Tỉnh Gia Lai"
-    },
-    {
-        "id": "oc-0aa57c75-5f19-4a64-89fd-032b9d22c886",
-        "name": "CÔNG TY TNHH THIẾT KẾ VÀ NỘI THẤT HÙNG DŨNG",
-        "legal_representative": {
-            "id": "op-61022c6c-395a-4189-ba40-240ad297a189",
-            "name": "Phan Hoài An",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "05611961072880",
-            "birthplace": "Khánh Hòa"
-        },
-        "office_address": "Tầng 76, tòa nhà Hephaestus, Xã Lương Hòa, Huyện Giồng Trôm, Tỉnh Bến Tre"
-    },
-    {
-        "id": "oc-b1589734-5de4-4f86-a417-7078f26fd260",
-        "name": "CÔNG TY TNHH ĐẦU TƯ QUỐC TẾ VÀ XÂY DỰNG VĨNH TIẾN",
-        "legal_representative": {
-            "id": "op-cd15c2fa-3814-4532-96a7-276e0c9cf350",
-            "name": "Bùi An Ngọc",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "02711961578645",
-            "birthplace": "Bắc Ninh"
-        },
-        "office_address": "Số 777, đường Hoàng Minh Thảo, Phường Trường An, Thành phố Vĩnh Long, Tỉnh Vĩnh Long"
-    },
-    {
-        "id": "oc-1d87667a-79b6-48c8-8449-0b5daa14625c",
-        "name": "CÔNG TY CỔ PHẦN KINH DOANH, CƠ ĐIỆN LẠNH VÀ KIẾN TRÚC HOÀNG GIA",
-        "legal_representative": {
-            "id": "op-b416cbed-01d5-40ec-8a53-ba16f0ffae68",
-            "name": "Hồ Thị Khánh Diệp",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "00111961743261",
-            "birthplace": "Hà Nội"
-        },
-        "office_address": "Số 02, đường Minh Khai, Xã Hoàng Tung, Huyện Hoà An, Tỉnh Cao Bằng"
-    },
-    {
-        "id": "oc-0f46cf06-f960-429d-a196-8f377781ea37",
-        "name": "CÔNG TY CỔ PHẦN PHÁT TRIỂN CƠ KHÍ, XUẤT NHẬP KHẨU VÀ THIẾT KẾ BẢO NGỌC",
-        "legal_representative": {
-            "id": "op-39fc7c2d-8a26-4065-aa21-168e20914808",
-            "name": "Đỗ Văn Toàn Thắng",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "09501961510540",
-            "birthplace": "Bạc Liêu"
-        },
-        "office_address": "Số 3, đường Vũ Lâm, Xã Lê Thanh, Huyện Mỹ Đức, Thành phố Hà Nội"
-    },
-    {
-        "id": "oc-ba79cb06-68ae-4048-b2ec-d932607544b5",
-        "name": "CÔNG TY CỔ PHẦN CÔNG NGHỆ NÔNG NGHIỆP VÀ THƯƠNG MẠI QUANG THỊNH",
-        "legal_representative": {
-            "id": "op-699bc842-0c0a-40c3-9d70-87fa939b9164",
-            "name": "Nguyễn Việt Dũng",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "09101961140705",
-            "birthplace": "Kiên Giang"
-        },
-        "office_address": "Số 045, đường Lý Thánh Tông, Xã Vĩnh Long, Huyện Vĩnh Lộc, Tỉnh Thanh Hóa"
-    },
-    {
-        "id": "oc-5486d9d6-f9de-476c-bed6-02ebb300b3f7",
-        "name": "CÔNG TY TNHH MTV THƯƠNG MẠI TIẾN THÀNH",
-        "legal_representative": {
-            "id": "op-502e4f40-0a01-4a86-bbfa-754913ee5ee8",
-            "name": "Hoàng Bá Duy",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "08901961294811",
-            "birthplace": "An Giang"
-        },
-        "office_address": "Số 8, đường Trần Lư, Xã Nhơn Hoà, Huyện Tân Thạnh, Tỉnh Long An"
-    },
-    {
-        "id": "oc-6d0e08d4-a819-4751-b438-09262bec2a52",
-        "name": "CÔNG TY CỔ PHẦN PHÁT TRIỂN KỸ THUẬT VÀ SẢN XUẤT KIM ANH",
-        "legal_representative": {
-            "id": "op-9701c3d3-7f79-4c6b-a8b6-65ac6a48e5b4",
-            "name": "Dương Huyền Anh",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "07211961179018",
+            "birthdate": "1972-09-07",
+            "ssn": "07201972376322",
             "birthplace": "Tây Ninh"
         },
-        "office_address": "Số 723, đường Thượng Phúc, Xã Bình Nghị, Huyện Gò Công Đông, Tỉnh Tiền Giang"
+        "office_address": "Số 8, đường Trường Sa, Xã Hiệp Hòa, Huyện Đức Hòa, Tỉnh Long An"
     },
     {
-        "id": "oc-70069215-929b-4ca4-820e-76f02a336ef6",
-        "name": "CÔNG TY TNHH MTV TƯ VẤN NỘI THẤT, VẬN TẢI VÀ CƠ ĐIỆN LẠNH MINH QUANG",
+        "id": "c-KhIFBO0qfE5IzEvaAp9PS",
+        "name": "CÔNG TY CỔ PHẦN CƠ KHÍ BẢO NGỌC",
         "legal_representative": {
-            "id": "op-8cff3e99-1e8e-4d52-aab9-c1851af0ed28",
-            "name": "Lê Văn Đức Tài",
+            "id": "p-zuYGCZWlP5C4e5bCe3PJX",
+            "name": "Bùi Trung Dũng",
             "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "06001961490269",
+            "birthdate": "1989-07-11",
+            "ssn": "08001989416367",
+            "birthplace": "Long An"
+        },
+        "office_address": "Tầng 81, tòa nhà Poseidon, Xã Tân Long, Huyện Tân Kỳ, Tỉnh Nghệ An"
+    },
+    {
+        "id": "c-vsfMaKZhX9V7_Osnru3-A",
+        "name": "CÔNG TY TNHH MTV KỸ THUẬT BẢO NGỌC",
+        "legal_representative": {
+            "id": "p-FnLC_7wdOCpRm0KTuvyIF",
+            "name": "Vũ Như Ngọc",
+            "sex": "nữ",
+            "birthdate": "1987-01-19",
+            "ssn": "06611987753474",
+            "birthplace": "Đắk Lắk"
+        },
+        "office_address": "Tầng 9, tòa nhà Poseidon, Xã Đông Minh, Huyện Tiền Hải, Tỉnh Thái Bình"
+    },
+    {
+        "id": "c-8Iph4uAp_mmg9qZ2VpdBs",
+        "name": "CÔNG TY CỔ PHẦN PHÁT TRIỂN SẢN XUẤT HƯNG HẢI",
+        "legal_representative": {
+            "id": "p-DvoWbI6Bm4qLW0sAmbDJm",
+            "name": "Lê Hữu Đạt",
+            "sex": "nam",
+            "birthdate": "1987-01-05",
+            "ssn": "01701987629436",
+            "birthplace": "Hòa Bình"
+        },
+        "office_address": "Số 827, đường Lý Tử Tấn, Phường Tân Hưng, Quận Thốt Nốt, Thành phố Cần Thơ"
+    },
+    {
+        "id": "c-GkbrtEP9JtUT7F0xyC5wF",
+        "name": "CÔNG TY TNHH CƠ ĐIỆN LẠNH NAM DƯƠNG",
+        "legal_representative": {
+            "id": "p-NpaY6_Rh-JEsP5Ulz-19-",
+            "name": "Hồ Thu Nguyệt",
+            "sex": "nữ",
+            "birthdate": "1983-08-06",
+            "ssn": "03811983482843",
+            "birthplace": "Thanh Hóa"
+        },
+        "office_address": "Tầng 87, tòa nhà Zeus, Xã Cư M'ta, Huyện M'Đrắk, Tỉnh Đắk Lắk"
+    },
+    {
+        "id": "c-rsTa-Gb0cTPM0fhDOQQxa",
+        "name": "CÔNG TY TNHH MTV ĐẦU TƯ NỘI THẤT VÀ QUỐC TẾ PHÚC MINH",
+        "legal_representative": {
+            "id": "p-lJ2IHrvkj-rQcvply_-Ie",
+            "name": "Hồ Anh Dũng",
+            "sex": "nam",
+            "birthdate": "1976-11-19",
+            "ssn": "09601976049827",
+            "birthplace": "Cà Mau"
+        },
+        "office_address": "Tầng 8, tòa nhà Apollo, Xã Phú Cường, Huyện Cai Lậy, Tỉnh Tiền Giang"
+    },
+    {
+        "id": "c-qqVV32M1za2YOvtl6IkC8",
+        "name": "CÔNG TY TNHH MTV VẬN TẢI TIẾN THÀNH",
+        "legal_representative": {
+            "id": "p-d7KYRQe8eekmwDrRmk1S8",
+            "name": "Đặng Quỳnh Châu",
+            "sex": "nữ",
+            "birthdate": "1986-08-16",
+            "ssn": "03511986478506",
+            "birthplace": "Hà Nam"
+        },
+        "office_address": "Tầng 0, tòa nhà Apollo, Phường Quỳnh Mai, Quận Hai Bà Trưng, Thành phố Hà Nội"
+    },
+    {
+        "id": "c-tnbwuipnUbSjYeYDOqE8X",
+        "name": "CÔNG TY TNHH MTV ĐẦU TƯ SẢN XUẤT TRƯỜNG THÀNH",
+        "legal_representative": {
+            "id": "p-1XIj4jnp00YC_6oA3-NHo",
+            "name": "Hồ Huyền Anh",
+            "sex": "nữ",
+            "birthdate": "2000-12-15",
+            "ssn": "09512000363137",
+            "birthplace": "Bạc Liêu"
+        },
+        "office_address": "Số 7, đường Cửa Tĩnh, Phường Hương Long, Thành phố Huế, Tỉnh Thừa Thiên Huế"
+    },
+    {
+        "id": "c-EaZNK3o7kqYWIfa8sgvcT",
+        "name": "CÔNG TY CỔ PHẦN DỊCH VỤ KINH DOANH HỒNG QUANG",
+        "legal_representative": {
+            "id": "p-ve3_kh3P4DpmGZCfWk_tE",
+            "name": "Phạm Văn Thanh Tùng",
+            "sex": "nam",
+            "birthdate": "1989-09-18",
+            "ssn": "03501989732037",
+            "birthplace": "Hà Nam"
+        },
+        "office_address": "Số 58, đường Đi Xã Đại Áng, Xã Nguyên Giáp, Huyện Tứ Kỳ, Tỉnh Hải Dương"
+    },
+    {
+        "id": "c-rl55bgAnGHQeTYlxPX_gu",
+        "name": "CÔNG TY TNHH MTV TẬP ĐOÀN CHUYỂN PHÁT, CƠ KHÍ VÀ XUẤT NHẬP KHẨU THÀNH CÔNG",
+        "legal_representative": {
+            "id": "p-SfFwS5vF3-b_Z4TX3ZIWB",
+            "name": "Phạm Văn Đức Trung",
+            "sex": "nam",
+            "birthdate": "1998-04-19",
+            "ssn": "01501998324092",
+            "birthplace": "Yên Bái"
+        },
+        "office_address": "Số 22, đường Mỹ Trung, Xã Thụy Dân, Huyện Thái Thụy, Tỉnh Thái Bình"
+    },
+    {
+        "id": "c-7pR9jARm-yHtuPKY9X1Jb",
+        "name": "CÔNG TY CỔ PHẦN ĐẦU TƯ ĐIỆN TỬ VÀ CƠ KHÍ HÙNG DŨNG",
+        "legal_representative": {
+            "id": "p-AoGsfFESttaOXkgjs_mqj",
+            "name": "Hoàng Thị Cẩm Anh",
+            "sex": "nữ",
+            "birthdate": "1988-08-28",
+            "ssn": "09211988995178",
+            "birthplace": "Cần Thơ"
+        },
+        "office_address": "Số 3, đường Xuân Tảo, Xã Văn Xuôi, Huyện Tu Mơ Rông, Tỉnh Kon Tum"
+    },
+    {
+        "id": "c-eQg_c2Z7Hl51wVHjJUz8M",
+        "name": "CÔNG TY CỔ PHẦN KINH DOANH, THƯƠNG MẠI VÀ NỘI THẤT HẢI ĐĂNG",
+        "legal_representative": {
+            "id": "p-dpF3oaZnTOQiL7Aj2KcBT",
+            "name": "Đặng Thị Phương Linh",
+            "sex": "nữ",
+            "birthdate": "1980-09-16",
+            "ssn": "06011980779613",
             "birthplace": "Bình Thuận"
         },
-        "office_address": "Số 31, đường Trại, Phường Lam Hạ, Thành phố Phủ Lý, Tỉnh Hà Nam"
+        "office_address": "Tầng 1, tòa nhà Apollo, Phường Đức Chính, Thị xã Đông Triều, Tỉnh Quảng Ninh"
     },
     {
-        "id": "oc-2370539b-ee4a-4b62-88de-092dcc22ccb5",
-        "name": "CÔNG TY TNHH CÔNG NGHỆ KỸ THUẬT, XUẤT NHẬP KHẨU VÀ NỘI THẤT SƠN HÀ",
+        "id": "c-jEU41VfwKiDDBHjsrrKRP",
+        "name": "CÔNG TY TNHH CƠ ĐIỆN LẠNH VÀ KIẾN TRÚC KIM QUANG",
         "legal_representative": {
-            "id": "op-a323d79e-7386-4418-b1db-0a78f2fd8e7a",
-            "name": "Lê Văn Gia An",
+            "id": "p-cWuJo9O1pMFwiAjXDu1cl",
+            "name": "Đỗ Nam Khánh",
             "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "02201961364128",
-            "birthplace": "Quảng Ninh"
+            "birthdate": "1992-04-14",
+            "ssn": "08401992139872",
+            "birthplace": "Trà Vinh"
         },
-        "office_address": "Số 11, đường Trại, Thị trấn Nam Ban, Huyện Lâm Hà, Tỉnh Lâm Đồng"
+        "office_address": "Số 7, đường Sau Làng, Xã Yên Nghĩa, Huyện Ý Yên, Tỉnh Nam Định"
     },
     {
-        "id": "oc-44fe27c9-0517-4618-8e95-ef6ab6757f65",
-        "name": "CÔNG TY TNHH MTV DU LỊCH, THIẾT KẾ VÀ NỘI THẤT VIỆT PHƯƠNG",
+        "id": "c-o4s-HPi_DvpNUeHUD6UEb",
+        "name": "CÔNG TY TNHH MTV DỊCH VỤ ĐIỆN TỬ, XÂY DỰNG VÀ DU LỊCH ÁNH DƯƠNG",
         "legal_representative": {
-            "id": "op-4b9e0913-49e1-4b4d-a1c6-68ce8d5d9790",
-            "name": "Ngô Văn Quang Mạnh",
+            "id": "p-QLRTcJq3GtGRdWkb2GHeo",
+            "name": "Phan Vân Khánh",
+            "sex": "nữ",
+            "birthdate": "1979-04-24",
+            "ssn": "07911979849256",
+            "birthplace": "Hồ Chí Minh"
+        },
+        "office_address": "Số 0, đường Đa Phúc, Xã Bàu Đồn, Huyện Gò Dầu, Tỉnh Tây Ninh"
+    },
+    {
+        "id": "c-hGgXa6vPWorThjheW-4Ni",
+        "name": "CÔNG TY TNHH DỊCH VỤ NÔNG NGHIỆP VÀ NỘI THẤT SƠN THỊNH",
+        "legal_representative": {
+            "id": "p-NEKR6e4zYzy6EpH6XqE1h",
+            "name": "Đặng Văn Hữu Đạt",
             "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "03001961583798",
-            "birthplace": "Hải Dương"
-        },
-        "office_address": "Tầng 30, tòa nhà Poseidon, Xã Yên Sở, Huyện Hoài Đức, Thành phố Hà Nội"
-    },
-    {
-        "id": "oc-e8b463bf-c7e0-4623-86fc-21665637a9d9",
-        "name": "CÔNG TY TNHH MTV PHÁT TRIỂN THIẾT KẾ, SẢN XUẤT VÀ XÂY DỰNG HÙNG THẮNG",
-        "legal_representative": {
-            "id": "op-2f3342b5-d3c4-41d0-8bab-6887b3975da9",
-            "name": "Hồ Khánh Diệp",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "01111961945084",
-            "birthplace": "Điện Biên"
-        },
-        "office_address": "Số 464, đường Minh Khai, Xã Lai Hưng, Huyện Bàu Bàng, Tỉnh Bình Dương"
-    },
-    {
-        "id": "oc-0f867760-a8b0-4beb-93c1-a1eb74d03697",
-        "name": "CÔNG TY TNHH TƯ VẤN XÂY DỰNG TIẾN THÀNH",
-        "legal_representative": {
-            "id": "op-45856260-c5df-4bb2-a9f2-58d8f170b8cc",
-            "name": "Phan Toàn Thắng",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "03401961918607",
-            "birthplace": "Thái Bình"
-        },
-        "office_address": "Tầng 8, tòa nhà Aphrodite, Xã Cộng Hiền, Huyện Vĩnh Bảo, Thành phố Hải Phòng"
-    },
-    {
-        "id": "oc-af22cc7a-5dee-4cba-905d-811c1beff1ff",
-        "name": "CÔNG TY CỔ PHẦN PHÁT TRIỂN QUỐC TẾ, KỸ THUẬT VÀ XUẤT NHẬP KHẨU HỒNG HẢI",
-        "legal_representative": {
-            "id": "op-83448662-04a4-411a-80e1-a7683cd17950",
-            "name": "Ngô Văn Thế Phương",
-            "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "07501961454636",
-            "birthplace": "Đồng Nai"
-        },
-        "office_address": "Số 4, đường Nguyễn Quốc Trinh, Xã Quỳnh Nguyên, Huyện Quỳnh Phụ, Tỉnh Thái Bình"
-    },
-    {
-        "id": "oc-5cc93118-7fb5-4235-b541-adbd13169396",
-        "name": "CÔNG TY CỔ PHẦN CHUYỂN PHÁT MINH TÂM",
-        "legal_representative": {
-            "id": "op-00e954f6-f574-48f9-bd16-b04f2cf6c298",
-            "name": "Nguyễn Thị Thu Diệp",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "06011961950966",
-            "birthplace": "Bình Thuận"
-        },
-        "office_address": "Số 87, đường Đào Xuyên, Phường 5, Thành phố Bến Tre, Tỉnh Bến Tre"
-    },
-    {
-        "id": "oc-1698f0e4-836c-499b-be48-6b653a6301f5",
-        "name": "CÔNG TY TNHH MTV CÔNG NGHỆ NỘI THẤT VIỆT ANH",
-        "legal_representative": {
-            "id": "op-251b95d4-0f63-4fda-b982-46e666f4ccdb",
-            "name": "Hoàng Trúc Khuê",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "03711961812959",
-            "birthplace": "Ninh Bình"
-        },
-        "office_address": "Tầng 7, tòa nhà Demeter, Xã Bàn Long, Huyện Châu Thành, Tỉnh Tiền Giang"
-    },
-    {
-        "id": "oc-f6ecd320-ca5a-458d-add7-10035aa3cdad",
-        "name": "CÔNG TY TNHH MTV CƠ KHÍ MINH QUANG",
-        "legal_representative": {
-            "id": "op-19e86575-a716-49e6-8c66-1c0fc6ff4b76",
-            "name": "Đặng Diệu Anh",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "07011961035888",
+            "birthdate": "1975-10-30",
+            "ssn": "07001975943645",
             "birthplace": "Bình Phước"
         },
-        "office_address": "Tầng 4, tòa nhà Demeter, Xã Vĩnh Sơn, Huyện Vĩnh Tường, Tỉnh Vĩnh Phúc"
+        "office_address": "Số 5, đường Kính Nỗ, Xã Hồng Giang, Huyện Đông Hưng, Tỉnh Thái Bình"
     },
     {
-        "id": "oc-54ed0e60-affc-48e9-a2de-ffdbfd328aa5",
-        "name": "CÔNG TY TNHH MTV KIẾN TRÚC, XUẤT NHẬP KHẨU VÀ ĐIỆN TỬ HẢI PHONG",
+        "id": "c-gIECPm9nxzakRrqLk6dW1",
+        "name": "CÔNG TY TNHH MTV SẢN XUẤT, VẬN TẢI VÀ XUẤT NHẬP KHẨU ĐẠI PHÚC",
         "legal_representative": {
-            "id": "op-34708c02-e153-4b8f-848d-67442489373b",
-            "name": "Đặng Ngọc Khuê",
-            "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "02611961238492",
-            "birthplace": "Vĩnh Phúc"
-        },
-        "office_address": "Số 587, đường Phan Long, Xã Thanh Đức, Huyện Vị Xuyên, Tỉnh Hà Giang"
-    },
-    {
-        "id": "oc-16fb588c-de44-4a1c-a188-ea613f0ed11d",
-        "name": "CÔNG TY TNHH CHUYỂN PHÁT VÀ CƠ ĐIỆN LẠNH PHƯỚC ĐẠT",
-        "legal_representative": {
-            "id": "op-4d1aa07e-aca2-4647-87fa-b649e2631aac",
-            "name": "Đặng Hữu Tâm",
+            "id": "p-w-bLsZccb0apKYt6C5zLZ",
+            "name": "Hoàng Văn Minh Khôi",
             "sex": "nam",
-            "birthdate": "5/3/1961",
-            "ssn": "00201961588253",
-            "birthplace": "Hà Giang"
+            "birthdate": "1999-09-18",
+            "ssn": "09201999867500",
+            "birthplace": "Cần Thơ"
         },
-        "office_address": "Số 0, đường Chùa Cao, Xã Xuân Phú, Huyện Ea Kar, Tỉnh Đắk Lắk"
+        "office_address": "Số 3, đường Tránh Quốc Lộ 32, Phường Thắng Lợi, Thành phố Sông Công, Tỉnh Thái Nguyên"
     },
     {
-        "id": "oc-b28f5ba2-0482-47b1-8b5b-e161deda995b",
-        "name": "CÔNG TY CỔ PHẦN DU LỊCH, KỸ THUẬT VÀ THIẾT KẾ ÁNH DƯƠNG",
+        "id": "c-qFJYj7Sd3JCI2SimJBSUc",
+        "name": "CÔNG TY TNHH MTV GIẢI PHÁP KINH DOANH VÀ NỘI THẤT HÙNG THẮNG",
         "legal_representative": {
-            "id": "op-6c910628-26c2-4bba-bdd2-071a8a0492d9",
-            "name": "Hồ Tố Nga",
+            "id": "p-OvbHlnGS-OwY9LnMAnClY",
+            "name": "Phan Thị Bích Hà",
             "sex": "nữ",
-            "birthdate": "5/3/1961",
-            "ssn": "02211961849861",
+            "birthdate": "1986-01-28",
+            "ssn": "04911986584250",
+            "birthplace": "Quảng Nam"
+        },
+        "office_address": "Số 66, đường Mỹ Trung, Xã Yên Phú, Huyện Lạc Sơn, Tỉnh Hoà Bình"
+    },
+    {
+        "id": "c-EeadRT2p5itvnAVrPXJeO",
+        "name": "CÔNG TY CỔ PHẦN GIẢI PHÁP QUỐC TẾ ÁNH DƯƠNG",
+        "legal_representative": {
+            "id": "p-GYa4tO265lcTOuZ2opDD_",
+            "name": "Phạm Ngọc Bích",
+            "sex": "nữ",
+            "birthdate": "1992-05-03",
+            "ssn": "05111992638943",
+            "birthplace": "Quảng Ngãi"
+        },
+        "office_address": "Tầng 6, tòa nhà Zeus, Thị trấn Đồng Đăng, Huyện Cao Lộc, Tỉnh Lạng Sơn"
+    },
+    {
+        "id": "c-bcd_P4QPK6oWxKVcMePfm",
+        "name": "CÔNG TY TNHH DỊCH VỤ NÔNG NGHIỆP, CHUYỂN PHÁT VÀ THIẾT KẾ MINH KHÁNH",
+        "legal_representative": {
+            "id": "p-rrYpuSQ8zKq5oJU-OLhrp",
+            "name": "Ngô Văn Minh Hùng",
+            "sex": "nam",
+            "birthdate": "1999-09-25",
+            "ssn": "03701999974770",
+            "birthplace": "Ninh Bình"
+        },
+        "office_address": "Số 17, đường Đông Nam Xóm Lác, Xã Thạnh Trị, Huyện Thạnh Trị, Tỉnh Sóc Trăng"
+    },
+    {
+        "id": "c-tEwwrPRqNnbYZRtWO0Cl6",
+        "name": "CÔNG TY CỔ PHẦN DỊCH VỤ VẬN TẢI QUANG THỊNH",
+        "legal_representative": {
+            "id": "p-uCukky4LmnrBpfOGxc3VS",
+            "name": "Hồ Văn Chí Thanh",
+            "sex": "nam",
+            "birthdate": "1977-03-21",
+            "ssn": "04001977028648",
+            "birthplace": "Nghệ An"
+        },
+        "office_address": "Số 4, đường Giữa Làng, Xã Lệ Viễn, Huyện Sơn Động, Tỉnh Bắc Giang"
+    },
+    {
+        "id": "c-MZODbdXYK2_rsacxGPZOE",
+        "name": "CÔNG TY TNHH MTV TƯ VẤN QUỐC TẾ, CƠ KHÍ VÀ ĐIỆN TỬ MINH ANH",
+        "legal_representative": {
+            "id": "p-1h3F7qe9GHg4BpWU96i9B",
+            "name": "Hoàng Thị Hương Tràm",
+            "sex": "nữ",
+            "birthdate": "1995-09-28",
+            "ssn": "01711995835184",
+            "birthplace": "Hòa Bình"
+        },
+        "office_address": "Số 750, đường Hồ Chí Minh, Phường Bình Tân, Thị Xã Buôn Hồ, Tỉnh Đắk Lắk"
+    },
+    {
+        "id": "c-YlhntcM5q2JDRyjG4763Q",
+        "name": "CÔNG TY CỔ PHẦN TƯ VẤN CHUYỂN PHÁT VẠN TIẾN",
+        "legal_representative": {
+            "id": "p-uA5q0D5zpbX36q3urWCXa",
+            "name": "Vũ Văn Thanh Tùng",
+            "sex": "nam",
+            "birthdate": "2001-03-28",
+            "ssn": "03102001335466",
+            "birthplace": "Hải Phòng"
+        },
+        "office_address": "Số 721, đường Cổng Ải, Xã Đồng Khê, Huyện Văn Chấn, Tỉnh Yên Bái"
+    },
+    {
+        "id": "c-l84jwi_NUirqEvYPKpUGm",
+        "name": "CÔNG TY TNHH MTV XÂY DỰNG VÀ ĐIỆN TỬ THÀNH ĐẠT",
+        "legal_representative": {
+            "id": "p-YFBDh0IkAl-7bYL8IIeaq",
+            "name": "Ngô Văn Hữu Đạt",
+            "sex": "nam",
+            "birthdate": "2001-09-13",
+            "ssn": "06602001661166",
+            "birthplace": "Đắk Lắk"
+        },
+        "office_address": "Số 177, đường Vân Trai, Xã Xuất Hóa, Huyện Lạc Sơn, Tỉnh Hoà Bình"
+    },
+    {
+        "id": "c-ZmPk4acCC6NqpK487YC1l",
+        "name": "CÔNG TY CỔ PHẦN TƯ VẤN KINH DOANH VÀ THƯƠNG MẠI VIỆT PHƯƠNG",
+        "legal_representative": {
+            "id": "p-PSZSJglZBeF5VhmoSZXmG",
+            "name": "Bùi Văn Bảo Nam",
+            "sex": "nam",
+            "birthdate": "1991-02-08",
+            "ssn": "05801991790083",
+            "birthplace": "Ninh Thuận"
+        },
+        "office_address": "Tầng 5, tòa nhà Poseidon, Phường Lê Lợi, Thị xã Sơn Tây, Thành phố Hà Nội"
+    },
+    {
+        "id": "c-OqY8_pDy95pemig6SLQ_a",
+        "name": "CÔNG TY TNHH MTV CÔNG NGHỆ KỸ THUẬT, DU LỊCH VÀ SẢN XUẤT HẢI PHONG",
+        "legal_representative": {
+            "id": "p-YDsuPh4R5F43eDbPRWckN",
+            "name": "Phan Văn Thanh Tùng",
+            "sex": "nam",
+            "birthdate": "1973-05-07",
+            "ssn": "08701973502141",
+            "birthplace": "Đồng Tháp"
+        },
+        "office_address": "Số 47, đường Hùng Nguyên, Xã Long Thọ, Huyện Nhơn Trạch, Tỉnh Đồng Nai"
+    },
+    {
+        "id": "c-RbHZ87yvKjjwtPp4rqMtG",
+        "name": "CÔNG TY TNHH TẬP ĐOÀN QUỐC TẾ MINH HIẾU",
+        "legal_representative": {
+            "id": "p-2YNbyjK3DUAP0tdoRQPDf",
+            "name": "Phan Thị Quỳnh Châu",
+            "sex": "nữ",
+            "birthdate": "1983-10-30",
+            "ssn": "01711983459609",
+            "birthplace": "Hòa Bình"
+        },
+        "office_address": "Tầng 53, tòa nhà Apollo, Phường Quang Hanh, Thành phố Cẩm Phả, Tỉnh Quảng Ninh"
+    },
+    {
+        "id": "c-1zrmSGpkCWyhg_TCtiSFM",
+        "name": "CÔNG TY CỔ PHẦN NÔNG NGHIỆP HÙNG DŨNG",
+        "legal_representative": {
+            "id": "p-Z7ZvtOeGj9q_AYN8ERZma",
+            "name": "Hoàng Văn Mạnh Hùng",
+            "sex": "nam",
+            "birthdate": "1973-06-23",
+            "ssn": "09201973181292",
+            "birthplace": "Cần Thơ"
+        },
+        "office_address": "Số 1, đường Đặng Thùy Trâm, Phường 5, Thành phố Bạc Liêu, Tỉnh Bạc Liêu"
+    },
+    {
+        "id": "c-ecQivTlSgYllSrcuD9WD6",
+        "name": "CÔNG TY TNHH KỸ THUẬT, XÂY DỰNG VÀ CƠ ĐIỆN LẠNH ĐẠI HUY",
+        "legal_representative": {
+            "id": "p-yA5AoiQKli8Q115XYqxgk",
+            "name": "Lê Văn Gia Hưng",
+            "sex": "nam",
+            "birthdate": "1986-07-18",
+            "ssn": "00801986825999",
+            "birthplace": "Tuyên Quang"
+        },
+        "office_address": "Số 44, đường Bát Khối, Xã Thanh Hòa, Huyện Thanh Chương, Tỉnh Nghệ An"
+    },
+    {
+        "id": "c-SOxomTrRZcYgdO1_dTCMw",
+        "name": "CÔNG TY TNHH MTV TƯ VẤN DU LỊCH, QUỐC TẾ VÀ THƯƠNG MẠI QUANG THỊNH",
+        "legal_representative": {
+            "id": "p-YgDeSJolNS34EgDDuNRhV",
+            "name": "Phạm Thị Thanh Thúy",
+            "sex": "nữ",
+            "birthdate": "1973-10-27",
+            "ssn": "08711973425486",
+            "birthplace": "Đồng Tháp"
+        },
+        "office_address": "Số 52, đường Nguyễn Văn Linh, Xã Hiệp Thạnh, Huyện Châu Thành, Tỉnh Long An"
+    },
+    {
+        "id": "c-0AUQLT5AL2TY1CogcaubB",
+        "name": "CÔNG TY CỔ PHẦN PHÁT TRIỂN CƠ KHÍ VÀ XÂY DỰNG MINH KHÁNH",
+        "legal_representative": {
+            "id": "p-X9Q_D5DYdmG_Isdzt5dpb",
+            "name": "Phạm Thị Quỳnh Hương",
+            "sex": "nữ",
+            "birthdate": "1992-02-26",
+            "ssn": "03511992616136",
+            "birthplace": "Hà Nam"
+        },
+        "office_address": "Tầng 24, tòa nhà Aphrodite, Phường Thịnh Lang, Thành phố Hòa Bình, Tỉnh Hoà Bình"
+    },
+    {
+        "id": "c-UQXWXObig-v6C5yv8V6Rb",
+        "name": "CÔNG TY TNHH MTV TƯ VẤN CƠ ĐIỆN LẠNH VÀ THIẾT KẾ THÀNH ĐẠT",
+        "legal_representative": {
+            "id": "p-_cxPk2-utxX6PSkGXdwly",
+            "name": "Bùi Văn Đăng Khoa",
+            "sex": "nam",
+            "birthdate": "1981-04-24",
+            "ssn": "06601981967129",
+            "birthplace": "Đắk Lắk"
+        },
+        "office_address": "Số 0, đường Nguyễn Văn Linh, Thị trấn Chi Nê, Huyện Lạc Thủy, Tỉnh Hoà Bình"
+    },
+    {
+        "id": "c-8U9TGRoeC7QszR5b6GNzp",
+        "name": "CÔNG TY TNHH CHUYỂN PHÁT VÀ NÔNG NGHIỆP MINH KHANG",
+        "legal_representative": {
+            "id": "p-ATMw6PDSENfcizpOC90y2",
+            "name": "Nguyễn Hiền Châu",
+            "sex": "nữ",
+            "birthdate": "1974-11-09",
+            "ssn": "02211974954768",
             "birthplace": "Quảng Ninh"
         },
-        "office_address": "Tầng 4, tòa nhà Hera, Xã Hòa Sơn, Huyện Hữu Lũng, Tỉnh Lạng Sơn"
+        "office_address": "Tầng 6, tòa nhà Zeus, Xã Đông Quang, Huyện Đông Hưng, Tỉnh Thái Bình"
+    },
+    {
+        "id": "c-x-zN2G6XgaqHyzoYyFY-n",
+        "name": "CÔNG TY TNHH MTV ĐIỆN TỬ, XUẤT NHẬP KHẨU VÀ DU LỊCH THÀNH CÔNG",
+        "legal_representative": {
+            "id": "p-UYjEnl1k0nqz1J0LQPLQ6",
+            "name": "Trần Minh Hùng",
+            "sex": "nam",
+            "birthdate": "1972-01-30",
+            "ssn": "06001972700727",
+            "birthplace": "Bình Thuận"
+        },
+        "office_address": "Số 57, đường Ngô Chi Lan, Xã Tây Đô, Huyện Hưng Hà, Tỉnh Thái Bình"
+    },
+    {
+        "id": "c-Xd1vuQxmO_NIEc8deJGuy",
+        "name": "CÔNG TY CỔ PHẦN CÔNG NGHỆ KỸ THUẬT VÀ CHUYỂN PHÁT MINH QUANG",
+        "legal_representative": {
+            "id": "p-npbRC4p9ekgHHsiENY8WD",
+            "name": "Trần Cẩm Anh",
+            "sex": "nữ",
+            "birthdate": "1981-10-07",
+            "ssn": "02711981706266",
+            "birthplace": "Bắc Ninh"
+        },
+        "office_address": "Tầng 27, tòa nhà Zeus, Thị trấn Ba Chẽ, Huyện Ba Chẽ, Tỉnh Quảng Ninh"
+    },
+    {
+        "id": "c-x71rvDf7V6007rOcL1P8L",
+        "name": "CÔNG TY TNHH MTV THIẾT KẾ KIM ANH",
+        "legal_representative": {
+            "id": "p-vEuyBZuqvD0jlk-wC5aDg",
+            "name": "Ngô Thị Hiền Châu",
+            "sex": "nữ",
+            "birthdate": "1995-10-25",
+            "ssn": "02711995584251",
+            "birthplace": "Bắc Ninh"
+        },
+        "office_address": "Tầng 1, tòa nhà Hephaestus, Xã Hòa Lộc, Huyện Hậu Lộc, Tỉnh Thanh Hóa"
+    },
+    {
+        "id": "c-VR_imPftDYFsRF0dWcFCd",
+        "name": "CÔNG TY TNHH MTV DỊCH VỤ NỘI THẤT TÙNG NAM",
+        "legal_representative": {
+            "id": "p-e7_iU_eW4MIwf5gdtZpOo",
+            "name": "Đặng Thị Huyền Anh",
+            "sex": "nữ",
+            "birthdate": "1974-08-19",
+            "ssn": "04411974458059",
+            "birthplace": "Quảng Bình"
+        },
+        "office_address": "Số 531, đường Đản Dị, Phường Duyệt Trung, Thành phố Cao Bằng, Tỉnh Cao Bằng"
+    },
+    {
+        "id": "c-mk1hDbOJBNAAY8f1Tiwe2",
+        "name": "CÔNG TY CỔ PHẦN ĐẦU TƯ KIẾN TRÚC TIẾN THÀNH",
+        "legal_representative": {
+            "id": "p-iI_HtVLEnAwm8vy5uYdgI",
+            "name": "Bùi Công Vinh",
+            "sex": "nam",
+            "birthdate": "1982-11-13",
+            "ssn": "04001982932826",
+            "birthplace": "Nghệ An"
+        },
+        "office_address": "Tầng 54, tòa nhà Demeter, Thị trấn Mỹ Phước, Huyện Tân Phước, Tỉnh Tiền Giang"
+    },
+    {
+        "id": "c-UFYeLgMz2J0oyDwb16G7R",
+        "name": "CÔNG TY TNHH TƯ VẤN CƠ ĐIỆN LẠNH VÀ CHUYỂN PHÁT THÀNH CÔNG",
+        "legal_representative": {
+            "id": "p-NT0zTcKTwfFIJsEqIc7fU",
+            "name": "Lê Văn Đức Việt",
+            "sex": "nam",
+            "birthdate": "1990-11-20",
+            "ssn": "04401990116336",
+            "birthplace": "Quảng Bình"
+        },
+        "office_address": "Tầng 06, tòa nhà Hera, Xã Giai Xuân, Huyện Phong Điền, Thành phố Cần Thơ"
+    },
+    {
+        "id": "c-DtKLMTZ51TvG8H7nGqldc",
+        "name": "CÔNG TY TNHH MTV DỊCH VỤ KIẾN TRÚC, THIẾT KẾ VÀ KỸ THUẬT SƠN HẢI",
+        "legal_representative": {
+            "id": "p-dCjTjjjeYMlpxH4v80JGZ",
+            "name": "Dương An Nhiên",
+            "sex": "nữ",
+            "birthdate": "1978-02-26",
+            "ssn": "08211978049865",
+            "birthplace": "Tiền Giang"
+        },
+        "office_address": "Số 2, đường Mê Linh, Xã Măng Buk, Huyện Kon Plông, Tỉnh Kon Tum"
+    },
+    {
+        "id": "c-5uD8xTo1dp70QHRauqrnO",
+        "name": "CÔNG TY CỔ PHẦN SẢN XUẤT MINH TÂM",
+        "legal_representative": {
+            "id": "p-1zv7sR6houRdq7FvAOROS",
+            "name": "Nguyễn Thùy Anh",
+            "sex": "nữ",
+            "birthdate": "2001-04-27",
+            "ssn": "01412001300563",
+            "birthplace": "Sơn La"
+        },
+        "office_address": "Tầng 0, tòa nhà Demeter, Xã Hội Sơn, Huyện Anh Sơn, Tỉnh Nghệ An"
+    },
+    {
+        "id": "c-PuqUhOzeGIxEO6eorqPJg",
+        "name": "CÔNG TY CỔ PHẦN GIẢI PHÁP DU LỊCH VÀ CƠ ĐIỆN LẠNH ĐẠI HUY",
+        "legal_representative": {
+            "id": "p-xqcWYCkmeyxjUXrBbu-ig",
+            "name": "Hoàng Văn Đình Nguyên",
+            "sex": "nam",
+            "birthdate": "1974-08-17",
+            "ssn": "02001974804154",
+            "birthplace": "Lạng Sơn"
+        },
+        "office_address": "Tầng 93, tòa nhà Hephaestus, Xã Tam Sơn, Huyện Núi Thành, Tỉnh Quảng Nam"
+    },
+    {
+        "id": "c-RMWy7nsmt5vvwvYRM6JQq",
+        "name": "CÔNG TY TNHH TẬP ĐOÀN CƠ ĐIỆN LẠNH VÀ SẢN XUẤT THÀNH CÔNG",
+        "legal_representative": {
+            "id": "p-CYqG-pWUqLbQVcd6PWBku",
+            "name": "Lê Trọng Nam",
+            "sex": "nam",
+            "birthdate": "1995-12-23",
+            "ssn": "08701995696844",
+            "birthplace": "Đồng Tháp"
+        },
+        "office_address": "Tầng 4, tòa nhà Hephaestus, Thị trấn Gia Khánh, Huyện Bình Xuyên, Tỉnh Vĩnh Phúc"
+    },
+    {
+        "id": "c-AsuvBbB7JL1Foz-PLt1FM",
+        "name": "CÔNG TY TNHH MTV ĐẦU TƯ SẢN XUẤT, NÔNG NGHIỆP VÀ ĐIỆN TỬ BÌNH MINH",
+        "legal_representative": {
+            "id": "p-nWRJftNDX_aGpe4MK1bRQ",
+            "name": "Nguyễn Đức Việt",
+            "sex": "nam",
+            "birthdate": "1986-11-04",
+            "ssn": "04401986973011",
+            "birthplace": "Quảng Bình"
+        },
+        "office_address": "Tầng 8, tòa nhà Zeus, Phường Hương An, Thành phố Huế, Tỉnh Thừa Thiên Huế"
+    },
+    {
+        "id": "c-_HaaKWdAdTrGZcT18hQr4",
+        "name": "CÔNG TY CỔ PHẦN TẬP ĐOÀN DU LỊCH MINH QUỐC",
+        "legal_representative": {
+            "id": "p-ApoLsZDfVmnbQSUr4Zvrw",
+            "name": "Ngô Khánh Diệu",
+            "sex": "nữ",
+            "birthdate": "1974-05-26",
+            "ssn": "07411974437239",
+            "birthplace": "Bình Dương"
+        },
+        "office_address": "Tầng 62, tòa nhà Athena, Phường Tân Long, Thành phố Mỹ Tho, Tỉnh Tiền Giang"
+    },
+    {
+        "id": "c-KAtYS5GaHg5TLH5WbbewX",
+        "name": "CÔNG TY TNHH MTV KIẾN TRÚC VÀ SẢN XUẤT KIM HƯNG",
+        "legal_representative": {
+            "id": "p-ojzuGtU4hJlqss2ztObuW",
+            "name": "Vũ Lâm Dũng",
+            "sex": "nam",
+            "birthdate": "1985-07-23",
+            "ssn": "02701985362378",
+            "birthplace": "Bắc Ninh"
+        },
+        "office_address": "Tầng 83, tòa nhà Hephaestus, Xã Hàm Giang, Huyện Trà Cú, Tỉnh Trà Vinh"
+    },
+    {
+        "id": "c-tYu02Orl_0A_se6y8zTVC",
+        "name": "CÔNG TY TNHH GIẢI PHÁP KINH DOANH, KIẾN TRÚC VÀ QUỐC TẾ ANH DŨNG",
+        "legal_representative": {
+            "id": "p-e8GMHq_w7ypMCHmNQmFiQ",
+            "name": "Lê Tuệ Mẫn",
+            "sex": "nữ",
+            "birthdate": "1973-03-23",
+            "ssn": "00111973145221",
+            "birthplace": "Hà Nội"
+        },
+        "office_address": "Tầng 4, tòa nhà Ares, Phường Bạch Đằng, Quận Hai Bà Trưng, Thành phố Hà Nội"
+    },
+    {
+        "id": "c-n0kp5ekAHt5ARhJZ88O_P",
+        "name": "CÔNG TY TNHH MTV CÔNG NGHỆ DU LỊCH, CHUYỂN PHÁT VÀ ĐIỆN TỬ SƠN HẢI",
+        "legal_representative": {
+            "id": "p-fzK6eUqxik7zTPEkGGp6v",
+            "name": "Lê Ngọc Trâm",
+            "sex": "nữ",
+            "birthdate": "1977-04-12",
+            "ssn": "01211977268679",
+            "birthplace": "Lai Châu"
+        },
+        "office_address": "Tầng 4, tòa nhà Demeter, Xã Đại Sơn, Huyện Quảng Hòa, Tỉnh Cao Bằng"
+    },
+    {
+        "id": "c-xviA2hVdiylZEbxGsI5UK",
+        "name": "CÔNG TY TNHH MTV DỊCH VỤ KINH DOANH QUỐC DŨNG",
+        "legal_representative": {
+            "id": "p-8DNyZ8cgUC8etTfczWQPg",
+            "name": "Phan Lâm Dũng",
+            "sex": "nam",
+            "birthdate": "1986-10-08",
+            "ssn": "06601986947092",
+            "birthplace": "Đắk Lắk"
+        },
+        "office_address": "Số 989, đường Trường Sa, Xã Tiến Hóa, Huyện Tuyên Hóa, Tỉnh Quảng Bình"
+    },
+    {
+        "id": "c-XM3RO-bdgQzbE9i8NuD8D",
+        "name": "CÔNG TY CỔ PHẦN QUỐC TẾ MINH KHANG",
+        "legal_representative": {
+            "id": "p-cfuUj7VbD1yIvXz5WCDX3",
+            "name": "Trần An Nhiên",
+            "sex": "nữ",
+            "birthdate": "1989-02-11",
+            "ssn": "04811989158533",
+            "birthplace": "Đà Nẵng"
+        },
+        "office_address": "Số 801, đường Hồ Chí Minh, Xã Tạ Bú, Huyện Mường La, Tỉnh Sơn La"
+    },
+    {
+        "id": "c-sE8jRRWqnJQl1yaniyO7E",
+        "name": "CÔNG TY TNHH MTV KINH DOANH MINH QUÂN",
+        "legal_representative": {
+            "id": "p-2fj9hNgMBVbHKRT7Cn6Ys",
+            "name": "Vũ Tuyết Nhung",
+            "sex": "nữ",
+            "birthdate": "1988-04-15",
+            "ssn": "02211988418143",
+            "birthplace": "Quảng Ninh"
+        },
+        "office_address": "Tầng 65, tòa nhà Poseidon, Phường Quang Trung, Thị xã Sơn Tây, Thành phố Hà Nội"
     }
 ]

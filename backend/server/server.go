@@ -13,6 +13,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/rs/zerolog/log"
+	"github.com/theLemionday/web-programming/cached"
 	"github.com/theLemionday/web-programming/conf"
 	"github.com/theLemionday/web-programming/database"
 	"github.com/theLemionday/web-programming/logging"
@@ -28,11 +29,6 @@ func getAbsPath() (absPath string) {
 }
 
 func Start(cfg *conf.Config) {
-	// database
-	database.NewConnection(cfg)
-	// database.CheckConnection()
-	defer database.CloseConnection()
-
 	app := fiber.New(fiber.Config{
 		// Prefork:       true,
 		CaseSensitive: true,
@@ -59,6 +55,13 @@ func Start(cfg *conf.Config) {
 	app.Use(logger.New(logCfg))
 
 	router.RegisterRoutes(app, cfg.JwtSecret)
+
+	// database
+	database.NewConnection(cfg)
+	// database.CheckConnection()
+	defer database.CloseConnection()
+
+	cached.SetupCacheManager()
 
 	listenAddr := cfg.Host + ":" + cfg.Port
 	go func() {

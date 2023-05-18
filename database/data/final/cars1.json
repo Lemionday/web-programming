@@ -1,0 +1,48 @@
+{
+    "data": [
+        {
+            "car_id": "zLXKb3elN380v-hT7rFfN",
+            "manufacturer": "nissan",
+            "model": "otti",
+            "carbody": "sedan",
+            "size": [
+                4688,
+                1689,
+                1399
+            ],
+            "fueltype": "gas",
+            "city": "Bình Định",
+            "plate": "77T - 19731",
+            "vin": "JBOMVNUCTWCZ32314",
+            "engine_number": "MRSWXAR73282",
+            "least_recently_registered": "14/3/2022",
+            "invalidate_date": "14/3/2024",
+            "center_registered": "3705D",
+            "register_number": "RZ-5678666",
+            "bill_number": "JH-12F/0596380",
+            "owner_id": "ZoH6yXNQ7b6e6UEYvlnbw"
+        },
+        {
+            "car_id": "3KmlRO8LsGOESd_80rOAl",
+            "manufacturer": "porsche",
+            "model": "cayenne",
+            "carbody": "hatchback",
+            "size": [
+                4462,
+                1836,
+                1282
+            ],
+            "fueltype": "gas",
+            "city": "Tp. Hồ Chí Minh",
+            "plate": "52K - 81870",
+            "vin": "AZZSFNAADWWT66787",
+            "engine_number": "AYSTFPS62584",
+            "least_recently_registered": "15/7/2021",
+            "invalidate_date": "15/1/2023",
+            "center_registered": "2401D",
+            "register_number": "MU-8650734",
+            "bill_number": "TS-34U/1482158",
+            "owner_id": "ZoH6yXNQ7b6e6UEYvlnbw"
+        }
+    ]
+}

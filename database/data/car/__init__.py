@@ -3,10 +3,10 @@ import factory
 import factory.fuzzy
 import rstr
 import csv
-import json
 import math
 import datetime
 from dateutil.relativedelta import relativedelta
+import nanoid
 
 
 class Provider(VehicleProvider):
@@ -98,7 +98,7 @@ class CarRegistry:
         register_number,
         bill_number,
     ) -> None:
-        self.car_id = f"c-{car_id}"
+        self.car_id = car_id
         self.manufacturer = car_spec["manufacturer"]
         self.model = car_spec["model"]
         self.carbody = car_spec["carbody"]
@@ -112,13 +112,11 @@ class CarRegistry:
         self.plate = f"{city[0]}{district} - {unique_num}"
         self.vin = vin
         self.engine_number = engine_number
-        self.least_recently_registered = least_recently_registered.strftime(
-            "%-d/%-m/%Y"
-        )
+        self.least_recently_registered = least_recently_registered.strftime("%Y-%m-%d")
         self.invalidate_date = (
             least_recently_registered
             + relativedelta(years=int(valid_period / 12), months=valid_period % 12)
-        ).strftime("%-d/%-m/%Y")
+        ).strftime("%Y-%m-%d")
         self.center_registered = center_registered
         self.register_number = register_number
         self.bill_number = bill_number
@@ -131,7 +129,7 @@ class CarRegistryFactory(factory.Factory):
     class Meta:
         model = CarRegistry
 
-    car_id = factory.Faker("uuid4")
+    car_id = factory.Sequence(lambda n: nanoid.generate())
     car_spec = factory.Faker("car_spec")
 
     city = factory.Faker("plate_city")

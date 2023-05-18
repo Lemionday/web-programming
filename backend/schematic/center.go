@@ -15,7 +15,7 @@ type Center struct {
 
 func GetAllCenter() ([]Center, error) {
 	var centers []Center
-	cur, err := database.GetCol("centers").Find(context.TODO(), bson.D{})
+	cur, err := database.GetCol("centers").Find(context.TODO(), bson.D{{}})
 	if err != nil {
 		return nil, err
 	}

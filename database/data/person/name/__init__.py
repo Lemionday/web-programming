@@ -8,10 +8,10 @@ import csv
 class Provider(NameProvider):
     def __init__(self, generator: Any) -> None:
         super().__init__(generator)
-        with open("name/female.csv") as inFile:
+        with open("person/name/female.csv") as inFile:
             csv_reader = csv.reader(inFile, delimiter=";")
             self.female_names = tuple(id[0] for id in csv_reader)
-        with open("name/male.csv") as inFile:
+        with open("person/name/male.csv") as inFile:
             csv_reader = csv.reader(inFile, delimiter=";")
             self.male_names = tuple(id[0] for id in csv_reader)
 

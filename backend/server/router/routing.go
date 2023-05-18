@@ -15,7 +15,9 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 		})
 	})
 
-	app.Get("/setuptest", addTestAccounts)
+	// app.Get("/setuptest",
+	// 	// testSetupAddAccounts,
+	// 	TestSetupAddCarres)
 	// app.Post("/add", func(c *fiber.Ctx) error {
 	// 	acc := schematic.Account{
 	// 		Username: "tester",
@@ -38,6 +40,7 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	})
 
 	// jwt
+	app.Get("/cars/statistics", getCarsStatisticsHandler)
 	middleware.SetupJWT(app, jwtSecret)
 	app.Use(authRequired)
 
@@ -46,6 +49,7 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	app.Post("/signup", schematic.ValidateAccountDataFromRequest, signupHandler)
 	app.Get("/accounts", getAccounts)
 	app.Delete("/account/:username", deleteAccount)
+
 	// app.Static("/", "./frontend/build")
 	// app.Static("*", "./frontend/build/index.html")
 	// app.Use(func(c *fiber.Ctx) error {

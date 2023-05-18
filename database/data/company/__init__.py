@@ -6,7 +6,7 @@ import csv
 import factory
 from person import PersonFactory
 from address import Provider as AddressProvider
-import json
+import nanoid
 
 
 class Provider(CompanyProvider):
@@ -87,7 +87,7 @@ class Provider(CompanyProvider):
 
 class Company:
     def __init__(self, id, name, legal_representative, office_address):
-        self.id = f"oc-{id}"
+        self.id = f"c-{id}"
         self.name = name.upper()
         self.legal_representative = legal_representative.__dict__
         self.office_address = office_address
@@ -101,7 +101,7 @@ class CompanyFactory(factory.Factory):
     class Meta:
         model = Company
 
-    id = factory.Faker("uuid4")
+    id = factory.Sequence(lambda n: nanoid.generate())
     name = factory.Faker("company")
     legal_representative = factory.SubFactory(PersonFactory)
     office_address = factory.Faker("address")
