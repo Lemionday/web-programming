@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/theLemionday/web-programming/database"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 type FuelType string
@@ -16,7 +16,7 @@ const (
 )
 
 type Car struct {
-	Id                      int16     `json:"car_id" bson:"car_id"`
+	Id                      string    `json:"car_id" bson:"car_id"`
 	Manufacturer            string    `json:"manufacturer" bson:"manufacturer"`
 	Model                   string    `json:"model" bson:"model"`
 	Size                    []int     `json:"size" bson:"size"`
@@ -33,8 +33,8 @@ type Car struct {
 	OwnerId                 string    `json:"owner_id" bson:"owner_id"`
 }
 
-func GetAllCars(options ...primitive.M) ([]Car, error) {
-	car_coll := database.GetCol("carres")
+func GetAllCars(options bson.M) ([]Car, error) {
+	car_coll := database.GetCol("cars")
 
 	var cars_list []Car
 	cur, err := car_coll.Find(context.TODO(), options)
@@ -48,4 +48,15 @@ func GetAllCars(options ...primitive.M) ([]Car, error) {
 	}
 
 	return cars_list, nil
+}
+
+func GetCar(options bson.M) (*Car, error) {
+	car_coll := database.GetCol("cars")
+
+	var car Car
+	if err := car_coll.FindOne(context.TODO(), options).Decode(&car); err != nil {
+		return nil, err
+	}
+
+	return &car, nil
 }

@@ -12,9 +12,9 @@ import (
 
 var (
 	admin = schematic.Account{
-		Username:   "admin",
-		Password:   "root1234",
-		Department: "adminDep",
+		Username: "admin",
+		Password: "root1234",
+		Center:   "adminDep",
 	}
 )
 

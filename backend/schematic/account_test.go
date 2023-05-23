@@ -9,9 +9,9 @@ import (
 func TestAddAccounts(t *testing.T) {
 	testSetup()
 	admin := Account{
-		Username:   "admin",
-		Password:   "root1234",
-		Department: "adminDep",
+		Username: "admin",
+		Password: "root1234",
+		Center:   "adminDep",
 	}
 
 	err := AddAccount(&admin)

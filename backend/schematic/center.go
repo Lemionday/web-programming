@@ -1,28 +1,25 @@
 package schematic
 
 import (
-	"context"
-
-	"github.com/theLemionday/web-programming/database"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Center struct {
-	Id      string `json:"id" bson:"id"`
-	Name    string `json:"name" bson:"name"`
-	Address string `json:"address" bson:"address"`
+	ObjId   primitive.ObjectID `json:"-" bson:"_id"`
+	ID      string             `json:"id" bson:"id"`
+	Name    string             `json:"name" bson:"name"`
+	Address string             `json:"address" bson:"address"`
+}
+
+func (c Center) GetID() string {
+	return c.ObjId.Hex()
 }
 
 func GetAllCenter() ([]Center, error) {
-	var centers []Center
-	cur, err := database.GetCol("centers").Find(context.TODO(), bson.D{{}})
-	if err != nil {
-		return nil, err
-	}
-	defer cur.Close(context.TODO())
-	if err = cur.All(context.TODO(), &centers); err != nil {
-		return nil, err
-	}
+	return getAll[Center]("centers", bson.M{})
+}
 
-	return centers, nil
+func GetAllCenterWithPaging(start string, nPerPage int64) ([]Center, string, error) {
+	return getAllWithPaging[Center]("centers", bson.M{}, start, nPerPage)
 }

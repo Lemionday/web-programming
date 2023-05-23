@@ -7,6 +7,10 @@ import (
 
 type PortType = uint16
 
+var (
+	NPerPage int64 = 20
+)
+
 type Config struct {
 	Host        string
 	Port        string

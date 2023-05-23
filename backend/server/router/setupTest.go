@@ -3,7 +3,6 @@ package router
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"os"
 	"path/filepath"
 
@@ -24,22 +23,23 @@ func clearAllFromColl(coll *mongo.Collection) {
 	// coll.Indexes().CreateOne(context.Background(), indexModel)
 }
 
-func addToColl[T interface{}](coll *mongo.Collection, dataPath string) {
+func addToColl(coll *mongo.Collection, dataPath string) {
 	jsonFile, err := os.ReadFile(dataPath)
 	if err != nil {
-		log.Error().Err(err)
+		log.Error().Err(err).Msg("")
 	}
 
-	type DataType struct {
-		Data []schematic.Car `json:"data"`
-	}
-	var data DataType
+	var data []schematic.Account
 	// fmt.Println(jsonFile)
 	err = json.Unmarshal(jsonFile, &data)
 	if err != nil {
-		log.Error().Err(err)
+		log.Error().Err(err).Msg("")
 	}
-	fmt.Println(data.Data)
+
+	for _, account := range data {
+		// coll.InsertOne(context.Background(), account)
+		schematic.AddAccount(&account)
+	}
 
 	// for _, car := range data {
 	// fmt.Println(json.MarshalIndent(car, "", "    "))
@@ -78,15 +78,17 @@ func testSetupAddAccounts(c *fiber.Ctx) error {
 }
 
 func testSetupAddCarres(c *fiber.Ctx) error {
-	carres := database.GetCol("cars")
-	clearAllFromColl(carres)
-	path, _ := filepath.Abs("../database/data/final/cars.json")
-	addToColl[schematic.Car](carres, path)
+	// carres := database.GetCol("cars")
+	// clearAllFromColl(carres)
+	path, _ := filepath.Abs("../database/data/final/accounts.json")
+	addToColl(nil, path)
 	return nil
 }
 
 func TestSetupAddCarres(c *fiber.Ctx) error {
-	path, _ := filepath.Abs("../database/data/final/cars1.json")
-	addToColl[schematic.Car](nil, path)
+	accounts := database.GetCol("accounts")
+	clearAllFromColl(accounts)
+	path, _ := filepath.Abs("../database/data/final/accounts.json")
+	addToColl(accounts, path)
 	return nil
 }

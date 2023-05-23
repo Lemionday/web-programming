@@ -16,6 +16,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { useLoaderData } from 'react-router-dom';
+import ReactVirtualizedTable from './shared/InfiniteScroll';
 
 interface TablePaginationActionsProps {
     count: number;
@@ -123,53 +124,56 @@ export default function CentersListPage() {
         setPage(0);
     };
 
-    return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-                <TableBody>
-                    {(rowsPerPage > 0
-                        ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        : rows
-                    ).map((row: any) => (
-                        <TableRow key={row.id}>
-                            <TableCell component="th" scope="row" style={{ width: '10vw' }}>
-                                {row.id}
-                            </TableCell>
-                            <TableCell style={{ width: '40vw' }} align="left">
-                                {row.name}
-                            </TableCell>
-                            <TableCell style={{ width: '40vw' }} align="left">
-                                {row.address}
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                    {emptyRows > 0 && (
-                        <TableRow style={{ height: 53 * emptyRows }}>
-                            <TableCell colSpan={6} />
-                        </TableRow>
-                    )}
-                </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                            colSpan={3}
-                            count={rows.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            SelectProps={{
-                                inputProps: {
-                                    'aria-label': 'rows per page',
-                                },
-                                native: true,
-                            }}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                            ActionsComponent={TablePaginationActions}
-                        />
-                    </TableRow>
-                </TableFooter>
-            </Table>
-        </TableContainer>
-    );
+    return <>
+        <ReactVirtualizedTable />
+    </>
+    // return (
+    //     <TableContainer component={Paper}>
+    //         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+    //             <TableBody>
+    //                 {(rowsPerPage > 0
+    //                     ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    //                     : rows
+    //                 ).map((row: any) => (
+    //                     <TableRow key={row.id}>
+    //                         <TableCell component="th" scope="row" style={{ width: '10vw' }}>
+    //                             {row.id}
+    //                         </TableCell>
+    //                         <TableCell style={{ width: '40vw' }} align="left">
+    //                             {row.name}
+    //                         </TableCell>
+    //                         <TableCell style={{ width: '40vw' }} align="left">
+    //                             {row.address}
+    //                         </TableCell>
+    //                     </TableRow>
+    //                 ))}
+    //                 {emptyRows > 0 && (
+    //                     <TableRow style={{ height: 53 * emptyRows }}>
+    //                         <TableCell colSpan={6} />
+    //                     </TableRow>
+    //                 )}
+    //             </TableBody>
+    //             <TableFooter>
+    //                 <TableRow>
+    //                     <TablePagination
+    //                         rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+    //                         colSpan={3}
+    //                         count={rows.length}
+    //                         rowsPerPage={rowsPerPage}
+    //                         page={page}
+    //                         SelectProps={{
+    //                             inputProps: {
+    //                                 'aria-label': 'rows per page',
+    //                             },
+    //                             native: true,
+    //                         }}
+    //                         onPageChange={handleChangePage}
+    //                         onRowsPerPageChange={handleChangeRowsPerPage}
+    //                         ActionsComponent={TablePaginationActions}
+    //                     />
+    //                 </TableRow>
+    //             </TableFooter>
+    //         </Table>
+    //     </TableContainer>
+    // );
 }

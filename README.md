@@ -7,6 +7,9 @@
 | 21020222     | Nguyễn Đức Nam   | 0345316858    |
 | 21021547     | Nguyễn Hữu Trọng | 0961308192    |
 
+# Cache
+Do dữ liệu về các trung tâm không thường xuyên thay đổi nên khi server khởi động sẽ lấy dữ liệu từ database và dùng cơ sở dữ liệu redis để cache các mã trung tâm và tên tương ứng với key và value.
+
 # Routing
 
 Thông tin xe trong file database/data/final/cars.json

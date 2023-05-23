@@ -3,8 +3,10 @@ package cached
 import (
 	"context"
 	"errors"
+	"time"
 
 	"github.com/eko/gocache/lib/v4/cache"
+	"github.com/eko/gocache/lib/v4/store"
 	redis_store "github.com/eko/gocache/store/redis/v4"
 	"github.com/redis/go-redis/v9"
 	"github.com/rs/zerolog/log"
@@ -12,7 +14,7 @@ import (
 )
 
 type cacheManager struct {
-	centers *cache.Cache[string]
+	centers *cache.LoadableCache[string]
 }
 
 var (
@@ -20,36 +22,38 @@ var (
 )
 
 var cacheManagerInstance cacheManager
-var ctx = context.TODO()
 
 func SetupCacheManager() {
 	redisStore := redis_store.NewRedis(redis.NewClient(&redis.Options{
 		Addr: "127.0.0.1:6379",
 	}))
 
-	cacheManagerInstance.centers = cache.New[string](redisStore)
-	getAllCenterAndCache(true, context.TODO())
+	cacheManagerInstance.centers = cache.NewLoadable[string](
+		loadCenters,
+		cache.New[string](redisStore),
+	)
 }
 
-func getAllCenterAndCache(firstTime bool, ctx context.Context) {
+func loadCenters(ctx context.Context, key any) (string, error) {
 	centers, err := schematic.GetAllCenter()
 	if err != nil {
 		log.Fatal().Err(err).Msg("get centers from database failed.")
 	}
 
+	var centerToFind schematic.Center
 	for _, center := range centers {
-		err = cacheManagerInstance.centers.Set(ctx, center.Id, center.Name)
+		err = cacheManagerInstance.centers.Set(ctx, center.ID, center.Name, store.WithExpiration(1*time.Hour))
 		if err != nil {
-			if firstTime {
-				log.Fatal().Err(err).Msg("load centers to cache failed.")
-			} else {
-				getAllCenterAndCache(false, ctx)
-			}
+			log.Fatal().Err(err).Msg("load centers to cache failed.")
+		}
+		if center.ID == key {
+			centerToFind = center
 		}
 	}
 
+	return centerToFind.ID, nil
 }
 
-func GetCacheCenters() *cache.Cache[string] {
+func GetCenters() *cache.LoadableCache[string] {
 	return cacheManagerInstance.centers
 }

@@ -2,9 +2,9 @@ package router
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/rs/zerolog/log"
 	"github.com/theLemionday/web-programming/schematic"
 	"github.com/theLemionday/web-programming/server/middleware"
+	"github.com/theLemionday/web-programming/server/router/handler"
 )
 
 func RegisterRoutes(app *fiber.App, jwtSecret string) {
@@ -15,9 +15,9 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 		})
 	})
 
-	// app.Get("/setuptest",
-	// 	// testSetupAddAccounts,
-	// 	TestSetupAddCarres)
+	app.Get("/setuptest",
+		// testSetupAddAccounts,
+		TestSetupAddCarres)
 	// app.Post("/add", func(c *fiber.Ctx) error {
 	// 	acc := schematic.Account{
 	// 		Username: "tester",
@@ -29,32 +29,20 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	// })
 
 	app.Post("/login", schematic.ValidateAccountDataFromRequest, loginHandler)
-	app.Get("/centers", func(c *fiber.Ctx) error {
-		centers, err := schematic.GetAllCenter()
-		if err != nil {
-			log.Error().Err(err)
-			return c.SendStatus(fiber.StatusInternalServerError)
-		}
-
-		return c.JSON(centers)
-	})
+	app.Get("/centers", handler.GetCentersWithPaging)
 
 	// jwt
-	app.Get("/cars/statistics", getCarsStatisticsHandler)
 	middleware.SetupJWT(app, jwtSecret)
-	app.Use(authRequired)
+	app.Use(middleware.AuthRequired)
 
 	// protected
 	app.Get("/hello", hello)
-	app.Post("/signup", schematic.ValidateAccountDataFromRequest, signupHandler)
-	app.Get("/accounts", getAccounts)
-	app.Delete("/account/:username", deleteAccount)
 
-	// app.Static("/", "./frontend/build")
-	// app.Static("*", "./frontend/build/index.html")
-	// app.Use(func(c *fiber.Ctx) error {
-	// 	return c.SendStatus(fiber.StatusNotFound)
-	// })
+	app.Post("/account/signup", schematic.ValidateAccountDataFromRequest, signupHandler)
+	app.Get("/accounts", handler.GetAccounts)
+	app.Delete("/account/:username", handler.DeleteAccount)
+	app.Get("/cars/statistics", handler.GetCarsStatistics)
+	app.Get("/owner/:id", handler.GetOwner)
 }
 
 func hello(c *fiber.Ctx) error {

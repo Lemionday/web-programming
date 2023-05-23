@@ -38,7 +38,11 @@ class Person:
         self.birthdate = birthdate.strftime("%Y-%m-%d")
         self.ssn = f"{ssn_city[1]}{ssn_sex}{birthdate.year}{ssn_unique_number}"
         self.birthplace = ssn_city[0]
+        self.cars_list = []
         # self.address = address
+
+    def add_car(self, car_id):
+        self.cars_list.append(car_id)
 
 
 from .name import Provider as NameProvider

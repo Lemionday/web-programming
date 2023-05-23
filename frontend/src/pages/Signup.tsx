@@ -17,7 +17,7 @@ import { AccountDataType } from '../components/models/Account';
 
 async function signUpAction(auth: string, newUser: AccountDataType) {
     try {
-        const result = await fetch(`${config.baseUrl}/signup`, {
+        const result = await fetch(`${config.baseUrl}/account/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

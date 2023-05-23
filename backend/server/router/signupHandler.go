@@ -17,7 +17,7 @@ func signupHandler(c *fiber.Ctx) error {
 				"err": "User already existed",
 			})
 		} else if err != nil {
-			log.Error().Err(err)
+			log.Error().Err(err).Msg("")
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 				"err": err,
 			})

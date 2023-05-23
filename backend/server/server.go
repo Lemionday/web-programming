@@ -17,6 +17,7 @@ import (
 	"github.com/theLemionday/web-programming/conf"
 	"github.com/theLemionday/web-programming/database"
 	"github.com/theLemionday/web-programming/logging"
+	"github.com/theLemionday/web-programming/server/middleware"
 	"github.com/theLemionday/web-programming/server/router"
 )
 
@@ -54,7 +55,7 @@ func Start(cfg *conf.Config) {
 	}
 	app.Use(logger.New(logCfg))
 
-	router.RegisterRoutes(app, cfg.JwtSecret)
+	middleware.SetupNanoID(21)
 
 	// database
 	database.NewConnection(cfg)
@@ -63,10 +64,18 @@ func Start(cfg *conf.Config) {
 
 	cached.SetupCacheManager()
 
+	router.RegisterRoutes(app, cfg.JwtSecret)
+	listen(cfg, app)
+
+	log.Info().Msg("Running cleanup tasks...")
+	log.Info().Msg("App was successfully shutdown.")
+}
+
+func listen(cfg *conf.Config, app *fiber.App) {
 	listenAddr := cfg.Host + ":" + cfg.Port
 	go func() {
 		if err := app.Listen(listenAddr); err != nil {
-			log.Fatal().Err(err)
+			log.Fatal().Err(err).Msg("")
 		}
 	}()
 
@@ -76,10 +85,6 @@ func Start(cfg *conf.Config) {
 	<-c // Blocks the main thread until an interrupt is reveived
 	fmt.Println("Gracefully shutting down with 2 seconds timeout...")
 	if err := app.ShutdownWithTimeout(2 * time.Second); err != nil {
-		log.Info().Err(err)
+		log.Info().Err(err).Msg("")
 	}
-
-	log.Info().Msg("Running cleanup tasks...")
-	database.CloseConnection()
-	log.Info().Msg("App was successfully shutdown.")
 }

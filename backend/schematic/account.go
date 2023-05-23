@@ -10,6 +10,7 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/theLemionday/web-programming/database"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -19,17 +20,22 @@ var (
 )
 
 type Account struct {
-	Username       string `json:"username" bson:"username" validate:"required,min=3,max=25"`
-	Role           Role   `json:"-" bson:"role"`
-	Department     string `json:"department" bson:"department"`
-	Password       string `json:"password" bson:"-" validate:"required,min=8"`
-	HashedPassword []byte `json:"-" bson:"hashpassword"`
-	Salt           []byte `json:"-" bson:"salt"`
+	Id             primitive.ObjectID `json:"-" bson:"_id"`
+	Username       string             `json:"username" bson:"username" validate:"required,min=3,max=25"`
+	Role           Role               `json:"role" bson:"role"`
+	Center         string             `json:"center" bson:"center"`
+	Password       string             `json:"password" bson:"-" validate:"required,min=8"`
+	HashedPassword []byte             `json:"-" bson:"hashpassword"`
+	Salt           []byte             `json:"-" bson:"salt"`
 	// CreatedAt      time.Time
 	// ModifiedAt     time.Time
 }
 
-func validateAccount(account Account) (errors []*ErrorValidate) {
+func (a Account) GetID() string {
+	return a.Id.Hex()
+}
+
+func (account *Account) validate() (errors []*ErrorValidate) {
 	err := validate.Struct(account)
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
@@ -50,7 +56,7 @@ func ValidateAccountDataFromRequest(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
-	errors := validateAccount(*data)
+	errors := data.validate()
 	if errors != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(errors)
 	}
@@ -112,18 +118,8 @@ func Authenticate(username, password string) (*Account, error) {
 	return &account, nil
 }
 
-func ListAllAccounts() ([]Account, error) {
-	var accounts []Account
-	cur, err := database.GetCol("accounts").Find(context.TODO(), bson.D{})
-	if err != nil {
-		return nil, err
-	}
-	defer cur.Close(context.TODO())
-	if err = cur.All(context.TODO(), &accounts); err != nil {
-		return nil, err
-	}
-
-	return accounts, nil
+func ListAllAccounts(start string, nPerPage int64) ([]Account, string, error) {
+	return getAllWithPaging[Account]("accounts", bson.M{}, start, nPerPage)
 }
 
 func DeleteAccount(username string) (int64, error) {

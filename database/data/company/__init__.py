@@ -91,6 +91,10 @@ class Company:
         self.name = name.upper()
         self.legal_representative = legal_representative.__dict__
         self.office_address = office_address
+        self.cars_list = []
+
+    def add_car(self, car_id):
+        self.cars_list.append(car_id)
 
 
 factory.Faker.add_provider(Provider)

@@ -28,7 +28,7 @@ func loginHandler(c *fiber.Ctx) error {
 
 	token, err := middleware.GenerateJWT(account)
 	if err != nil {
-		log.Error().Err(err)
+		log.Error().Err(err).Msg("")
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"err": "Cannot generate token for you!",
 		})
