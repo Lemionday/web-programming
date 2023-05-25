@@ -1,5 +1,3 @@
-import React from 'react';
-import './scss/App.scss';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ProtectedLayout from './components/layout/Protected';
 import DashboardPage from './pages/Dashboard/Dashboard';

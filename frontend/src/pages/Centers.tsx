@@ -1,179 +1,179 @@
-import * as React from 'react';
-import { config } from '../conf/config';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
+import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import { useLoaderData } from 'react-router-dom';
-import ReactVirtualizedTable from './shared/InfiniteScroll';
+import * as React from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { TableComponents, TableVirtuoso } from 'react-virtuoso';
+import { useAuth } from '../components/hooks/useAuth';
+import { Role } from '../components/models/Roles';
+import { config } from '../conf/config';
 
-interface TablePaginationActionsProps {
-    count: number;
-    page: number;
-    rowsPerPage: number;
-    onPageChange: (
-        event: React.MouseEvent<HTMLButtonElement>,
-        newPage: number,
-    ) => void;
+interface Center {
+    idx: number;
+    id: string
+    name: string;
+    address: string;
+}
+interface ColumnData {
+    dataKey: keyof Center;
+    label: string;
+    numeric?: boolean;
+    width: number | string;
 }
 
-function TablePaginationActions(props: TablePaginationActionsProps) {
-    const theme = useTheme();
-    const { count, page, rowsPerPage, onPageChange } = props;
+const columns: ColumnData[] = [
+    {
+        width: '5%',
+        label: 'Stt',
+        dataKey: 'idx',
+        numeric: true,
+    },
+    {
+        width: '10%',
+        label: "Mã số trung tâm",
+        dataKey: "id",
+    },
+    {
+        width: '50%',
+        label: "Tên trung tâm",
+        dataKey: "name",
+    },
+    {
+        width: '35%',
+        label: "Địa chỉ",
+        dataKey: "address",
+    }
+];
 
-    const handleFirstPageButtonClick = (
-        event: React.MouseEvent<HTMLButtonElement>,
-    ) => {
-        onPageChange(event, 0);
-    };
+const VirtuosoTableComponents: TableComponents<Center> = {
+    Scroller: React.forwardRef<HTMLDivElement>((props, ref) => (
+        <TableContainer component={Paper} {...props} ref={ref} />
+    )),
 
-    const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        onPageChange(event, page - 1);
-    };
+    Table: (props) => (
+        <Table {...props} sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }} />
+    ),
 
-    const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        onPageChange(event, page + 1);
-    };
+    TableHead,
 
-    const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-    };
+    TableRow: ({ item: _item, ...props }) => <TableRow {...props} />,
 
+    TableBody: React.forwardRef<HTMLTableSectionElement>((props, ref) => (
+        <TableBody {...props} ref={ref} />
+    )),
+};
+
+function fixedHeaderContent() {
     return (
-        <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-            <IconButton
-                onClick={handleFirstPageButtonClick}
-                disabled={page === 0}
-                aria-label="first page"
-            >
-                {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-            </IconButton>
-            <IconButton
-                onClick={handleBackButtonClick}
-                disabled={page === 0}
-                aria-label="previous page"
-            >
-                {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            </IconButton>
-            <IconButton
-                onClick={handleNextButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-                aria-label="next page"
-            >
-                {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-            </IconButton>
-            <IconButton
-                onClick={handleLastPageButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-                aria-label="last page"
-            >
-                {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-            </IconButton>
-        </Box>
+        <TableRow>
+            {columns.map((column) => (
+                <TableCell
+                    key={column.dataKey}
+                    variant="head"
+                    align={column.numeric || false ? 'right' : 'left'}
+                    style={{ width: column.width }}
+                    sx={{
+                        backgroundColor: 'background.paper',
+                    }}
+                >
+                    {column.label}
+                </TableCell>
+            ))}
+        </TableRow>
     );
 }
 
-async function getAllCenters() {
-    try {
-        const result = await fetch(`${config.baseUrl}/centers`, {});
-
-        if (!result.ok) {
-            console.log(result);
-            alert(result);
-            return;
-        }
-
-        const resJson = await result.json();
-        return resJson;
-    } catch (err) {
-        console.log(err);
-    }
+function rowContent(_index: number, row: Center) {
+    return (
+        <React.Fragment>
+            {columns.map((column) => (
+                <>
+                    <TableCell
+                        key={column.dataKey}
+                        align={column.numeric || false ? 'right' : 'left'}
+                    >
+                        {row[column.dataKey]}
+                    </TableCell>
+                </>
+            ))}
+        </React.Fragment>
+    );
 }
 
+interface DataAPI<T> {
+    data: T[];
+    setData: React.Dispatch<React.SetStateAction<Center[]>>;
+    fetchData: () => Promise<never[] | undefined>;
+}
+
+function InfiniteScroll({ data, setData, fetchData }: DataAPI<Center>) {
+
+    const loadMore = useCallback(() => {
+        return setTimeout(() => {
+            fetchData();
+        }, 200);
+    }, [setData]);
+
+    useEffect(() => {
+        const timeout = loadMore();
+        return () => clearTimeout(timeout);
+    }, []);
+
+    return (
+        <Paper style={{ height: '100vh', width: '100vw' }}>
+            <TableVirtuoso
+                endReached={loadMore}
+                data={data}
+                components={VirtuosoTableComponents}
+                fixedHeaderContent={fixedHeaderContent}
+                itemContent={rowContent}
+            />
+        </Paper>
+    );
+}
+
+
 export default function CentersListPage() {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    const rows: any = useLoaderData();
+    const [accounts, setAccounts] = useState<Center[]>(() => []);
+    const last_id = useRef<string>("");
+    const idx = useRef<number>(1);
 
-    // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    async function fetchData() {
+        try {
+            const res = await fetch(`${config.baseUrl}/centers?` + new URLSearchParams({
+                last_id: last_id.current,
+            }));
 
-    const handleChangePage = (
-        event: React.MouseEvent<HTMLButtonElement> | null,
-        newPage: number,
-    ) => {
-        setPage(newPage);
-    };
+            if (!res.ok) return;
 
-    const handleChangeRowsPerPage = (
-        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+            const data = await res.json();
+            let toReturn: Center[] = []
+            for (const center of data.centers) {
+                let temp: Center = {
+                    idx: idx.current,
+                    id: center.id,
+                    name: center.name,
+                    address: center.address,
+                };
+                idx.current += 1;
+                toReturn.push(temp);
+            }
 
-    return <>
-        <ReactVirtualizedTable />
-    </>
-    // return (
-    //     <TableContainer component={Paper}>
-    //         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-    //             <TableBody>
-    //                 {(rowsPerPage > 0
-    //                     ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-    //                     : rows
-    //                 ).map((row: any) => (
-    //                     <TableRow key={row.id}>
-    //                         <TableCell component="th" scope="row" style={{ width: '10vw' }}>
-    //                             {row.id}
-    //                         </TableCell>
-    //                         <TableCell style={{ width: '40vw' }} align="left">
-    //                             {row.name}
-    //                         </TableCell>
-    //                         <TableCell style={{ width: '40vw' }} align="left">
-    //                             {row.address}
-    //                         </TableCell>
-    //                     </TableRow>
-    //                 ))}
-    //                 {emptyRows > 0 && (
-    //                     <TableRow style={{ height: 53 * emptyRows }}>
-    //                         <TableCell colSpan={6} />
-    //                     </TableRow>
-    //                 )}
-    //             </TableBody>
-    //             <TableFooter>
-    //                 <TableRow>
-    //                     <TablePagination
-    //                         rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-    //                         colSpan={3}
-    //                         count={rows.length}
-    //                         rowsPerPage={rowsPerPage}
-    //                         page={page}
-    //                         SelectProps={{
-    //                             inputProps: {
-    //                                 'aria-label': 'rows per page',
-    //                             },
-    //                             native: true,
-    //                         }}
-    //                         onPageChange={handleChangePage}
-    //                         onRowsPerPageChange={handleChangeRowsPerPage}
-    //                         ActionsComponent={TablePaginationActions}
-    //                     />
-    //                 </TableRow>
-    //             </TableFooter>
-    //         </Table>
-    //     </TableContainer>
-    // );
+            last_id.current = data.last_id;
+            setAccounts(current => [...current, ...toReturn]);
+        }
+        catch (error) {
+            return [];
+        };
+    }
+
+    return (
+        <>
+            <InfiniteScroll data={accounts} setData={setAccounts} fetchData={fetchData} />
+        </>
+    );
 }

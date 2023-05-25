@@ -1,21 +1,18 @@
-import { Box, Button, Container, CssBaseline, Typography } from "@mui/material";
-import "./Home.scss";
-import Navbar from "./Navbar";
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import { Link } from "react-router-dom";
+import { Box, Button, CssBaseline, Typography } from "@mui/material";
+// import "./Home.scss";
+import NavbarComponent from "./Navbar";
 
 export function HomePage() {
     return (
-        <>
-            <CssBaseline />
-            <Navbar />
-            <div className="main">
+        <div>
+            <NavbarComponent />
+            <div className="dark:bg-gray-900">
                 {/* <Header /> */}
                 <Box id="introduction">
                     <Typography variant="h3" id="hero-title">
                         Website đăng kiểm Việt Nam
                     </Typography>
-                    <Typography variant="h6">
+                    <Typography variant="h6" className="dark:text-white">
                         Theo dõi, thống kê, cấp đăng kiểm xe ô tô Việt Nam
                     </Typography>
                     <Button className="hover-btn" href="/centers">
@@ -24,6 +21,6 @@ export function HomePage() {
                     <Box id="hero-image" />
                 </Box>
             </div>
-        </>
+        </div>
     );
 };

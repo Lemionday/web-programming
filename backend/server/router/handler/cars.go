@@ -31,7 +31,7 @@ func GetCarsStatistics(c *fiber.Ctx) error {
 	case "year":
 		lrr_duration["$gt"] = time.Now().AddDate(-1, 0, 0)
 	default:
-		c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"err": fmt.Sprintf("Invalid period %s", period),
 		})
 	}
@@ -48,7 +48,7 @@ func GetCarsStatistics(c *fiber.Ctx) error {
 
 		if err != nil {
 			log.Error().Err(err).Msg("")
-			c.SendStatus(fiber.StatusInternalServerError)
+			return c.SendStatus(fiber.StatusInternalServerError)
 		}
 
 		return c.JSON(cars)
@@ -58,12 +58,12 @@ func GetCarsStatistics(c *fiber.Ctx) error {
 		case nil:
 			log.Info().Msgf("Get all cars from center: %s", center_id)
 		case redis.Nil:
-			c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 				"err": fmt.Sprintf("No center with center id: %s", center_id),
 			})
 		default:
 			log.Error().Err(err).Msg("")
-			c.SendStatus(fiber.StatusInternalServerError)
+			return c.SendStatus(fiber.StatusInternalServerError)
 		}
 
 		cars, err := schematic.GetAllCars(bson.M{
@@ -73,7 +73,7 @@ func GetCarsStatistics(c *fiber.Ctx) error {
 
 		if err != nil {
 			log.Error().Err(err).Msg("")
-			c.SendStatus(fiber.StatusInternalServerError)
+			return c.SendStatus(fiber.StatusInternalServerError)
 		}
 
 		return c.JSON(cars)

@@ -51,5 +51,9 @@ func getAllWithPaging[T idinterface](collection string, filters primitive.M, sta
 		return nil, "", err
 	}
 
+	if len(arrayOfT) <= 0 {
+		return arrayOfT, "", nil
+	}
+
 	return arrayOfT, arrayOfT[len(arrayOfT)-1].GetID(), nil
 }

@@ -20,7 +20,7 @@ var (
 )
 
 type Account struct {
-	Id             primitive.ObjectID `json:"-" bson:"_id"`
+	Id             primitive.ObjectID `json:"-" bson:"_id,omitempty"`
 	Username       string             `json:"username" bson:"username" validate:"required,min=3,max=25"`
 	Role           Role               `json:"role" bson:"role"`
 	Center         string             `json:"center" bson:"center"`
@@ -32,6 +32,7 @@ type Account struct {
 }
 
 func (a Account) GetID() string {
+	// return ""
 	return a.Id.Hex()
 }
 

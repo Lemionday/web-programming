@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { useColorScheme } from "../hooks/useColorScheme";
 
 export function BaseLayout() {
-    return <div>
-        <Outlet />
+    return <div className="dark">
+        <div className="bg-white dark:bg-gray-900">
+            <Outlet />
+        </div>
     </div>;
 }

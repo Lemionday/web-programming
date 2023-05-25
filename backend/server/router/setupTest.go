@@ -3,6 +3,7 @@ package router
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -38,6 +39,7 @@ func addToColl(coll *mongo.Collection, dataPath string) {
 
 	for _, account := range data {
 		// coll.InsertOne(context.Background(), account)
+		fmt.Println(account)
 		schematic.AddAccount(&account)
 	}
 
@@ -45,36 +47,6 @@ func addToColl(coll *mongo.Collection, dataPath string) {
 	// fmt.Println(json.MarshalIndent(car, "", "    "))
 	// coll.InsertOne(context.Background(), car)
 	// }
-}
-
-func testSetupAddAccounts(c *fiber.Ctx) error {
-	var accounts = []schematic.Account{
-		{Username: "tester", Password: "testerpwd", Role: schematic.Admin},
-		{Username: "jsmith22", Password: "P@ssw0rd123!"},
-		{Username: "emily_89", Password: "SecurePass789#"},
-		{Username: "david_miller", Password: "Str0ngP@ssw0rd!"},
-		{Username: "sarahjones", Password: "Passw0rd123$"},
-		{Username: "alexander22", Password: "P@ssw0rd789!"},
-		{Username: "lilywilson", Password: "StrongPass12#"},
-		{Username: "mjohnson", Password: "P@ssw0rd345!"},
-		{Username: "olivia_87", Password: "SecureP@ss123#"},
-		{Username: "samuel89", Password: "Str0ngP@ssw0rd$"},
-		{Username: "sophia_cole", Password: "Passw0rd789!"},
-		{Username: "matthew34", Password: "P@ssw0rd123#"},
-		{Username: "isabella_green", Password: "SecurePass12$"},
-		{Username: "ethan_96", Password: "Str0ngP@ssw0rd!"},
-		{Username: "mia_smith", Password: "Passw0rd345#"},
-		{Username: "jacob85", Password: "P@ssw0rd789$"},
-		{Username: "ava_miller", Password: "SecureP@ss123#"},
-		{Username: "noah_parker", Password: "Str0ngP@ssw0rd$"},
-		{Username: "emma_brown", Password: "Passw0rd789!"},
-		// Add more accounts here...
-	}
-
-	for _, acc := range accounts {
-		schematic.AddAccount(&acc)
-	}
-	return nil
 }
 
 func testSetupAddCarres(c *fiber.Ctx) error {
