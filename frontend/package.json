@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.2",
     "@types/react-router-dom": "^5.3.3",
+    "@types/react-table": "^7.7.14",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
@@ -23,6 +24,7 @@
     "react-password-strength-bar": "^0.4.1",
     "react-pro-sidebar": "^1.1.0-alpha.1",
     "react-router-dom": "^6.11.2",
+    "react-table": "^7.8.0",
     "react-virtuoso": "^4.3.8",
     "sort-by": "^1.2.0",
     "types": "file:../../../../react-pro-sidebar"

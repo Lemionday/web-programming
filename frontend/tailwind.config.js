@@ -9,7 +9,11 @@ module.exports = withMT({
             'sans': ["Roboto", "Arial", "Helvetica", "sans-serif"],
             'brand': ['"Great Vibes"', 'cursive'],
         },
-        extend: {},
+        extend: {
+            backgroundImage: {
+                'hero': "url('./src/assets/images/aston_martin_dbs_gt_zagato_2019_4k_4-HD.jpg')",
+            }
+        },
     },
     plugins: [],
 });
