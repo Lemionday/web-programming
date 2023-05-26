@@ -52,9 +52,12 @@ const router = createBrowserRouter([
               { path: '/accounts', element: <AccountsPage /> },
               { path: '/account', element: <AccountsPage /> }
             ]
-          }
+          },
+          // {
+          //   path: '/test/pagination',
+          //   element: <TestPage />
+          // }
         ]
-
       }
     ]
   }

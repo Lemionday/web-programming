@@ -1,16 +1,9 @@
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import * as React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { TableComponents, TableVirtuoso } from 'react-virtuoso';
+import { TableVirtuoso } from 'react-virtuoso';
 import { config } from '../conf/config';
-import { Card, Typography } from "@material-tailwind/react";
-
+import { Card, Typography, CardFooter, Button } from "@material-tailwind/react";
+import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 interface Center {
     idx: number;
     id: string
@@ -19,8 +12,8 @@ interface Center {
 }
 interface ColumnData {
     dataKey: keyof Center;
-    label: string;
-    numeric?: boolean;
+    label: any;
+    justify?: boolean;
     width: number | string;
 }
 
@@ -29,12 +22,13 @@ const columns: ColumnData[] = [
         width: '5%',
         label: 'Stt',
         dataKey: 'idx',
-        numeric: true,
+        justify: true,
     },
     {
-        width: '10%',
-        label: "Mã số",
+        width: 'h-10',
+        label: <span>Mã số</span>,
         dataKey: "id",
+        justify: true,
     },
     {
         width: '50%',
@@ -48,107 +42,73 @@ const columns: ColumnData[] = [
     }
 ];
 
-const VirtuosoTableComponents: TableComponents<Center> = {
-    Scroller: React.forwardRef<HTMLDivElement>((props, ref) => (
-        <TableContainer component={Paper} {...props} ref={ref} />
-    )),
-
-    Table: (props) => (
-        <Table {...props} sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }} />
-    ),
-
-    TableHead,
-
-    TableRow: ({ item: _item, ...props }) => <TableRow className="even:bg-teal-700 odd:bg-gray-900"{...props} />,
-
-    TableBody: React.forwardRef<HTMLTableSectionElement>((props, ref) => (
-        <TableBody {...props} ref={ref} />
-    )),
-};
-
 function fixedHeaderContent() {
     return (
-        <TableRow>
+        <tr>
             {columns.map((column) => (
-                <TableCell
-                    key={column.dataKey}
-                    variant="head"
-                    align={column.numeric || false ? 'right' : 'left'}
-                    style={{ width: column.width }}
-                    sx={{
-                        backgroundColor: 'background.paper',
-                    }}
-                >
-                    {column.label}
-                </TableCell>
+                <th key={column.dataKey} className=" dark:bg-gray-800 p-5">
+                    <Typography
+                        variant="small"
+                        className="font-normal leading-none opacity-70 dark:text-cyan-400 text-lg"
+                    >
+                        {column.label}
+                    </Typography>
+                </th>
             ))}
-        </TableRow>
+        </tr>
     );
 }
 
 function rowContent(_index: number, row: Center) {
     return (
-        <React.Fragment>
+        <>
             {columns.map((column) => (
-                <>
-                    <TableCell
-                        className="dark:text-gray-400 text-lg"
-                        key={column.dataKey}
-                        align={column.numeric || false ? 'right' : 'left'}
-                    >
+                <td
+                    className="dark:text-gray-400 text-lg"
+                    key={column.dataKey}
+                    align={column.justify ? 'center' : 'left'}
+                >
+                    <Typography variant="small" className="font-normal">
                         {row[column.dataKey]}
-                    </TableCell>
-                </>
+                    </Typography>
+                </td>
             ))}
-        </React.Fragment>
+        </>
     );
 }
 
-interface DataAPI<T> {
-    data: T[];
-    setData: React.Dispatch<React.SetStateAction<Center[]>>;
-    fetchData: () => Promise<never[] | undefined>;
-}
+function InfiniteScroll() {
+    const [centers, setCenters] = useState<Center[]>(() => [])
+    const last_id = useRef<string[]>([""])
+    const page_number = useRef<number>(0)
+    const idx = useRef<number>(1)
 
-function InfiniteScroll({ data, setData, fetchData }: DataAPI<Center>) {
-
-    const loadMore = useCallback(() => {
-        return setTimeout(() => {
-            fetchData();
-        }, 200);
-    }, [setData]);
-
-    useEffect(() => {
-        const timeout = loadMore();
-        return () => clearTimeout(timeout);
-    }, []);
-
-    return (
-        <Card className="h-screen w-screen mx-auto rounded-3xl shadow-md">
-            <TableVirtuoso
-                endReached={loadMore}
-                data={data}
-                components={VirtuosoTableComponents}
-                fixedHeaderContent={fixedHeaderContent}
-                itemContent={rowContent}
-            />
-        </Card>
-    );
-}
-
-export default function CentersListPage() {
-    const [accounts, setAccounts] = useState<Center[]>(() => []);
-    const last_id = useRef<string>("");
-    const idx = useRef<number>(1);
-
-    async function fetchData() {
+    async function fetchData(forward?: boolean) {
         try {
+            if (forward === false) {
+                page_number.current -= 1;
+                if (page_number.current <= 0) {
+                    page_number.current = 0;
+                }
+            } else {
+                page_number.current += 1;
+                if (page_number.current >= last_id.current.length) {
+                    page_number.current = last_id.current.length - 1;
+                }
+            }
+
+            let id = last_id.current.at(page_number.current) as string;
+            if (id === undefined) {
+                id = "";
+            }
+
             const res = await fetch(`${config.baseUrl}/centers?` + new URLSearchParams({
-                last_id: last_id.current,
+                last_id: id,
             }));
 
             if (!res.ok) return;
 
+            idx.current = 1;
             const data = await res.json();
             let toReturn: Center[] = []
             for (const center of data.centers) {
@@ -162,227 +122,86 @@ export default function CentersListPage() {
                 toReturn.push(temp);
             }
 
-            last_id.current = data.last_id;
-            setAccounts(current => [...current, ...toReturn]);
+            if (page_number.current === last_id.current.length - 1) {
+                last_id.current.push(data.last_id);
+            }
+            setCenters([...toReturn])
         }
         catch (error) {
             return [];
         };
     }
 
+    const loadMore = useCallback((forward: boolean) => {
+        return setTimeout(async () => {
+            await fetchData(forward);
+        }, 300);
+    }, [setCenters]);
+
+    useEffect(() => {
+        const timeout = loadMore(true);
+        return () => clearTimeout(timeout);
+    }, []);
+
     return (
-        <>
-            {/* <Typography variant="h1" color="green" className="mb-2 text-center">
-                Danh sách các trung tâm đăng kiểm
-            </Typography> */}
-            <InfiniteScroll data={accounts} setData={setAccounts} fetchData={fetchData} />
-        </>
+        <Card className="h-full w-full mx-auto rounded-3xl dark:bg-gray-700  p-4">
+            <TableVirtuoso
+                // endReached={loadMore}
+                className='w-full'
+                data={centers}
+                components={{
+                    Table: (props) => (
+                        <table className='w-full h-full text-top'{...props} />
+                    ),
+
+                    TableRow: ({ item: _item, ...props }) => <tr className="even:bg-teal-700 odd:bg-gray-900"{...props} />,
+
+                    TableBody: React.forwardRef<HTMLTableSectionElement>((props, ref) => (
+                        <tbody {...props} ref={ref} />
+                    )),
+                }}
+                fixedHeaderContent={fixedHeaderContent}
+                itemContent={rowContent}
+            />
+            <CardFooter className="flex items-center justify-between  p-4">
+                <Typography variant="small" color="blue-gray"
+                    className="dark:text-gray-400 text-lg"
+                >
+                    Trang {page_number.current + 1}
+                </Typography>
+                <div className="flex">
+                    <Button
+                        variant="text"
+                        className="dark:text-gray-400 flex items-center gap-2"
+                        onClick={() => loadMore(false)}
+                        disabled={page_number.current === 0}
+                    >
+                        <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Trang trước
+                    </Button>
+                    <Button
+                        variant="text"
+                        color="blue-gray"
+                        className="dark:text-gray-400 flex items-center gap-2"
+                        onClick={() => loadMore(true)}
+                    // disabled={!isFirst}
+                    >
+                        Trang sau <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
+                    </Button>
+                </div>
+            </CardFooter>
+        </Card>
     );
 }
-// import Paper from '@mui/material/Paper';
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableHead from '@mui/material/TableHead';
-// import TableRow from '@mui/material/TableRow';
-// import * as React from 'react';
-// import { useCallback, useEffect, useRef, useState } from 'react';
-// import { TableComponents, TableVirtuoso } from 'react-virtuoso';
-// import { config } from '../conf/config';
-// import { Card, Typography } from "@material-tailwind/react";
 
-// interface Center {
-//     idx: number;
-//     id: string
-//     name: string;
-//     address: string;
-// }
-// interface ColumnData {
-//     dataKey: keyof Center;
-//     label: string;
-//     numeric?: boolean;
-//     width: number | string;
-// }
-
-// const columns: ColumnData[] = [
-//     {
-//         width: '5%',
-//         label: 'Stt',
-//         dataKey: 'idx',
-//         numeric: true,
-//     },
-//     {
-//         width: '10%',
-//         label: "Mã số trung tâm",
-//         dataKey: "id",
-//     },
-//     {
-//         width: '50%',
-//         label: "Tên trung tâm",
-//         dataKey: "name",
-//     },
-//     {
-//         width: '35%',
-//         label: "Địa chỉ",
-//         dataKey: "address",
-//     }
-// ];
-
-// const VirtuosoTableComponents: TableComponents<Center> = {
-//     Scroller: React.forwardRef<HTMLDivElement>((props, ref) => (
-//         <TableContainer component={Paper} {...props} ref={ref} />
-//     )),
-
-//     Table: (props) => (
-//         <Table {...props} sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }} />
-//     ),
-
-//     TableHead,
-
-//     TableRow: ({ item: _item, ...props }) => <TableRow {...props} />,
-
-//     TableBody: React.forwardRef<HTMLTableSectionElement>((props, ref) => (
-//         <TableBody {...props} ref={ref} />
-//     )),
-// };
-
-// function fixedHeaderContent() {
-//     return (
-//         <TableRow>
-//             {columns.map((column) => (
-//                 <TableCell
-//                     key={column.dataKey}
-//                     variant="head"
-//                     align={column.numeric || false ? 'right' : 'left'}
-//                     style={{ width: column.width }}
-//                     sx={{
-//                         backgroundColor: 'background.paper',
-//                     }}
-//                 >
-//                     {column.label}
-//                 </TableCell>
-//             ))}
-//         </TableRow>
-//     );
-// }
-
-// function rowContent(_index: number, row: Center) {
-//     return (
-//         <React.Fragment>
-//             {columns.map((column) => (
-//                 <>
-//                     <TableCell
-//                         key={column.dataKey}
-//                         align={column.numeric || false ? 'right' : 'left'}
-//                     >
-//                         {row[column.dataKey]}
-//                     </TableCell>
-//                 </>
-//             ))}
-//         </React.Fragment>
-//     );
-// }
-
-// interface DataAPI<T> {
-//     data: T[];
-//     setData: React.Dispatch<React.SetStateAction<Center[]>>;
-//     fetchData: () => Promise<never[] | undefined>;
-// }
-
-// function InfiniteScroll({ data, setData, fetchData }: DataAPI<Center>) {
-
-//     const loadMore = useCallback(() => {
-//         return setTimeout(() => {
-//             fetchData();
-//         }, 200);
-//     }, [setData]);
-
-//     useEffect(() => {
-//         const timeout = loadMore();
-//         return () => clearTimeout(timeout);
-//     }, []);
-
-//     return (
-//         <Paper style={{ height: '100vh', width: '100vw' }}>
-//             <TableVirtuoso
-//                 endReached={loadMore}
-//                 data={data}
-//                 components={VirtuosoTableComponents}
-//                 fixedHeaderContent={fixedHeaderContent}
-//                 itemContent={rowContent}
-//             />
-//         </Paper>
-//     );
-// }
-
-
-// export default function CentersListPage() {
-//     const [centers, setCenters] = useState<Center[]>(() => []);
-//     const last_id = useRef<string>("");
-//     const idx = useRef<number>(1);
-
-//     async function fetchData() {
-//         try {
-//             const res = await fetch(`${config.baseUrl}/centers?` + new URLSearchParams({
-//                 last_id: last_id.current,
-//             }));
-
-//             if (!res.ok) return;
-
-//             const data = await res.json();
-//             let toReturn: Center[] = []
-//             for (const center of data.centers) {
-//                 let temp: Center = {
-//                     idx: idx.current,
-//                     id: center.id,
-//                     name: center.name,
-//                     address: center.address,
-//                 };
-//                 idx.current += 1;
-//                 toReturn.push(temp);
-//             }
-
-//             last_id.current = data.last_id;
-//             setCenters(current => [...current, ...toReturn]);
-//         }
-//         catch (error) {
-//             return [];
-//         };
-//     }
-
-//     return (
-//         <Card className="overflow-scroll h-full w-full">
-//             <table className="w-full min-w-max table-auto text-left">
-//                 <thead>
-//                     <tr>
-//                         {columns.map((column) => (
-//                             <th key={column.dataKey} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-//                                 <Typography
-//                                     variant="small"
-//                                     color="blue-gray"
-//                                     className="font-normal leading-none opacity-70"
-//                                 >
-//                                     {column.label}
-//                                 </Typography>
-//                             </th>
-//                         ))}
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     {centers.map((center, index) => (
-//                         <tr key={index} className="even:bg-blue-gray-50/50">
-//                             {columns.map(column => (
-//                                 <td className="p-4">
-//                                     <Typography variant="small" color="blue-gray" className="font-normal">
-//                                         {(center as Center)[column.dataKey]}
-//                                     </Typography>
-//                                 </td>
-//                             ))}
-//                         </tr>
-//                     ))}
-//                 </tbody>
-//             </table>
-//         </Card>
-//     );
-// }
+export default function CentersListPage() {
+    return (
+        <div className='flex flex-col w-screen h-screen dark:text-gray-400'>
+            <Typography variant="h1" color="green" className="mb-2 text-center">
+                Danh sách các trung tâm đăng kiểm
+            </Typography>
+            <div className="flex-1 w-full mx-auto bg-inherit p-5" >
+                <InfiniteScroll />
+            </div>
+        </div>
+    );
+}

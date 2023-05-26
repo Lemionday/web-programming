@@ -30,6 +30,7 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 
 	app.Post("/login", schematic.ValidateAccountDataFromRequest, loginHandler)
 	app.Get("/centers", handler.GetCentersWithPaging)
+	// app.Get("/centers", handler.GetAllCenters)
 
 	// jwt
 	middleware.SetupJWT(app, jwtSecret)

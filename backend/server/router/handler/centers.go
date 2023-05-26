@@ -23,3 +23,15 @@ func GetCentersWithPaging(c *fiber.Ctx) error {
 		"last_id": last_center_id,
 	})
 }
+
+func GetAllCenters(c *fiber.Ctx) error {
+	centers, err := schematic.GetAllCenter()
+	if err != nil {
+		log.Error().Err(err).Msg("")
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+
+	return c.JSON(fiber.Map{
+		"centers": centers,
+	})
+}
