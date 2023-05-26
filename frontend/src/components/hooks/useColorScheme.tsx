@@ -12,13 +12,13 @@ export function useColorScheme() {
 
     const [isDark, setIsDark] = useLocalStorage<boolean>("colorscheme", systemPrefersDark === undefined ? true : systemPrefersDark);
 
-    const value = useMemo(
+    const value: boolean = useMemo(
         () => (isDark === undefined ? !!systemPrefersDark : isDark),
         [isDark, systemPrefersDark]
     );
 
     useEffect(() => {
-        if (true) {
+        if (value) {
             document.body.classList.add("dark");
         } else {
             document.body.classList.remove("dark");

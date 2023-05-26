@@ -10,7 +10,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { TableComponents, TableVirtuoso } from 'react-virtuoso';
 import { useAuth } from '../components/hooks/useAuth';
 import { config } from '../conf/config';
-import { Role } from '../components/models/Roles';
+import { Role } from '../components/models/Session';
+import { Card } from '@material-tailwind/react';
 interface Account {
     username: string;
     role: Role;
@@ -121,7 +122,7 @@ function InfiniteScroll({ data, setData, fetchData }: DataAPI<Account>) {
     }, []);
 
     return (
-        <Paper style={{ height: '100vh', width: '100vw' }}>
+        <Card className='w-full h-full'>
             <TableVirtuoso
                 endReached={loadMore}
                 data={data}
@@ -129,7 +130,7 @@ function InfiniteScroll({ data, setData, fetchData }: DataAPI<Account>) {
                 fixedHeaderContent={fixedHeaderContent}
                 itemContent={rowContent}
             />
-        </Paper>
+        </Card>
     );
 }
 
@@ -172,8 +173,8 @@ export default function AccountsPage() {
     }
 
     return (
-        <>
+        <div className='w-full'>
             <InfiniteScroll data={accounts} setData={setAccounts} fetchData={fetchData} />
-        </>
+        </div>
     );
 }

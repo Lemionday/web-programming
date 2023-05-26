@@ -1,19 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { config } from '../../conf/config';
-import { AccountDataType } from '../models/Account';
-import { Session } from 'inspector';
-import { SessionStatus } from '../models/SessionStatus';
-import { Role } from '../models/Roles';
+import { Account, Session } from '../models/Session';
+import { useLocalStorage } from './useLocalStorage';
 
-async function loginAPI(accountData: AccountDataType) {
+async function loginAPI(accountData: Account) {
     try {
+        // console.log(accountData)
         const result = await fetch(`${config.baseUrl}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(accountData),
+            body: JSON.stringify({
+                username: accountData.username,
+                password: accountData.password,
+            }),
         });
 
         if (!result.ok) {
@@ -22,8 +24,6 @@ async function loginAPI(accountData: AccountDataType) {
             return;
         }
 
-        // const resJson = await result.json();
-        // return resJson["token"];
         return await result.json();
     } catch (err) {
         console.log(err);
@@ -31,30 +31,28 @@ async function loginAPI(accountData: AccountDataType) {
 }
 
 interface AuthContextType {
-    session: SessionStatus;
-    login: (user: AccountDataType) => void;
+    session: Session;
+    login: (user: Account) => void;
     logout: () => void;
 }
 
 let AuthContext = React.createContext<AuthContextType>(null!);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    // const [token, setToken] = useState(null);
-    // const [token, setToken] = useState<string>("");
-    // const [session, setSession] = useState<SessionStatus>({ token: "1", role: Role.UserFromMainCenter });
-    const [session, setSession] = useState<SessionStatus>({ token: "", role: Role.UserUnauthorized });
+    const [session, setSession] = useLocalStorage<Session>("session", { token: "", account: undefined });
     const navigate = useNavigate();
 
     // call this function when you want to authenticate the user
-    const login = async (userData: AccountDataType) => {
+    const login = async (userData: Account) => {
         const res = await loginAPI(userData);
-        setSession({ token: res.token, role: res.status });
+        setSession({ token: res.token, account: res.account });
+        console.log(session);
         navigate("/dashboard");
     };
 
     // call this function to sign out logged in user
     const logout = () => {
-        setSession({ token: "", role: Role.UserUnauthorized });
+        setSession({ token: "", account: undefined });
         navigate("/", { replace: true });
     };
 

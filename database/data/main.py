@@ -1,24 +1,15 @@
-from company import Provider as CompanyProvider
 from company import CompanyFactory
-from name import Provider as NameProvider
-from address import Provider as AddressProvider
 from faker import Faker
+from avatar import generate_avatar
+import datetime
 
-# from faker_vehicle import VehicleProvider
-from car import Provider as VehicleProvider
-import random
-from random import randrange
 import json
 from person import PersonFactory
 from car import CarRegistryFactory
-from account import AccountFactory
+from account import AccountFactory, Account
 
 fake = Faker()
 Faker.seed(0)
-fake.add_provider(CompanyProvider)
-fake.add_provider(AddressProvider)
-fake.add_provider(NameProvider)
-fake.add_provider(VehicleProvider)
 # companies = []
 # for i in range(10):
 #     companies.append({
@@ -121,7 +112,24 @@ def generate_and_write():
 
 
 def generateAccounts():
-    accounts = []
+    accounts = [
+        Account(
+            "adminTester",
+            "1234567890",
+            3,
+            "admin",
+            avatar=0,
+            hired_date=datetime.date(2000, 11, 1),
+        ).__dict__,
+        Account(
+            "adminTester2",
+            "1234567890",
+            3,
+            "admin",
+            avatar=0,
+            hired_date=datetime.date(2000, 11, 1),
+        ).__dict__,
+    ]
     for _ in range(1000):
         account = AccountFactory()
         accounts.append(account.__dict__)
@@ -132,3 +140,4 @@ def generateAccounts():
 
 if __name__ == "__main__":
     generateAccounts()
+    generate_avatar()

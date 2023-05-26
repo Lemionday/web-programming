@@ -22,9 +22,10 @@ var (
 type Account struct {
 	Id             primitive.ObjectID `json:"-" bson:"_id,omitempty"`
 	Username       string             `json:"username" bson:"username" validate:"required,min=3,max=25"`
+	Avatar         int                `json:"avatar" bson:"avatar"`
 	Role           Role               `json:"role" bson:"role"`
 	Center         string             `json:"center" bson:"center"`
-	Password       string             `json:"password" bson:"-" validate:"required,min=8"`
+	Password       string             `json:"password,omitempty" bson:"-" validate:"required,min=8"`
 	HashedPassword []byte             `json:"-" bson:"hashpassword"`
 	Salt           []byte             `json:"-" bson:"salt"`
 	// CreatedAt      time.Time
@@ -32,8 +33,8 @@ type Account struct {
 }
 
 func (a Account) GetID() string {
-	// return ""
-	return a.Id.Hex()
+	return ""
+	// return a.Id.Hex()
 }
 
 func (account *Account) validate() (errors []*ErrorValidate) {

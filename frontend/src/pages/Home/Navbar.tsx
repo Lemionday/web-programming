@@ -5,6 +5,7 @@ import {
     Typography,
     Button,
     IconButton,
+    Collapse,
 } from "@material-tailwind/react";
 
 export default function Example() {
@@ -113,12 +114,12 @@ export default function Example() {
                         </IconButton>
                     </div>
                 </div>
-                <MobileNav open={openNav}>
+                <Collapse open={openNav}>
                     {navList}
                     <Button variant="gradient" size="sm" fullWidth className="mb-2">
                         <span>Đăng nhập</span>
                     </Button>
-                </MobileNav>
+                </Collapse>
             </Navbar>
         </>
     );
