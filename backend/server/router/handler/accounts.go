@@ -5,14 +5,13 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/rs/zerolog/log"
-	"github.com/theLemionday/web-programming/conf"
 	"github.com/theLemionday/web-programming/schematic"
 )
 
 func GetAccounts(c *fiber.Ctx) error {
-	last_id := c.Query("last_account_id", "")
+	last_id := c.Query("last_id", "")
 	if c.Locals("role").(schematic.Role) >= schematic.AuthorizedFromMainCenter {
-		accounts, last_account_id, err := schematic.ListAllAccounts(last_id, conf.NPerPage)
+		accounts, last_account_id, err := schematic.ListAllAccounts(last_id, 20)
 		if err != nil {
 			log.Error().Err(err).Msg("")
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -20,10 +19,22 @@ func GetAccounts(c *fiber.Ctx) error {
 			})
 		}
 
-		return c.JSON(fiber.Map{
-			"last_account_id": last_account_id,
-			"accounts":        accounts,
-		})
+		res := fiber.Map{
+			"last_id":  last_account_id,
+			"accounts": accounts,
+		}
+
+		if last_id == "" {
+			count, err := schematic.CountDocumentsNoFilter("accounts")
+			if err != nil {
+				log.Error().Err(err).Msg("")
+				return c.SendStatus(fiber.StatusInternalServerError)
+			}
+
+			res["total_number_pages"] = count
+		}
+
+		return c.JSON(res)
 	}
 
 	return c.SendStatus(fiber.StatusForbidden)

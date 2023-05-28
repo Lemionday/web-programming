@@ -5,7 +5,8 @@ import {
     PresentationChartLineIcon,
     TableCellsIcon,
     UserIcon,
-    UserPlusIcon
+    UserPlusIcon,
+    HomeIcon
 } from "@heroicons/react/24/outline";
 import {
     PowerIcon
@@ -21,9 +22,10 @@ import React, { ElementType } from "react";
 
 
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useColorScheme } from "../hooks/useColorScheme";
+import { Role } from "../models/Session";
 
 type ItemProps = {
     Icon: ElementType
@@ -35,14 +37,15 @@ type ItemProps = {
 }
 
 function ItemList({ Icon, iconProps, href, name }: ItemProps) {
+    const navigate = useNavigate();
     return (
-        <ListItem>
+        <ListItem onClick={() => {
+            if (href !== undefined) navigate(href)
+        }}>
             <ListItemPrefix>
                 <Icon className={`h-5 w-5 stroke-${iconProps.strokeWidth}`} />
             </ListItemPrefix>
-            <a href={href}>
-                {name}
-            </a>
+            {name}
         </ListItem>
     )
 }
@@ -50,7 +53,7 @@ function ItemList({ Icon, iconProps, href, name }: ItemProps) {
 function NestedItemList({ children }: { children: ItemProps[] }) {
     return (
         <List className="p-0 ms-4">
-            {children.map((child) => (<ItemList Icon={child.Icon} iconProps={child.iconProps} name={child.name} href={child.href} />))}
+            {children.map((child) => (<ItemList key={child.name} Icon={child.Icon} iconProps={child.iconProps} name={child.name} href={child.href} />))}
         </List>
     )
 }
@@ -91,7 +94,8 @@ function AccordionSidebar({ open, open_idx, handleOpen, parent, children }: Acco
 }
 
 export default function SideBar() {
-    const { isDark, setIsDark } = useColorScheme()
+    const navigate = useNavigate();
+    // const { isDark, setIsDark } = useColorScheme()
     const auth = useAuth();
     const [open, setOpen] = React.useState(0);
 
@@ -109,19 +113,19 @@ export default function SideBar() {
         },
         children: [
             {
-                Icon: UserPlusIcon,
+                Icon: PresentationChartBarIcon,
                 iconProps: {
                     strokeWidth: 2
                 },
-                href: "/register",
-                name: "Tạo tài khoản"
+                href: "/cars/statistics",
+                name: "Thống kê"
             },
             {
                 Icon: PresentationChartLineIcon,
                 iconProps: {
                     strokeWidth: 2
                 },
-                href: "/prediction",
+                href: "/cars/prediction",
                 name: "Dự báo"
             }
         ]
@@ -135,28 +139,27 @@ export default function SideBar() {
                 strokeWidth: 3
             }
         },
-        children: [
-            {
-                Icon: PresentationChartBarIcon,
-                iconProps: {
-                    strokeWidth: 2
-                },
-                href: "/car_statistis",
-                name: "Thống kê"
+        children: [{
+            Icon: UserPlusIcon,
+            iconProps: {
+                strokeWidth: 2
             },
-            {
-                Icon: TableCellsIcon,
-                iconProps: {
-                    strokeWidth: 2
-                },
-                href: "/accounts",
-                name: "Danh sách tài khoản"
-            }
+            href: "/account/register",
+            name: "Tạo tài khoản"
+        },
+        {
+            Icon: TableCellsIcon,
+            iconProps: {
+                strokeWidth: 2
+            },
+            href: "/accounts",
+            name: "Danh sách tài khoản"
+        }
         ]
     }
     return (
         <div className="flex flex-row">
-            <Card className="fixed top-2 left-2 h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+            <Card className="ml-2 my-2 h-[calc(100vh-1rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
                 <div className="flex items-center mx-auto">
                     <Avatar
                         src={`./src/assets/avatar/${String(auth.session.account?.avatar)}.svg`}
@@ -173,11 +176,30 @@ export default function SideBar() {
                 </div>
 
                 <List>
-                    <AccordionSidebar parent={car_register.parent} children={car_register.children} open={open} open_idx={1} handleOpen={handleOpen} />
+                    <ListItem onClick={() => navigate("/dashboard")}>
+                        <ListItemPrefix>
+                            <HomeIcon className={`h-7 w-7 stroke-2`} />
+                        </ListItemPrefix>
+                        Trang chủ
+                    </ListItem>
 
-                    <AccordionSidebar parent={accounts.parent} children={accounts.children} open={open} open_idx={2} handleOpen={handleOpen} />
+                    <AccordionSidebar
+                        parent={car_register.parent}
+                        children={car_register.children}
+                        open={open} open_idx={1}
+                        handleOpen={handleOpen} />
 
-                    <Accordion
+                    {auth.session.account?.role === Role.Admin ?
+                        <AccordionSidebar
+                            parent={accounts.parent}
+                            children={accounts.children}
+                            open={open}
+                            open_idx={2}
+                            handleOpen={handleOpen} />
+                        : null
+                    }
+
+                    {/* <Accordion
                         open={open === 3}
                         icon={
                             <ChevronDownIcon
@@ -206,7 +228,7 @@ export default function SideBar() {
                                 </ListItem>
                             </List>
                         </AccordionBody>
-                    </Accordion>
+                    </Accordion> */}
 
                     <hr className="my-2 border-blue-gray-50" />
                     {/* <ListItem>
@@ -226,7 +248,7 @@ export default function SideBar() {
                     </ListItem>
                 </List >
             </Card >
-            <main className="w-[calc(100vh-22rem)]">
+            <main className="flex-1 my-2">
                 <Outlet />
             </main>
         </div>

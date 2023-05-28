@@ -16,12 +16,10 @@ import (
 
 func GetCarsStatistics(c *fiber.Ctx) error {
 	period := c.Query("period")
+
 	lrr_duration := bson.M{
-		"$lt": time.Now(),
+		"$lt": time.Date(2022, time.December, 31, 0, 0, 0, 0, time.UTC),
 	}
-	// duration := bson.M{
-	// 	"least_recently_registered": lrr_duration,
-	// }
 
 	switch period {
 	case "month":
@@ -29,7 +27,11 @@ func GetCarsStatistics(c *fiber.Ctx) error {
 	case "quater":
 		lrr_duration["$gt"] = time.Now().AddDate(0, -3, 0)
 	case "year":
-		lrr_duration["$gt"] = time.Now().AddDate(-1, 0, 0)
+		startDateOfYear := time.Date(2022, time.January, 1, 0, 0, 0, 0, time.UTC)
+		lrr_duration["$gt"] = startDateOfYear
+		log.Info().Msg(startDateOfYear.String())
+	case "all":
+		break
 	default:
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"err": fmt.Sprintf("Invalid period %s", period),
@@ -52,6 +54,7 @@ func GetCarsStatistics(c *fiber.Ctx) error {
 		}
 
 		return c.JSON(cars)
+
 	default:
 		cacheCenters := cached.GetCenters()
 		switch _, err := cacheCenters.Get(context.TODO(), center_id); err {

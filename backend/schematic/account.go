@@ -33,8 +33,8 @@ type Account struct {
 }
 
 func (a Account) GetID() string {
-	return ""
-	// return a.Id.Hex()
+	// return ""
+	return a.Id.Hex()
 }
 
 func (account *Account) validate() (errors []*ErrorValidate) {
@@ -78,6 +78,8 @@ func GenerateSalt() ([]byte, error) {
 }
 
 func AddAccount(account *Account) error {
+	account.Id = primitive.NewObjectID()
+
 	salt, err := GenerateSalt()
 	if err != nil {
 		return err

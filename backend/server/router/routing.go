@@ -42,6 +42,10 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	app.Post("/account/signup", schematic.ValidateAccountDataFromRequest, signupHandler)
 	app.Get("/accounts", handler.GetAccounts)
 	app.Delete("/account/:username", handler.DeleteAccount)
+
+	// @query:
+	// period: month | quarter | year
+	// center: main | <:center_id>
 	app.Get("/cars/statistics", handler.GetCarsStatistics)
 	app.Get("/owner/:id", handler.GetOwner)
 }

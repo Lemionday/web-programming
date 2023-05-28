@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ProtectedLayout from './components/layout/Protected';
-import DashboardPage from './pages/Dashboard/Dashboard';
+import DashboardPage from './pages/Dashboard';
 import { HomePage } from './pages/Home/Home';
 import ErrorPage from './pages/Error';
 import { AuthLayout } from './components/layout/Auth';
@@ -12,6 +12,7 @@ import { BaseLayout } from './components/layout/Base';
 import CentersListPage from './pages/Centers';
 import { config } from './conf/config';
 import AboutPage from './pages/About';
+import CarsStatisticsPage from './pages/Cars/Statistics';
 
 const router = createBrowserRouter([
   {
@@ -48,9 +49,10 @@ const router = createBrowserRouter([
             children: [
               { path: '/dashboard', element: <DashboardPage /> },
               // { path: '/car_list', element: <CarList /> },
-              { path: '/register', element: <RegisterPage /> },
+              { path: '/account/register', element: <RegisterPage /> },
               { path: '/accounts', element: <AccountsPage /> },
-              { path: '/account', element: <AccountsPage /> }
+              { path: '/account', element: <AccountsPage /> },
+              { path: '/cars/statistics', element: <CarsStatisticsPage /> }
             ]
           },
           // {

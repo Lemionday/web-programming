@@ -89,8 +89,8 @@ def generate(
 
 
 def generate_and_write():
-    people_number = 10000
-    companies_number = 5000
+    people_number = 50000
+    companies_number = 1000
     cars_per_person = 2
     max_cars_per_company = 10
     min_cars_per_company = 5
@@ -141,3 +141,4 @@ def generateAccounts():
 if __name__ == "__main__":
     generateAccounts()
     generate_avatar()
+    generate_and_write()

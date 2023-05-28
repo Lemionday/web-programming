@@ -57,3 +57,15 @@ func getAllWithPaging[T idinterface](collection string, filters primitive.M, sta
 
 	return arrayOfT, arrayOfT[len(arrayOfT)-1].GetID(), nil
 }
+
+func CountDocumentsNoFilter(collection string) (int64, error) {
+	coll := database.GetCol(collection)
+
+	opts := options.Count().SetHint("_id_")
+	count, err := coll.CountDocuments(context.TODO(), bson.D{}, opts)
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
+}
