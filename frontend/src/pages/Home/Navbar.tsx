@@ -7,9 +7,11 @@ import {
     IconButton,
     Collapse,
 } from "@material-tailwind/react";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 
 export default function Example() {
     const [openNav, setOpenNav] = React.useState(false);
+    const navigate = useNavigate()
 
     React.useEffect(() => {
         window.addEventListener(
@@ -26,9 +28,11 @@ export default function Example() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <a href="/" className="flex items-center">
+                {/* <a href="/" className="flex items-center"> */}
+                <NavLink to="/">
                     Trang chủ
-                </a>
+                </NavLink>
+                {/* </a> */}
             </Typography>
             <Typography
                 as="li"
@@ -36,9 +40,11 @@ export default function Example() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <a href="/about" className="flex items-center">
+                {/* <a href="/about" className="flex items-center"> */}
+                <NavLink to="/about">
                     Liên hệ
-                </a>
+                </NavLink>
+                {/* </a> */}
             </Typography>
             <Typography
                 as="li"
@@ -46,9 +52,11 @@ export default function Example() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <a href="#" className="flex items-center">
+                {/* <a href="#" className="flex items-center"> */}
+                <NavLink to="/structure">
                     Cấu trúc
-                </a>
+                </NavLink>
+                {/* </a> */}
             </Typography>
         </ul>
     );
@@ -70,10 +78,9 @@ export default function Example() {
                             variant="gradient"
                             size="sm"
                             className="hidden lg:inline-block"
+                            onClick={() => navigate("/login")}
                         >
-                            <a href="/login">
-                                Đăng nhập
-                            </a>
+                            Đăng nhập
                         </Button>
                         <IconButton
                             variant="text"
@@ -116,7 +123,7 @@ export default function Example() {
                 </div>
                 <Collapse open={openNav}>
                     {navList}
-                    <Button variant="gradient" size="sm" fullWidth className="mb-2">
+                    <Button variant="gradient" size="sm" fullWidth className="mb-2" onClick={() => navigate("/login")}>
                         <span>Đăng nhập</span>
                     </Button>
                 </Collapse>

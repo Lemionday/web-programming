@@ -13,6 +13,7 @@ import CentersListPage from './pages/Centers';
 import { config } from './conf/config';
 import AboutPage from './pages/About';
 import CarsStatisticsPage from './pages/Cars/Statistics';
+import CarInformationPage from './pages/Cars/Infomation';
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,8 @@ const router = createBrowserRouter([
               { path: '/account/register', element: <RegisterPage /> },
               { path: '/accounts', element: <AccountsPage /> },
               { path: '/account', element: <AccountsPage /> },
-              { path: '/cars/statistics', element: <CarsStatisticsPage /> }
+              { path: '/cars/statistics', element: <CarsStatisticsPage /> },
+              { path: '/car/information/:id', element: <CarInformationPage /> }
             ]
           },
           // {

@@ -47,6 +47,7 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	// period: month | quarter | year
 	// center: main | <:center_id>
 	app.Get("/cars/statistics", handler.GetCarsStatistics)
+	app.Get("/car/information/:id", handler.GetCarInformation)
 	app.Get("/owner/:id", handler.GetOwner)
 }
 

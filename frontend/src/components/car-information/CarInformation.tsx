@@ -1,23 +1,35 @@
-export default function CarPage({car}) {
-  const entries = Object.entries(car);
+import { useEffect, useState } from "react";
+import { Car } from "../models/Car";
+
+function capitalizeFirstLetter(string: string): string {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export default function CarPage({ car }: { car: Car | undefined }) {
+  const [entries, setEntries] = useState<[string, undefined][]>(() => [])
+
+  useEffect(() => {
+    // console.log(car)
+    if (car !== undefined) { setEntries(Object.entries(car)) }
+  }, [car])
+
   return (
     <div className="bg-white">
       <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Car Information</h2>
           <p className="mt-4 text-gray-500">
-            This car is owned by <a href="#">{car.owner_id}</a>
+            This car is owned by <a href="#">{car?.owner_id}</a>
           </p>
-
           <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
-          {entries
-            .filter(([name]) => !["car_id", "size", "vin", "owner_id"].includes(name))
-            .map(([name, value]) => (
-              <div key={name} className="border-t border-gray-200 pt-4">
-                <dt className="font-medium text-gray-900">{name}</dt>
-                <dd className="mt-2 text-sm text-gray-500">{value}</dd>
-              </div>
-            ))}
+            {entries
+              .filter(([name]) => !["car_id", "size", "vin", "owner_id"].includes(name))
+              .map(([name, value]) => (
+                <div key={name} className="border-t border-gray-200 pt-4">
+                  <dt className="font-medium text-gray-900">{capitalizeFirstLetter(name)}</dt>
+                  <dd className="mt-2 text-sm text-gray-500">{value}</dd>
+                </div>
+              ))}
 
           </dl>
         </div>

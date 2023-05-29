@@ -49,7 +49,7 @@ function fixedHeaderContent() {
                 <th key={column.dataKey} className=" dark:bg-gray-800 p-5">
                     <Typography
                         variant="small"
-                        className="font-normal leading-none opacity-70 dark:text-cyan-400 text-lg"
+                        className="font-normal leading-none opacity-70 text-lg"
                     >
                         {column.label}
                     </Typography>
@@ -77,13 +77,13 @@ function rowContent(_index: number, row: Center) {
     );
 }
 
-function InfiniteScroll() {
+function PagingTable() {
     const [centers, setCenters] = useState<Center[]>(() => [])
     const last_id = useRef<string[]>([""])
     const page_number = useRef<number>(0)
     const idx = useRef<number>(1)
 
-    async function fetchData(forward?: boolean) {
+    async function fetchData(forward?: boolean): Promise<Center[] | undefined> {
         try {
             if (forward === false) {
                 page_number.current -= 1;
@@ -106,41 +106,49 @@ function InfiniteScroll() {
                 last_id: id,
             }));
 
-            if (!res.ok) return;
+            if (!res.ok) return
 
             idx.current = 1;
             const data = await res.json();
             let toReturn: Center[] = []
             for (const center of data.centers) {
-                let temp: Center = {
+                toReturn.push({
                     idx: idx.current,
                     id: center.id,
                     name: center.name,
                     address: center.address,
-                };
+                });
                 idx.current += 1;
-                toReturn.push(temp);
             }
 
             if (page_number.current === last_id.current.length - 1) {
                 last_id.current.push(data.last_id);
             }
-            setCenters([...toReturn])
+
+            return toReturn;
         }
         catch (error) {
-            return [];
+            return
         };
     }
 
-    const loadMore = useCallback((forward: boolean) => {
-        return setTimeout(async () => {
-            await fetchData(forward);
-        }, 300);
-    }, [setCenters]);
+    // const loadMore = useCallback((forward: boolean) => {
+    //     return setTimeout(async () => {
+    //         const data = await fetchData(forward);
+    //         if (data !== undefined) setCenters(data);
+    //     }, 300);
+    // }, [centers]);
+    async function loadMore(forward: boolean) {
+        const data = await fetchData(forward);
+        if (data !== undefined) setCenters(data);
+    }
 
     useEffect(() => {
-        const timeout = loadMore(true);
-        return () => clearTimeout(timeout);
+        (async () => {
+            loadMore(true)
+        })()
+        // const timeout = loadMore(true);
+        // return () => clearTimeout(timeout);
     }, []);
 
     return (
@@ -154,7 +162,7 @@ function InfiniteScroll() {
                         <table className='w-full h-full text-top'{...props} />
                     ),
 
-                    TableRow: ({ item: _item, ...props }) => <tr className="even:bg-teal-700 odd:bg-gray-900"{...props} />,
+                    TableRow: ({ item: _item, ...props }) => <tr className="even:bg-blue-gray-50/50"{...props} />,
 
                     TableBody: React.forwardRef<HTMLTableSectionElement>((props, ref) => (
                         <tbody {...props} ref={ref} />
@@ -173,7 +181,7 @@ function InfiniteScroll() {
                     <Button
                         variant="text"
                         className="dark:text-gray-400 flex items-center gap-2"
-                        onClick={() => loadMore(false)}
+                        onClick={async () => await loadMore(false)}
                         disabled={page_number.current === 0}
                     >
                         <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Trang trước
@@ -182,7 +190,7 @@ function InfiniteScroll() {
                         variant="text"
                         color="blue-gray"
                         className="dark:text-gray-400 flex items-center gap-2"
-                        onClick={() => loadMore(true)}
+                        onClick={async () => await loadMore(true)}
                     // disabled={!isFirst}
                     >
                         Trang sau <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
@@ -200,7 +208,7 @@ export default function CentersListPage() {
                 Danh sách các trung tâm đăng kiểm
             </Typography>
             <div className="flex-1 w-full mx-auto bg-inherit p-5" >
-                <InfiniteScroll />
+                <PagingTable />
             </div>
         </div>
     );

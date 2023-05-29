@@ -8,11 +8,11 @@ export class Car {
     manufacturer?: string
     model?: string
     size?: number[]
-    FuelType?: FuelType
+    fueltype?: FuelType
     city?: string
     plate?: string
     vin?: string
-    EngineNumber?: string
+    engine_number?: string
     least_recently_registered?: Date
     invalidate_date?: Date
     center_registered?: string
