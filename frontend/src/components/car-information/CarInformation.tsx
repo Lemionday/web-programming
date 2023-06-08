@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { Car } from "../models/Car";
-
-function capitalizeFirstLetter(string: string): string {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+import { capitalizeFirstLetter } from "../util/util";
 
 export default function CarPage({ car }: { car: Car | undefined }) {
   const [entries, setEntries] = useState<[string, undefined][]>(() => [])

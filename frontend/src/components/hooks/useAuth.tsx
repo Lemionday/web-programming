@@ -19,7 +19,6 @@ async function loginAPI(accountData: Account) {
         });
 
         if (!result.ok) {
-            console.log(result);
             alert(result);
             return;
         }
@@ -46,7 +45,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const login = async (userData: Account) => {
         const res = await loginAPI(userData);
         setSession({ token: res.token, account: res.account });
-        console.log(session);
         navigate("/dashboard");
     };
 

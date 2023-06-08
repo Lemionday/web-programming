@@ -3,7 +3,6 @@ package schematic
 import (
 	"context"
 
-	"github.com/rs/zerolog/log"
 	"github.com/theLemionday/web-programming/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -29,16 +28,16 @@ func getAll[T idinterface](collection string, filter primitive.M) ([]T, error) {
 }
 
 // string là Object Id của phần tử cuối cùng được trả về
-func getAllWithPaging[T idinterface](collection string, filters primitive.M, start string, nPerPage int64) ([]T, string, error) {
+func getAllWithPaging[T idinterface](collection string, filters primitive.M, sortField string, start string, nPerPage int64) ([]T, string, error) {
 	if start != "" {
-		objID, err := primitive.ObjectIDFromHex(start)
-		if err != nil {
-			log.Error().Err(err).Msg("")
-		}
-		filters["_id"] = bson.M{"$gt": objID}
+		// objID, err := primitive.ObjectIDFromHex(start)
+		// if err != nil {
+		// 	log.Error().Err(err).Msg("")
+		// }
+		filters[sortField] = bson.M{"$gt": start}
 	}
 
-	opts := options.Find().SetSort(bson.D{{"_id", 1}})
+	opts := options.Find().SetSort(bson.D{{sortField, 1}})
 	opts.SetLimit(nPerPage)
 
 	var arrayOfT []T

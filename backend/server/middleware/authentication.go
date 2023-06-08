@@ -19,3 +19,13 @@ func AuthRequired(c *fiber.Ctx) error {
 
 	return c.Next()
 }
+
+func RoleRequired(role schematic.Role) func(c *fiber.Ctx) error {
+	return func(c *fiber.Ctx) error {
+		if c.Locals("role").(schematic.Role) >= role {
+			return c.Next()
+		}
+
+		return c.SendStatus(fiber.StatusForbidden)
+	}
+}

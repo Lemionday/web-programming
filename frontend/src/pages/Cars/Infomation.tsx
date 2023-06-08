@@ -31,7 +31,6 @@ async function fetchData(token: string, id: string): Promise<Car | undefined> {
 
 export default function CarInformationPage() {
     const auth = useAuth()
-    // const car = useRef<Car>(new Car())
     const [car, setCar] = useState<Car>()
 
     const { id } = useParams()
@@ -42,7 +41,6 @@ export default function CarInformationPage() {
             if (data !== undefined) {
                 setCar(data)
             }
-            // console.log(car.current)
         })()
     }, [])
 

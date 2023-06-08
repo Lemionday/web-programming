@@ -137,7 +137,7 @@ class CarRegistryFactory(factory.Factory):
     vin = factory.Sequence(lambda n: rstr.xeger(r"[A-Z]{12}[0-9]{5}"))
     engine_number = factory.Sequence(lambda n: rstr.xeger(r"[A-Z]{7}[0-9]{5}"))
     least_recently_registered = factory.fuzzy.FuzzyDate(
-        datetime.date(2010, 1, 1), datetime.date(2022, 12, 31)
+        datetime.date(2020, 1, 1), datetime.date(2022, 12, 31)
     )
     valid_period = factory.Faker("valid_period")
     center_registered = factory.Faker("center_id")

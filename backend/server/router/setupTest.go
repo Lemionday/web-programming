@@ -13,15 +13,19 @@ import (
 	"github.com/theLemionday/web-programming/schematic"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func clearAllFromColl(coll *mongo.Collection) {
+func clearAllFromColl(coll *mongo.Collection, indexField string) {
 	coll.DeleteMany(context.Background(), bson.D{{}})
-	// indexModel := mongo.IndexModel{
-	// 	Keys: bson.D{{"car_id", 1}},
-	// }
+
+	indexModel := mongo.IndexModel{
+		Keys:    bson.D{{indexField, 1}},
+		Options: options.Index().SetUnique(true),
+	}
+
 	coll.Indexes().DropAll(context.Background())
-	// coll.Indexes().CreateOne(context.Background(), indexModel)
+	coll.Indexes().CreateOne(context.Background(), indexModel)
 }
 
 func addToColl(coll *mongo.Collection, dataPath string) {
@@ -59,7 +63,7 @@ func testSetupAddCarres(c *fiber.Ctx) error {
 
 func TestSetupAddCarres(c *fiber.Ctx) error {
 	accounts := database.GetCol("accounts")
-	clearAllFromColl(accounts)
+	clearAllFromColl(accounts, "username")
 	path, _ := filepath.Abs("../database/data/final/accounts.json")
 	addToColl(accounts, path)
 	return nil

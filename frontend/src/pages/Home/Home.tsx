@@ -9,19 +9,20 @@ import {
     Typography
 } from "@material-tailwind/react";
 import NavbarComponent from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 export function HomePage() {
+    const navigate = useNavigate()
     return (
-        <>
+        <div className="w-full bg-gray-600">
             <NavbarComponent />
             <Typography variant="h1" color="green" className="mb-2 text-center">
                 Website đăng kiểm Việt Nam
             </Typography>
-            <a href="/centers">
-                <Button variant="text" className="flex items-center gap-2 mx-auto" size="lg">
-                    Tìm kiếm trung tấm<ArrowLongRightIcon strokeWidth={2} className="h-5 w-5" />
-                </Button>
-            </a>
+            <Button variant="outlined" className="flex items-center gap-2 mx-auto rounded-full" size="lg"
+                onClick={() => navigate("/centers")}>
+                Tìm kiếm trung tâm <ArrowLongRightIcon strokeWidth={2} className="h-5 w-5" />
+            </Button>
             <div className="mx-auto max-w-screen-md py-12">
                 <Card className="mb-12 overflow-hidden">
                     <img
@@ -59,6 +60,6 @@ export function HomePage() {
                     </Box> */}
                 </div>
             </div>
-        </>
+        </div>
     );
 };

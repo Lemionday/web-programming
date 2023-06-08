@@ -14,6 +14,7 @@ import { config } from './conf/config';
 import AboutPage from './pages/About';
 import CarsStatisticsPage from './pages/Cars/Statistics';
 import CarInformationPage from './pages/Cars/Infomation';
+import { Center } from './components/models/Center';
 
 const router = createBrowserRouter([
   {
@@ -41,8 +42,7 @@ const router = createBrowserRouter([
             path: '/centers',
             element: <CentersListPage />,
             loader: async function () {
-              const res = await fetch(`${config.baseUrl}/centers`);
-              return res.json();
+              return fetch(`${config.baseUrl}/centers`);
             }
           },
           {
@@ -50,7 +50,13 @@ const router = createBrowserRouter([
             children: [
               { path: '/dashboard', element: <DashboardPage /> },
               // { path: '/car_list', element: <CarList /> },
-              { path: '/account/register', element: <RegisterPage /> },
+              {
+                path: '/account/register',
+                element: <RegisterPage />,
+                loader: async function () {
+                  return fetch(`${config.baseUrl}/center/getall`)
+                }
+              },
               { path: '/accounts', element: <AccountsPage /> },
               { path: '/account', element: <AccountsPage /> },
               { path: '/cars/statistics', element: <CarsStatisticsPage /> },

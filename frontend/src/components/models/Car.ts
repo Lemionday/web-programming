@@ -7,6 +7,7 @@ export class Car {
     car_id?: string
     manufacturer?: string
     model?: string
+    carbody?: string
     size?: number[]
     fueltype?: FuelType
     city?: string

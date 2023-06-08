@@ -18,25 +18,39 @@ const (
 )
 
 type Car struct {
-	Id                      string    `json:"car_id,omitempty" bson:"car_id"`
-	Manufacturer            string    `json:"manufacturer,omitempty" bson:"manufacturer"`
-	Model                   string    `json:"model,omitempty" bson:"model"`
-	Size                    []int     `json:"size,omitempty" bson:"size"`
-	FuelType                FuelType  `json:"fueltype,omitempty" bson:"fueltype"`
-	City                    string    `json:"city,omitempty" bson:"city"`
-	Plate                   string    `json:"plate,omitempty" bson:"plate"`
-	Vin                     string    `json:"vin,omitempty" bson:"vin"`
-	EngineNumber            string    `json:"engine_number,omitempty" bson:"engine_number"`
-	LeastRecentlyRegistered time.Time `json:"least_recently_registered,omitempty" bson:"least_recently_registered"`
-	Invalidate_date         time.Time `json:"invalidate_date,omitempty" bson:"invalidate_date"`
-	CenterRegistered        string    `json:"center_registered,omitempty" bson:"center_registered"`
-	RegisterNumber          string    `json:"register_number,omitempty" bson:"register_number"`
-	BillNumber              string    `json:"bill_number,omitempty" bson:"bill_number"`
-	OwnerId                 string    `json:"owner_id,omitempty" bson:"owner_id"`
+	Id                      primitive.ObjectID `json:"-" bson:"_id"`
+	CarId                   string             `json:"car_id,omitempty" bson:"car_id"`
+	Manufacturer            string             `json:"manufacturer,omitempty" bson:"manufacturer"`
+	Model                   string             `json:"model,omitempty" bson:"model"`
+	CarBoby                 string             `json:"carbody,omitempty" bson:"carbody"`
+	Size                    []int              `json:"size,omitempty" bson:"size"`
+	FuelType                FuelType           `json:"fueltype,omitempty" bson:"fueltype"`
+	City                    string             `json:"city,omitempty" bson:"city"`
+	Plate                   string             `json:"plate,omitempty" bson:"plate"`
+	Vin                     string             `json:"vin,omitempty" bson:"vin"`
+	EngineNumber            string             `json:"engine_number,omitempty" bson:"engine_number"`
+	LeastRecentlyRegistered time.Time          `json:"least_recently_registered,omitempty" bson:"least_recently_registered"`
+	InvalidateDate          time.Time          `json:"invalidate_date,omitempty" bson:"invalidate_date"`
+	CenterRegistered        string             `json:"center_registered,omitempty" bson:"center_registered"`
+	RegisterNumber          string             `json:"register_number,omitempty" bson:"register_number"`
+	BillNumber              string             `json:"bill_number,omitempty" bson:"bill_number"`
+	OwnerId                 string             `json:"owner_id,omitempty" bson:"owner_id"`
+}
+
+func (c Car) GetID() string {
+	return c.Id.Hex()
 }
 
 func GetAllCars(filter primitive.M) ([]Car, error) {
-	opts1 := options.Find().SetProjection(bson.D{{"manufacturer", 1}, {"model", 1}, {"least_recently_registered", 1}, {"invalidate_date", 1}})
+	opts1 := options.Find().SetProjection(bson.D{
+		{"manufacturer", 1},
+		{"model", 1},
+		{"city", 1},
+		{"plate", 1},
+		{"carbody", 1},
+		{"owner_id", 1},
+		{"least_recently_registered", 1},
+		{"invalidate_date", 1}})
 	car_coll := database.GetCol("cars")
 
 	var cars_list []Car
@@ -62,4 +76,8 @@ func GetCar(options bson.M) (*Car, error) {
 	}
 
 	return &car, nil
+}
+
+func GetAllCarsWithPagin(filter primitive.M, start_id string, nPerPage int64) ([]Car, string, error) {
+	return getAllWithPaging[Car]("cars", filter, "invalidate_date", start_id, nPerPage)
 }

@@ -98,3 +98,19 @@ func GetCarInformation(c *fiber.Ctx) error {
 
 	return c.JSON(*car)
 }
+
+func GetInvalidatedCars(c *fiber.Ctx) error {
+	last := c.Query("last", "")
+	cars, last_date, err := schematic.GetAllCarsWithPagin(bson.M{}, last, 100)
+	if err != nil {
+		log.Error().Err(err).Msg("")
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"err": err,
+		})
+	}
+
+	return c.JSON(fiber.Map{
+		"last_date": last_date,
+		"cars":      cars,
+	})
+}

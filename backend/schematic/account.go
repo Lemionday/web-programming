@@ -11,7 +11,6 @@ import (
 	"github.com/theLemionday/web-programming/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -100,12 +99,8 @@ func AddAccount(account *Account) error {
 
 	accountsCol := database.GetCol("accounts")
 	_, err = accountsCol.InsertOne(context.TODO(), account)
-	if mongo.IsDuplicateKeyError(err) {
-		return ErrUserAlreadyExisted
-	} else if err != nil {
-		return err
-	}
-	return nil
+
+	return err
 }
 
 func Authenticate(username, password string) (*Account, error) {
@@ -122,8 +117,12 @@ func Authenticate(username, password string) (*Account, error) {
 	return &account, nil
 }
 
-func ListAllAccounts(start string, nPerPage int64) ([]Account, string, error) {
-	return getAllWithPaging[Account]("accounts", bson.M{}, start, nPerPage)
+func GetAllAccountsWithPaging(start string, nPerPage int64) ([]Account, string, error) {
+	return getAllWithPaging[Account]("accounts", bson.M{}, "_id", start, nPerPage)
+}
+
+func GetAllAccounts() ([]Account, error) {
+	return getAll[Account]("accounts", bson.M{})
 }
 
 func DeleteAccount(username string) (int64, error) {

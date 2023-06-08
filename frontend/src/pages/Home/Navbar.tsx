@@ -28,11 +28,9 @@ export default function Example() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                {/* <a href="/" className="flex items-center"> */}
                 <NavLink to="/">
                     Trang chủ
                 </NavLink>
-                {/* </a> */}
             </Typography>
             <Typography
                 as="li"
@@ -40,11 +38,9 @@ export default function Example() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                {/* <a href="/about" className="flex items-center"> */}
                 <NavLink to="/about">
                     Liên hệ
                 </NavLink>
-                {/* </a> */}
             </Typography>
             <Typography
                 as="li"
@@ -52,11 +48,9 @@ export default function Example() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                {/* <a href="#" className="flex items-center"> */}
                 <NavLink to="/structure">
                     Cấu trúc
                 </NavLink>
-                {/* </a> */}
             </Typography>
         </ul>
     );

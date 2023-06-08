@@ -28,9 +28,9 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	// 	return nil
 	// })
 
-	app.Post("/login", schematic.ValidateAccountDataFromRequest, loginHandler)
+	app.Post("/login", schematic.ValidateAccountDataFromRequest, handler.Login)
 	app.Get("/centers", handler.GetCentersWithPaging)
-	// app.Get("/centers", handler.GetAllCenters)
+	app.Get("/center/getall", handler.GetAllCenters)
 
 	// jwt
 	middleware.SetupJWT(app, jwtSecret)
@@ -39,13 +39,17 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	// protected
 	app.Get("/hello", hello)
 
-	app.Post("/account/signup", schematic.ValidateAccountDataFromRequest, signupHandler)
-	app.Get("/accounts", handler.GetAccounts)
-	app.Delete("/account/:username", handler.DeleteAccount)
+	account_grp := app.Group("/account", middleware.RoleRequired(schematic.AuthorizedFromMainCenter))
+	account_grp.Post("/signup", schematic.ValidateAccountDataFromRequest, handler.SignupAccount)
+	account_grp.Get("/page", handler.GetAccountsWithPaging)
+	account_grp.Get("/getall", handler.GetAllAccountsHandler)
+	account_grp.Delete("/delete/:username", handler.DeleteAccount)
+	account_grp.Get("/check/:username", handler.IsUsernameExisted)
 
 	// @query:
 	// period: month | quarter | year
 	// center: main | <:center_id>
+	// app.Get("/cars/statistics/invalidated", handler.GetInvalidatedCars)
 	app.Get("/cars/statistics", handler.GetCarsStatistics)
 	app.Get("/car/information/:id", handler.GetCarInformation)
 	app.Get("/owner/:id", handler.GetOwner)

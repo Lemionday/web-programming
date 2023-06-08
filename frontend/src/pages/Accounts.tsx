@@ -1,11 +1,11 @@
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, ArrowRightIcon, CheckCircleIcon, ExclamationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import {
+    Alert,
     Avatar,
     Button,
     Card,
     CardBody,
-    CardFooter,
     CardHeader,
     IconButton,
     Tooltip,
@@ -15,12 +15,15 @@ import {
     createColumnHelper,
     flexRender,
     getCoreRowModel,
-    useReactTable,
+    getFilteredRowModel,
+    getPaginationRowModel,
+    useReactTable
 } from '@tanstack/react-table';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../components/hooks/useAuth';
 import { Account, Role, RoleToString } from '../components/models/Session';
+import { GetAllWithAuthentication } from "../components/shared/actions";
 import { config } from '../conf/config';
 
 function AvatarAndUsername({ username, avatar }: { username: string, avatar?: number }) {
@@ -45,10 +48,12 @@ function AvatarAndUsername({ username, avatar }: { username: string, avatar?: nu
     );
 }
 
-function DeleteAccount({ username }: { username: string }) {
+function DeleteAccountButton({ onClick }: { onClick: () => Promise<void> }) {
     return (
-        <Tooltip content="Edit User">
-            <IconButton variant="text" color="red" onClick={() => console.log(username)}>
+        <Tooltip content="Xóa tài khoản">
+            <IconButton variant="text" color="red"
+                onClick={async () => await onClick()}
+            >
                 <TrashIcon className="h-4 w-4" />
             </IconButton>
         </Tooltip>
@@ -57,172 +62,174 @@ function DeleteAccount({ username }: { username: string }) {
 
 const columnHelper = createColumnHelper<Account>();
 
-const columns = [
-    columnHelper.accessor(row => row.username, {
-        id: 'username',
-        cell: info => {
-            const data = info.row.original
-            return (
-                <>
-                    <AvatarAndUsername username={data.username} avatar={data.avatar} />
-                </>
-            )
-        },
-        header: 'Tài khoản'
-    }),
-    columnHelper.accessor(row => row.role, {
-        id: 'role',
-        cell: info => RoleToString(info.getValue()),
-        header: 'Vai trò'
-    }),
-    columnHelper.accessor(row => row.center, {
-        id: "center",
-        cell: info => info.getValue(),
-        header: 'Trung tâm'
-    }),
-    columnHelper.display({
-        header: () => null,
-        id: "actions",
-        cell: info => <DeleteAccount username={info.row.getValue("username")} />
-    })
-]
+function AccountsTable() {
+    const auth = useAuth();
+    const [accounts, setAccounts] = useState<Account[]>(() => []);
+    const [alert, setAlert] = useState({ msg: "", error: false })
 
-interface DataAPI<T> {
-    data: T[];
-}
+    useEffect(() => {
+        (async function () {
+            try {
+                const data = await GetAllWithAuthentication<Account>({ url: `${config.baseUrl}/account/getall`, token: auth.session.token })
+                setAccounts(data);
+            }
+            catch (error) {
+                console.log(error)
+            };
+        })()
 
-function AccountsTable({ data }: DataAPI<Account>) {
+    }, []);
+
+    const columns = useMemo(() => [
+        columnHelper.accessor(row => row.username, {
+            id: "username",
+            cell: info => {
+                const data = info.row.original
+                return (
+                    <>
+                        <AvatarAndUsername username={data.username} avatar={data.avatar} />
+                    </>
+                )
+            },
+            header: 'Tài khoản'
+        }),
+
+        columnHelper.accessor(row => row.role, {
+            id: "role",
+            header: 'Vai trò',
+            cell: info => {
+                return RoleToString(info.getValue())
+            }
+        }),
+
+        columnHelper.accessor(row => row.center, { header: 'Trung tâm' }),
+
+        columnHelper.display({
+            header: () => null,
+            id: "actions",
+            cell: info => {
+                const auth = useAuth()
+
+                return (
+                    <>
+                        <DeleteAccountButton
+                            onClick={async () => {
+                                const username = info.row.getValue("username")
+                                if (info.row.getValue("role") === Role.Admin) {
+                                    setAlert({ msg: "Không thể xóa tài khoản quản trị viên", error: true })
+                                    return
+                                }
+
+                                const res = await fetch(`${config.baseUrl}/account/delete/${username}`, {
+                                    method: "DELETE",
+                                    headers: {
+                                        "Authorization": `Bearer ${auth.session.token}`
+                                    }
+                                })
+
+                                if (res.ok) {
+                                    setAccounts(accounts => accounts.filter((acc) => acc.username !== username))
+                                    setAlert({ msg: `Xóa tài khoản ${username} thành công!`, error: false })
+                                } else {
+                                    console.log(res)
+                                }
+                            }} />
+                    </>
+                )
+            }
+        })
+    ], [])
+
     const table = useReactTable({
-        data,
+        data: accounts,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        //
+        debugTable: true,
     })
 
     return (
+        <div className="flex flex-col items-center gap-4">
+            <Alert
+                className="w-1/2 items-center"
+                open={alert.msg !== ""}
+                variant="outlined"
+                color={alert.error ? "red" : "green"}
+                icon={alert.error ? <ExclamationCircleIcon className="h-6 w-6" /> : <CheckCircleIcon className="h-6 w-6" />}
+                onClose={() => setAlert({ msg: "", error: false })}>{alert.msg}
+            </Alert>
+            <table className="mt-4 w-full min-w-max table-auto text-left no-scrollbar">
+                <thead>
+                    {table.getHeaderGroups().map((headerGroup) => (
+                        <tr key={headerGroup.id}>
+                            {headerGroup.headers.map(header => (
+                                <th key={header.id}
+                                    className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
+                                    <Typography
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
+                                    >
+                                        {header.isPlaceholder
+                                            ? null
+                                            : (<>
+                                                {flexRender(
+                                                    header.column.columnDef.header,
+                                                    header.getContext()
+                                                )}
+                                            </>)}
+                                    </Typography>
+                                </th>
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
+                <tbody>
+                    {table.getRowModel().rows.map(row => (
+                        <tr key={row.id} className="even:bg-blue-gray-50/50">
+                            {row.getVisibleCells().map(cell => (
+                                <td key={cell.id} className="p-4">
+                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
-        <table className="mt-4 w-full min-w-max table-auto text-left no-scrollbar">
-            <thead>
-                {table.getHeaderGroups().map((headerGroup) => (
-                    <tr key={headerGroup.id}>
-                        {headerGroup.headers.map(header => (
-                            <th key={header.id}
-                                className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                                <Typography
-                                    variant="small"
-                                    color="blue-gray"
-                                    className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                                >
-                                    {header.isPlaceholder
-                                        ? null
-                                        : (<>
-                                            {flexRender(
-                                                header.column.columnDef.header,
-                                                header.getContext()
-                                            )}
-                                            {/* {" "}
-                                                    {index !== columns.length - 1 && (
-                                                        <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
-                                                    )} */}
-                                        </>)}
-                                </Typography>
-                            </th>
-                        ))}
-                    </tr>
-                ))}
-            </thead>
-            <tbody>
-                {table.getRowModel().rows.map(row => (
-                    <tr key={row.id} className="even:bg-blue-gray-50/50">
-                        {row.getVisibleCells().map(cell => (
-                            <td key={cell.id} className="p-2">
-                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                            </td>
-                        ))}
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-
+            <div className="flex items-center gap-4">
+                <Button
+                    variant="text"
+                    color="blue-gray"
+                    className="flex items-center gap-2"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Trang trước
+                </Button>
+                <Typography color="gray" className="font-normal">
+                    Trang <strong className="text-blue-gray-900">{table.getState().pagination.pageIndex + 1}</strong> trên {" "}
+                    <strong className="text-blue-gray-900">{table.getPageCount()}</strong>
+                </Typography>
+                <Button
+                    variant="text"
+                    color="blue-gray"
+                    className="flex items-center gap-2"
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    Next
+                    <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
+                </Button>
+            </div>
+        </div>
     );
 }
 
 export default function AccountsPage() {
     const navigate = useNavigate();
-
-    const [accounts, setAccounts] = useState<Account[]>(() => []);
-    const last_id = useRef<string[]>([""])
-    const auth = useAuth();
-    const [totalNumberOfPages, setTotalNumberOfPages] = useState<number>(1);
-    const current_page_number = useRef<number>(0)
-
-    async function fetchData(forward: boolean) {
-        try {
-            if (forward === false) {
-                current_page_number.current -= 1;
-                if (current_page_number.current <= 0) {
-                    current_page_number.current = 0;
-                }
-            } else {
-                current_page_number.current += 1;
-                if (current_page_number.current >= last_id.current.length) {
-                    current_page_number.current = last_id.current.length - 1;
-                }
-            }
-
-            let id = last_id.current.at(current_page_number.current) as string;
-            if (id === undefined) {
-                id = "";
-            }
-            const res = await fetch(`${config.baseUrl}/accounts?` + new URLSearchParams({
-                last_id: id,
-            }), {
-                headers: {
-                    "Authorization": `Bearer ${auth.session.token}`,
-                },
-            });
-
-            if (!res.ok) return;
-
-            const data = await res.json();
-            let toReturn: Account[] = []
-            for (const account of data.accounts) {
-                const isAdmin = (account.role === Role.Admin);
-
-                let temp: Account = {
-                    username: account.username,
-                    avatar: account.avatar,
-                    role: account.role,
-                    center: isAdmin ? "Quản trị" : account.center,
-                };
-                toReturn.push(temp);
-            }
-
-            if (data["total_number_pages"]) {
-                setTotalNumberOfPages(Math.ceil(data["total_number_pages"] / toReturn.length))
-                console.log(totalNumberOfPages)
-            }
-
-            if (current_page_number.current === last_id.current.length - 1) {
-                last_id.current.push(data.last_id);
-            }
-
-            setAccounts([...toReturn]);
-        }
-        catch (error) {
-            return [];
-        };
-    }
-
-    const loadMore = useCallback(() => {
-        return setTimeout(() => {
-            fetchData(true);
-        }, 200);
-    }, [setAccounts]);
-
-    useEffect(() => {
-        const timeout = loadMore();
-        return () => clearTimeout(timeout);
-    }, []);
 
     return (
         <Card className="h-full w-full">
@@ -237,9 +244,6 @@ export default function AccountsPage() {
                         </Typography>
                     </div>
                     <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                        {/* <Button variant="outlined" color="blue-gray" size="sm">
-                            view all */}
-                        {/* </Button> */}
                         <Button className="flex items-center gap-3" color="blue" size="sm"
                             onClick={() => { navigate("/account/register") }}>
                             <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Thêm tài khoản
@@ -249,24 +253,8 @@ export default function AccountsPage() {
             </CardHeader>
 
             <CardBody className="w-full h-full px-0">
-                <AccountsTable data={accounts} />
+                <AccountsTable />
             </CardBody >
-
-            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-                <Typography variant="small" color="blue-gray" className="font-normal">
-                    Trang {current_page_number.current + 1} trên {totalNumberOfPages}
-                </Typography>
-                <div className="flex gap-2">
-                    <Button variant="outlined" color="blue-gray" size="sm"
-                        onClick={() => fetchData(false)}>
-                        Trang trước
-                    </Button>
-                    <Button variant="outlined" color="blue-gray" size="sm"
-                        onClick={() => fetchData(true)}>
-                        Trang sau
-                    </Button>
-                </div>
-            </CardFooter>
         </Card >
     );
 }

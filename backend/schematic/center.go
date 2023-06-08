@@ -21,5 +21,5 @@ func GetAllCenter() ([]Center, error) {
 }
 
 func GetAllCenterWithPaging(start string, nPerPage int64) ([]Center, string, error) {
-	return getAllWithPaging[Center]("centers", bson.M{}, start, nPerPage)
+	return getAllWithPaging[Center]("centers", bson.M{}, "_id", start, nPerPage)
 }

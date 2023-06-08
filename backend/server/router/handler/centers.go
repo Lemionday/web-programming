@@ -31,7 +31,5 @@ func GetAllCenters(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
-	return c.JSON(fiber.Map{
-		"centers": centers,
-	})
+	return c.JSON(centers)
 }
