@@ -1,15 +1,16 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Car } from "../../components/models/Car";
-import { Period } from "../../components/models/Period";
-import { config } from "../../conf/config";
-import { useAuth } from "../../components/hooks/useAuth";
-import Statistics, { CarModelChart } from "../../components/statistic/Statistics";
+import { Car } from "../../../components/models/Car";
+import { Period } from "../../../components/models/Period";
+import { config } from "../../../conf/config";
+import { useAuth } from "../../../components/hooks/useAuth";
+import Statistics from "./RegisteredCharts";
+import { CarModelChart } from './CarModelChart';
 import DaysLeftUntilInvalidatedTable from "./DaysLeftUntilInvalidatedTable";
 import { Typography } from "@material-tailwind/react";
 
 async function fetchData(token: string, period: Period, center: string): Promise<Car[]> {
     try {
-        const res = await fetch(`${config.baseUrl}/cars/statistics?` + new URLSearchParams({
+        const res = await fetch(`${config.baseUrl}/car/statistics?` + new URLSearchParams({
             period: period,
             center: center,
         }), {

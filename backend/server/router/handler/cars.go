@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -14,7 +15,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func GetCarsStatistics(c *fiber.Ctx) error {
+func GetAllCarsStatistics(c *fiber.Ctx) error {
 	period := c.Query("period")
 
 	lrr_duration := bson.M{
@@ -84,8 +85,9 @@ func GetCarsStatistics(c *fiber.Ctx) error {
 }
 
 func GetCarInformation(c *fiber.Ctx) error {
-	id := c.Params("id")
-	car, err := schematic.GetCar(bson.M{"car_id": bson.M{"$eq": id}})
+	plate := c.Params("plate")
+	plate = strings.ReplaceAll(plate, "_", " ")
+	car, err := schematic.GetCar(bson.M{"plate": bson.M{"$eq": plate}})
 	if err != nil {
 		log.Error().Err(err).Msg("")
 

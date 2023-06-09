@@ -17,10 +17,11 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import React from "react";
-import { Car } from "../../components/models/Car";
-import { FormatDateToString, capitalizeFirstLetter } from "../../components/util/util";
-import { useData } from "./Statistics";
-import { daysBetweenDate } from "../../components/util/util";
+import { Car } from "../../../components/models/Car";
+import { FormatDateToString, capitalizeFirstLetter } from "../../../components/util/util";
+import { useData } from "./Main";
+import { daysBetweenDate } from "../../../components/util/util";
+import { useNavigate } from "react-router-dom";
 
 const columnHelper = createColumnHelper<Car>();
 
@@ -63,12 +64,15 @@ const columns = [
         header: () => null,
         id: "actions",
         cell: info => {
+            const navigate = useNavigate()
+            const plate = info.row.getValue("plate") as string
+
             return <Tooltip content="Car Information">
                 <IconButton
                     variant="text"
                     color="green"
                     onClick={function () {
-                        console.log(info.row.getValue("plate"))
+                        navigate(`/car/information/${plate.replaceAll(" ", "_")}`)
                     }}>
                     <ArrowTopRightOnSquareIcon className="h-5 w-5" />
                 </IconButton>

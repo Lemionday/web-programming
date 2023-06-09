@@ -12,9 +12,10 @@ import { BaseLayout } from './components/layout/Base';
 import CentersListPage from './pages/Centers';
 import { config } from './conf/config';
 import AboutPage from './pages/About';
-import CarsStatisticsPage from './pages/Cars/Statistics';
+import CarsStatisticsPage from './pages/Cars/Statistics/Main';
 import CarInformationPage from './pages/Cars/Infomation';
 import { Center } from './components/models/Center';
+import { useAuth } from './components/hooks/useAuth';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
             path: '/centers',
             element: <CentersListPage />,
             loader: async function () {
-              return fetch(`${config.baseUrl}/centers`);
+              return fetch(`${config.baseUrl}/center/getall`);
             }
           },
           {
@@ -54,19 +55,22 @@ const router = createBrowserRouter([
                 path: '/account/register',
                 element: <RegisterPage />,
                 loader: async function () {
+                  const auth = useAuth()
                   return fetch(`${config.baseUrl}/center/getall`)
                 }
               },
               { path: '/accounts', element: <AccountsPage /> },
               { path: '/account', element: <AccountsPage /> },
               { path: '/cars/statistics', element: <CarsStatisticsPage /> },
-              { path: '/car/information/:id', element: <CarInformationPage /> }
+              {
+                path: '/car', children: [
+                  {
+                    path: 'information/:plate', element: <CarInformationPage />,
+                  }
+                ]
+              }
             ]
           },
-          // {
-          //   path: '/test/pagination',
-          //   element: <TestPage />
-          // }
         ]
       }
     ]

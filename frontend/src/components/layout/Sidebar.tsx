@@ -26,6 +26,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useColorScheme } from "../hooks/useColorScheme";
 import { Role } from "../models/Session";
+import { config } from "../../conf/config";
 
 type ItemProps = {
     Icon: ElementType
@@ -162,7 +163,7 @@ export default function SideBar() {
             <Card className="ml-2 my-2 h-[calc(100vh-1rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
                 <div className="flex items-center mx-auto">
                     <Avatar
-                        src={`./src/assets/avatar/${String(auth.session.account?.avatar)}.svg`}
+                        src={`${config.baseUrl}/avatar/${String(auth.session.account?.avatar)}.svg`}
                         // variant="rounded"
                         withBorder={true}
                         color="green"

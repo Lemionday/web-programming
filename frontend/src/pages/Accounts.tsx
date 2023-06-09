@@ -30,7 +30,7 @@ function AvatarAndUsername({ username, avatar }: { username: string, avatar?: nu
     return (
         <div className="flex items-center gap-3">
             <Avatar
-                src={`./src/assets/avatar/${String(avatar)}.svg`}
+                src={`${config.baseUrl}/avatar/${String(avatar)}.svg`}
                 alt={username} size="sm" />
             <div className="flex flex-col">
                 <Typography variant="small" color="blue-gray" className="font-normal">

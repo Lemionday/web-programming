@@ -1,5 +1,4 @@
 import { Avatar, Box, Grid, Typography } from "@mui/material";
-import "./About.scss";
 
 export default function AboutPage() {
     const members_list = [

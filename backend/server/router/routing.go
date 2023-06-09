@@ -9,6 +9,8 @@ import (
 
 func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	// public
+	app.Static("/", "./public")
+
 	app.Get("/api", func(c *fiber.Ctx) error {
 		return c.JSON(&fiber.Map{
 			"message": "Hello from server",
@@ -50,9 +52,10 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	// period: month | quarter | year
 	// center: main | <:center_id>
 	// app.Get("/cars/statistics/invalidated", handler.GetInvalidatedCars)
-	app.Get("/cars/statistics", handler.GetCarsStatistics)
-	app.Get("/car/information/:id", handler.GetCarInformation)
-	app.Get("/owner/:id", handler.GetOwner)
+	car_grp := app.Group("/car")
+	car_grp.Get("/statistics", handler.GetAllCarsStatistics)
+	car_grp.Get("/information/:plate", handler.GetCarInformation)
+	car_grp.Get("/owner/:id", handler.GetOwner)
 }
 
 func hello(c *fiber.Ctx) error {
