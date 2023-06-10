@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 export default function HomeLayout() {
-    let auth = useAuth();
+    const auth = useAuth();
 
     if (auth.session.token) {
         return <Navigate to="/dashboard" replace />;

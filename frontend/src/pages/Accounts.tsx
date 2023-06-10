@@ -75,7 +75,7 @@ function AccountsTable() {
             }
             catch (error) {
                 console.log(error)
-            };
+            }
         })()
 
     }, []);

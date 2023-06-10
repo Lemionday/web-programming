@@ -11,6 +11,14 @@ export class Car {
     size?: number[]
     fueltype?: FuelType
     city?: string
+    curb_weight?: number
+    usage?: string
+    peak_rpm?: number
+    horse_power?: number
+    compression_ratio?: number
+    cylinder_number?: number
+    engine_size?: number
+    wheel_base?: number
     plate?: string
     vin?: string
     engine_number?: string

@@ -1,4 +1,5 @@
-import { Avatar, Box, Grid, Typography } from "@mui/material";
+import { Avatar, Card, CardBody, CardHeader, Navbar, Typography } from "@material-tailwind/react";
+import NavBar from "../components/shared/Navbar";
 
 export default function AboutPage() {
     const members_list = [
@@ -8,31 +9,29 @@ export default function AboutPage() {
     ];
 
     return (
-        <div id="about">
-            <Typography variant="h6">
-                Thông tin thành viên
-            </Typography>
-            <Grid container id="about"
-                alignItems="center"
-                justifyContent="space-between"
-                spacing={0.5}
-                sx={{ flexGrow: 1, minHeight: '15rem' }}>
-                {members_list.map((member) => (
-                    <Grid
-                        item
-                        xs={12}
-                        md={3}
-                        // minHeight={300}
-                        key={member.msv}
-                        className="member-card"
-                    >
-                        <Avatar className="avatar" alt={member.name} src={`https://avatars.githubusercontent.com/${member.github_account}`} />
-                        <Typography variant="h6">{member.name}</Typography>
-                        <Typography>{member.msv}</Typography>
-                        <Typography>Lập trình {member.job}</Typography>
-                    </Grid>
-                ))}
-            </Grid>
-        </div>
+        <>
+            <NavBar />
+            <div className="flex flex-col h-screen mx-10">
+                <Typography variant="h2">
+                    Thông tin thành viên
+                </Typography>
+                <div className="flex justify-between gap-10 mt-10">
+                    {members_list.map((member) => (
+                        <Card className="w-90 h-100 bg-blue-gray-100">
+                            <CardHeader shadow={false} floated={false} className="flex justify-center w-80">
+                                <img alt={member.name} src={`https://avatars.githubusercontent.com/${member.github_account}`} />
+                            </CardHeader>
+
+                            <CardBody>
+
+                                <Typography variant="h6">{member.name}</Typography>
+                                <Typography>{member.msv}</Typography>
+                                <Typography>Lập trình {member.job}</Typography>
+                            </CardBody>
+                        </Card>
+                    ))}
+                </div>
+            </div >
+        </>
     );
 }

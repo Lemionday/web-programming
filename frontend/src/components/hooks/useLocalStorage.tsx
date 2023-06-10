@@ -23,4 +23,4 @@ export function useLocalStorage<T>(keyName: string, defaultValue: T) {
         setStoredValue(newValue);
     };
     return [storedValue, setValue];
-};
+}

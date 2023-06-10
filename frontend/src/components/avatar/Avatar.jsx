@@ -1,6 +1,6 @@
 import React from 'react';
-import maleAvatar from './assets/male.jpg';
-import femaleAvatar from './assets/female.jpg';
+// import maleAvatar from '../../';
+// import femaleAvatar from './assets/female.jpg';
 
 
 const Avatar = ({ gender }) => {
@@ -11,9 +11,9 @@ const Avatar = ({ gender }) => {
   };
 
   const getAvatarImage = () => {
-    if (gender === 'nam') {
-      return maleAvatar;
-    } else return femaleAvatar;
+    // if (gender === 'nam') {
+    //   return maleAvatar;
+    // } else return femaleAvatar;
   };
 
   return <img src={getAvatarImage()} alt="Avatar" style={avatarStyle} />;

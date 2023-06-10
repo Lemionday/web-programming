@@ -14,7 +14,8 @@ type OwnerIsPerson struct {
 	Id         string    `json:"id" bson:"id"`
 	Name       string    `json:"name" bson:"name"`
 	Sex        string    `json:"sex" bson:"sex"`
-	Birthday   time.Time `json:"birthday" bson:"birthday"`
+	Ssn        string    `json:"ssn" bson:"ssn"`
+	Birthday   time.Time `json:"birthdate" bson:"birthdate"`
 	Birthplace string    `json:"birthplace" bson:"birthplace"`
 	CarsList   []string  `json:"cars_list" bson:"cars_list"`
 }
@@ -28,16 +29,24 @@ type OwnerIsCompany struct {
 	CarsList               []string      `json:"cars_list" bson:"cars_list"`
 }
 
-type Owner interface {
-	OwnerIsPerson | OwnerIsCompany
+func GetPersonOwner(ssn string) (*OwnerIsPerson, error) {
+	coll := database.GetCol("owner")
+	var owner OwnerIsPerson
+
+	if err := coll.FindOne(context.TODO(), bson.D{{"ssn", ssn}}).Decode(&owner); err != nil {
+		return nil, err
+	}
+
+	return &owner, nil
 }
 
-func GetOwner[T Owner](id string) (*T, error) {
+func GetCompanyOwner(id string) (*OwnerIsCompany, error) {
 	coll := database.GetCol("owner")
-	var owner T
+	var owner OwnerIsCompany
 
 	if err := coll.FindOne(context.TODO(), bson.D{{"id", id}}).Decode(&owner); err != nil {
 		return nil, err
 	}
+
 	return &owner, nil
 }

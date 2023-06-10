@@ -55,7 +55,7 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	car_grp := app.Group("/car")
 	car_grp.Get("/statistics", handler.GetAllCarsStatistics)
 	car_grp.Get("/information/:plate", handler.GetCarInformation)
-	car_grp.Get("/owner/:id", handler.GetOwner)
+	app.Get("/owner/:id", handler.GetOwner)
 }
 
 func hello(c *fiber.Ctx) error {

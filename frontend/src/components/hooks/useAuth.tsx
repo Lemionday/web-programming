@@ -35,7 +35,7 @@ interface AuthContextType {
     logout: () => void;
 }
 
-let AuthContext = React.createContext<AuthContextType>(null!);
+const AuthContext = React.createContext<AuthContextType>(null!);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [session, setSession] = useLocalStorage<Session>("session", { token: "", account: undefined });
@@ -57,8 +57,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const value = { session, login, logout };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
+}
 
 export function useAuth() {
     return useContext(AuthContext);
-};
+}

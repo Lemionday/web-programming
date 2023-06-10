@@ -1,3 +1,4 @@
+import random
 from company import CompanyFactory
 from faker import Faker
 from avatar import generate_avatar
@@ -53,6 +54,14 @@ Faker.seed(0)
 #     # print(json.dumps(carRegistry.__dict__, ensure_ascii=False, indent=4))
 #     company = CompanyFactory()
 #     print(json.dumps(company.__dict__, indent=4, ensure_ascii=False))
+personalUsages = ["Đi lại cá nhân", "Dịch vụ chở khách", "Cho thuê"]
+companyUsages = [
+    "Dịch vụ chở khách",
+    "Dịch vụ chở khách cao cấp",
+    "Dịch vụ du lịch",
+    "Đưa đón nhân viên",
+    "Cho thuê làm dịch vụ vận tải",
+]
 
 
 def generate(
@@ -69,9 +78,10 @@ def generate(
         person = PersonFactory()
         for _ in range(fake.pyint(min_value=0, max_value=cars_per_person)):
             car = CarRegistryFactory()
-            car.add_owner_id(person.id)
+            car.add_owner_id(person.ssn)
+            car.add_usage(random.choice(personalUsages))
             cars.append(car.__dict__)
-            person.add_car(car.car_id)
+            person.add_car(car.plate)
         people.append(person.__dict__)
 
     for _ in range(company_number):
@@ -81,8 +91,9 @@ def generate(
         ):
             car = CarRegistryFactory()
             car.add_owner_id(company.id)
+            car.add_usage(random.choice(companyUsages))
             cars.append(car.__dict__)
-            company.add_car(car.car_id)
+            company.add_car(car.plate)
         companies.append(company.__dict__)
 
     return people, companies, cars

@@ -1,114 +1,84 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import * as React from 'react';
-import { useAuth } from '../components/hooks/useAuth';
-
-const theme = createTheme();
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import {
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    IconButton,
+    Input,
+    Typography
+} from "@material-tailwind/react";
+import { useState } from "react";
+import { useAuth } from "../components/hooks/useAuth";
 
 export default function LoginPage() {
-    let auth = useAuth();
+    const auth = useAuth();
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [isShowPassword, setIsShowPassword] = useState(false);
 
-    let handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    function ShowPasswordButton() {
+        return <IconButton
+            onClick={() => {
+                setIsShowPassword(!isShowPassword)
+            }}
+            variant="text" className="!absolute right-1 top-1">
+            {isShowPassword ?
+                <EyeIcon strokeWidth={2} className="h-5 w-5" /> :
+                <EyeSlashIcon strokeWidth={2} className="h-5 w-5" />}
+        </IconButton>;
+    }
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
 
         auth.login({
-            username: data.get("username") as string,
-            password: data.get("password") as string,
+            username: username,
+            password: password,
         })
     }
 
     return (
-        <ThemeProvider theme={theme}>
-            <Grid container component="main" sx={{ height: '100vh' }}>
-                <CssBaseline />
-                <Grid
-                    item
-                    xs={false}
-                    sm={4}
-                    md={7}
-                    sx={{
-                        // backgroundImage: 'url(https://i2-vnexpress.vnecdn.net/2021/09/18/Toyota-Vios-White-4.jpg?w=2400&h=0&q=100&dpr=1&fit=crop&s=YWSuQ9IYq7Ogl5ZKos4x0g&t=image)',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                    }}
-                />
-                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-                    <Box
-                        sx={{
-                            my: 8,
-                            mx: 4,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                            <AccountCircleIcon />
-                        </Avatar>
-                        <Typography component="h1" variant="h5">
-                            Dịch vụ công đăng kiểm xe ô tô
-                        </Typography>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="username"
-                                label="Tên đăng nhập"
-                                name="username"
-                                autoFocus
-                            // onChange={e => { e.target.value }}
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Mật khẩu"
-                                type="password"
-                                id="password"
+        <div className={`flex flex-col items-center justify-center align-middle w-screen h-screen
+        bg-no-repeat bg-cover bg-center bg-fixed
+        bg-[url('../images/wallpaperflare.com_wallpaper-1-1.jpg')]`}>
+            <Card className="w-1/3 mt-20">
+                <CardHeader
+                    variant="gradient"
+                    color="blue"
+                    className="mb-4 grid h-28 place-items-center"
+                >
+                    <Typography variant="h3" className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-300">
+                        Dịch vụ công đăng kiểm xe ô tô
+                    </Typography>
+                </CardHeader>
+                <form onSubmit={handleSubmit}>
+                    <CardBody className="flex flex-col gap-4">
+                        <Input label="Tên đăng nhập" size="lg"
+                            autoComplete="username"
+                            onChange={e => setUsername(e.target.value)}
+                            autoFocus
+                        />
+                        <div className="relative flex w-full">
+                            <Input label="Mật khẩu" size="lg"
+                                type={isShowPassword ? "text" : "password"}
                                 autoComplete="current-password"
-                            // onChange={e => { e.target.value }}
+                                onChange={e => setPassword(e.target.value)}
                             />
-                            <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
-                                label="Duy trì đăng nhập"
-                            />
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Đăng nhập
-                            </Button>
-                            <Grid container>
-                                <Grid item xs>
-                                    <Link href="#" variant="body2">
-                                        Quên mật khẩu?
-                                    </Link>
-                                </Grid>
-                            </Grid>
-                            {/* <Copyright sx={{ mt: 5 }} /> */}
-                        </Box>
-                    </Box>
-                </Grid>
-            </Grid>
-        </ThemeProvider>
+                            <ShowPasswordButton />
+                        </div>
+                        {/* <div className="-ml-2.5">
+                        <Checkbox label="Remember Me" />
+                    </div> */}
+                    </CardBody>
+                    <CardFooter className="pt-0">
+                        <Button variant="gradient" type="submit" fullWidth>
+                            Đăng nhập
+                        </Button>
+                    </CardFooter>
+                </form>
+            </Card>
+        </div>
     );
-};
+}

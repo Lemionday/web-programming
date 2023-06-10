@@ -9,14 +9,14 @@ import {
 } from "@material-tailwind/react";
 import { useAuth } from '../components/hooks/useAuth';
 import { Account, RoleToString } from '../components/models/Session';
+import { config } from '../conf/config';
 
 function Profile({ account }: { account: Account }) {
     return (
-        <Card className="w-96">
-            <CardHeader floated={false} className="h-80 flex flex-col justify-center items-center">
+        <Card className="w-120">
+            <CardHeader floated={false} className="bg-gray-800 h-80 flex flex-col justify-center items-center">
                 <img
-                    src={`./src/assets/avatar/${account.avatar}.svg`}
-                    className="bg-black"
+                    src={`${config.baseUrl}/avatar/${account.avatar}.svg`}
                     alt="avatar" />
             </CardHeader>
             <CardBody className="text-center">

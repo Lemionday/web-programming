@@ -1,12 +1,12 @@
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { Button, Card, CardBody, IconButton, Input, Option, Radio, Select, Typography } from '@material-tailwind/react';
 import { FormEvent, useRef, useState } from "react";
 import PasswordStrengthBar from 'react-password-strength-bar';
-import { useAuth } from '../components/hooks/useAuth';
-import { config } from '../conf/config';
-import { Button, Card, CardBody, IconButton, Input, Select, Typography, Option, Radio } from '@material-tailwind/react';
-import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { useLoaderData } from "react-router-dom";
-import { Role, RoleToString } from "../components/models/Session";
+import { useAuth } from '../components/hooks/useAuth';
 import { Center } from "../components/models/Center";
+import { Role, RoleToString } from "../components/models/Session";
+import { config } from '../conf/config';
 
 async function signUpAction(auth: string, newUser: { username: string, password: string }) {
     try {
@@ -140,13 +140,13 @@ export default function RegisterPage() {
                         <Radio name="role"
                             value={Role.UserFromRegistryCenter}
                             label={RoleToString(Role.UserFromRegistryCenter)}
-                            onChange={e => { currentSelectedRole.current = Role.UserFromRegistryCenter }}
+                            onChange={() => { currentSelectedRole.current = Role.UserFromRegistryCenter }}
                             defaultChecked />
 
                         <Radio name="role"
                             label={RoleToString(Role.UserFromMainCenter)}
                             value={Role.UserFromMainCenter}
-                            onChange={e => { currentSelectedRole.current = Role.UserFromMainCenter }}
+                            onChange={() => { currentSelectedRole.current = Role.UserFromMainCenter }}
                         />
                     </div>
 

@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ProtectedLayout from './components/layout/Protected';
 import DashboardPage from './pages/Dashboard';
-import { HomePage } from './pages/Home/Home';
+import { HomePage } from './pages/Home';
 import ErrorPage from './pages/Error';
 import { AuthLayout } from './components/layout/Auth';
 import HomeLayout from './components/layout/Home';
@@ -12,10 +12,11 @@ import { BaseLayout } from './components/layout/Base';
 import CentersListPage from './pages/Centers';
 import { config } from './conf/config';
 import AboutPage from './pages/About';
-import CarsStatisticsPage from './pages/Cars/Statistics/Main';
-import CarInformationPage from './pages/Cars/Infomation';
-import { Center } from './components/models/Center';
-import { useAuth } from './components/hooks/useAuth';
+import CarsStatisticsPage, { DataProvider } from './pages/Cars/Statistics/RegisteredCars';
+import CarInformationPage from './pages/Cars/CarInfomation';
+import CarsListPage from './pages/Cars/AllCarsList';
+import OwnerProfile from './pages/Cars/Owner/OwnerProfile';
+import InvalidatedCarsStatisticsPage from './pages/Cars/Statistics/InvalidatedCars';
 
 const router = createBrowserRouter([
   {
@@ -55,19 +56,23 @@ const router = createBrowserRouter([
                 path: '/account/register',
                 element: <RegisterPage />,
                 loader: async function () {
-                  const auth = useAuth()
                   return fetch(`${config.baseUrl}/center/getall`)
                 }
               },
               { path: '/accounts', element: <AccountsPage /> },
               { path: '/account', element: <AccountsPage /> },
-              { path: '/cars/statistics', element: <CarsStatisticsPage /> },
               {
-                path: '/car', children: [
-                  {
-                    path: 'information/:plate', element: <CarInformationPage />,
-                  }
+                path: '/car',
+                children: [
+                  { path: 'statistics/registered', element: <CarsStatisticsPage /> },
+                  { path: 'statistics/invalidated', element: <InvalidatedCarsStatisticsPage /> },
+                  { path: 'information/:plate', element: <CarInformationPage />, },
+                  { path: 'listall', element: <CarsListPage /> }
                 ]
+              },
+              {
+                path: '/owner/:ownerId',
+                element: <OwnerProfile />
               }
             ]
           },

@@ -9,4 +9,4 @@ export default function ToggleDarkModeButton() {
             onClick={(e) => setIsDark(!isDark)}
         />
     );
-};
+}

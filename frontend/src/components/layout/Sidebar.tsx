@@ -1,12 +1,9 @@
 import {
-    CogIcon,
-    IdentificationIcon,
-    PresentationChartBarIcon,
+    HomeIcon, IdentificationIcon, ListBulletIcon, PresentationChartBarIcon,
     PresentationChartLineIcon,
     TableCellsIcon,
     UserIcon,
-    UserPlusIcon,
-    HomeIcon
+    UserPlusIcon
 } from "@heroicons/react/24/outline";
 import {
     PowerIcon
@@ -16,17 +13,16 @@ import {
     List,
     ListItem,
     ListItemPrefix,
-    Switch, Typography
+    Typography
 } from "@material-tailwind/react";
 import React, { ElementType } from "react";
 
 
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import { useColorScheme } from "../hooks/useColorScheme";
-import { Role } from "../models/Session";
 import { config } from "../../conf/config";
+import { useAuth } from "../hooks/useAuth";
+import { Role } from "../models/Session";
 
 type ItemProps = {
     Icon: ElementType
@@ -96,7 +92,6 @@ function AccordionSidebar({ open, open_idx, handleOpen, parent, children }: Acco
 
 export default function SideBar() {
     const navigate = useNavigate();
-    // const { isDark, setIsDark } = useColorScheme()
     const auth = useAuth();
     const [open, setOpen] = React.useState(0);
 
@@ -114,20 +109,28 @@ export default function SideBar() {
         },
         children: [
             {
+                Icon: ListBulletIcon,
+                iconProps: {
+                    strokeWidth: 2
+                },
+                href: "/car/listall",
+                name: "Danh sách toàn bộ xe"
+            },
+            {
                 Icon: PresentationChartBarIcon,
                 iconProps: {
                     strokeWidth: 2
                 },
-                href: "/cars/statistics",
-                name: "Thống kê"
+                href: "/car/statistics/registered",
+                name: "Thống kê xe đăng kiểm"
             },
             {
                 Icon: PresentationChartLineIcon,
                 iconProps: {
                     strokeWidth: 2
                 },
-                href: "/cars/prediction",
-                name: "Dự báo"
+                href: "/car/statistics/invalidated",
+                name: "Thống kê xe hết hạn đăng kiểm"
             }
         ]
     }
@@ -164,7 +167,6 @@ export default function SideBar() {
                 <div className="flex items-center mx-auto">
                     <Avatar
                         src={`${config.baseUrl}/avatar/${String(auth.session.account?.avatar)}.svg`}
-                        // variant="rounded"
                         withBorder={true}
                         color="green"
                         className="p-1"
@@ -190,7 +192,7 @@ export default function SideBar() {
                         open={open} open_idx={1}
                         handleOpen={handleOpen} />
 
-                    {auth.session.account?.role === Role.Admin ?
+                    {auth.session.account?.role! >= Role.UserFromMainCenter ?
                         <AccordionSidebar
                             parent={accounts.parent}
                             children={accounts.children}

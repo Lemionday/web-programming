@@ -20,6 +20,13 @@ const (
 type Car struct {
 	Id                      primitive.ObjectID `json:"-" bson:"_id"`
 	CarId                   string             `json:"car_id,omitempty" bson:"car_id"`
+	WheelBase               float64            `json:"wheel_base,omitempty" bson:"wheel_base"`
+	Usage                   string             `json:"usage,omitempty" bson:"usage"`
+	PeakRpm                 int                `json:"peak_rpm,omitempty" bson:"peak_rpm"`
+	CurbWeight              int                `json:"curb_weight,omitempty" bson:"curb_weight"`
+	CylinderNumber          int                `json:"cylinder_number,omitempty" bson:"cylinder_number"`
+	HorsePower              int                `json:"horse_power,omitempty" bson:"horse_power"`
+	CompressionRatio        float64            `json:"compression_ratio,omitempty" bson:"compression_ratio"`
 	Manufacturer            string             `json:"manufacturer,omitempty" bson:"manufacturer"`
 	Model                   string             `json:"model,omitempty" bson:"model"`
 	CarBoby                 string             `json:"carbody,omitempty" bson:"carbody"`

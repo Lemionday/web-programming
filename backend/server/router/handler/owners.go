@@ -5,26 +5,37 @@ import (
 	"strings"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/rs/zerolog/log"
 	"github.com/theLemionday/web-programming/schematic"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func ownerHandler[T schematic.Owner](c *fiber.Ctx, id string) error {
-	owner, err := schematic.GetOwner[T](id)
-	if err == mongo.ErrNoDocuments {
-		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"err": fmt.Sprintf("Owner with id %s not found", id),
-		})
+type Owner interface {
+	schematic.OwnerIsPerson | schematic.OwnerIsCompany
+}
+
+func ownerHandler[T Owner](c *fiber.Ctx, owner *T, err error, id string) error {
+	if err != nil {
+		log.Error().Err(err).Msg("")
+		if err == mongo.ErrNoDocuments {
+			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+				"err": fmt.Sprintf("Owner with id %s not found", id),
+			})
+		}
+
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
-	return c.JSON(owner)
+	return c.JSON(*owner)
 }
 
 func GetOwner(c *fiber.Ctx) error {
 	id := c.Params("id")
-	if strings.HasPrefix(id, "p") {
-		return ownerHandler[schematic.OwnerIsPerson](c, id)
+	if strings.HasPrefix(id, "c") {
+		owner, err := schematic.GetCompanyOwner(id)
+		return ownerHandler[schematic.OwnerIsCompany](c, owner, err, id)
 	} else {
-		return ownerHandler[schematic.OwnerIsCompany](c, id)
+		owner, err := schematic.GetPersonOwner(id)
+		return ownerHandler[schematic.OwnerIsPerson](c, owner, err, id)
 	}
 }

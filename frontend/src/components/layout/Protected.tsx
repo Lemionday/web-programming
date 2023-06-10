@@ -5,7 +5,7 @@ import SideBar from './Sidebar';
 
 export default function ProtectedLayout() {
     const auth = useAuth();
-    let location = useLocation();
+    const location = useLocation();
 
     if (!auth.session.token) {
         // Redirect them to the /login page, but save the current location they were

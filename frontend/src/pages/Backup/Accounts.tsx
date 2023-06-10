@@ -184,11 +184,11 @@ export default function AccountsPage() {
             if (!res.ok) return;
 
             const data = await res.json();
-            let toReturn: Account[] = []
+            const toReturn: Account[] = []
             for (const account of data.accounts) {
                 const isAdmin = (account.role === Role.Admin);
 
-                let temp: Account = {
+                const temp: Account = {
                     username: account.username,
                     avatar: account.avatar,
                     role: account.role,
@@ -210,7 +210,7 @@ export default function AccountsPage() {
         }
         catch (error) {
             return [];
-        };
+        }
     }
 
     const loadMore = useCallback(() => {

@@ -20,6 +20,19 @@ class Provider(VehicleProvider):
         "curbweight",
         "fueltype",
         "symboling",
+        "cylindernumber",
+        "horsepower",
+        "wheelbase",
+        "enginesize",
+        "compressionratio",
+        "peakrpm",
+    ]
+
+    intHeaders = ["curbweight", "cylindernumber", "horsepower", "enginesize", "peakrpm"]
+
+    floatHeaders = [
+        "wheelbase",
+        "compressionratio",
     ]
 
     def __init__(self, generator) -> None:
@@ -33,7 +46,16 @@ class Provider(VehicleProvider):
             for line in csv_reader:
                 row = []
                 for spec in self.car_headers:
-                    row.append(line[self.header[spec]])
+                    val = line[self.header[spec]]
+                    if spec in self.intHeaders:
+                        row.append(int(val))
+                        continue
+
+                    if spec in self.floatHeaders:
+                        row.append(float(val))
+                        continue
+
+                    row.append(val)
                 self.cars.append(row)
 
         with open("center/id.csv") as inFile:
@@ -99,17 +121,27 @@ class CarRegistry:
         bill_number,
     ) -> None:
         self.car_id = car_id
+
         self.manufacturer = car_spec["manufacturer"]
         self.model = car_spec["model"]
         self.carbody = car_spec["carbody"]
+        self.curb_weight = car_spec["curbweight"]
+        self.horse_power = car_spec["horsepower"]
+        self.compression_ratio = car_spec["compressionratio"]
+        self.cylinder_number = car_spec["cylindernumber"]
+        self.engine_size = car_spec["enginesize"]
+        self.wheel_base = car_spec["wheelbase"]
+        self.fueltype = car_spec["fueltype"]
+        self.peak_rpm = car_spec["peakrpm"]
+
         carlength = inch2mm(car_spec["carlength"])
         carwidth = inch2mm(car_spec["carwidth"])
         carheight = inch2mm(car_spec["carheight"])
         self.size = [carlength, carwidth, carheight]
-        self.fueltype = car_spec["fueltype"]
+
         self.city = city[1]
         district = rstr.xeger(r"[A-Z]")
-        self.plate = f"{city[0]}{district} - {unique_num}"
+        self.plate = f"{city[0]}{district}-{unique_num}"
         self.vin = vin
         self.engine_number = engine_number
         self.least_recently_registered = least_recently_registered.strftime("%Y-%m-%d")
@@ -123,6 +155,9 @@ class CarRegistry:
 
     def add_owner_id(self, owner_id: str) -> None:
         self.owner_id = owner_id
+
+    def add_usage(self, usage: str) -> None:
+        self.usage = usage
 
 
 class CarRegistryFactory(factory.Factory):

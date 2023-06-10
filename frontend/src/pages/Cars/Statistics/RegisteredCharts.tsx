@@ -1,24 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react';
-import autocolors from 'chartjs-plugin-autocolors';
-import Chart from 'chart.js/auto';
 import {
-    Chart as ChartJS,
+    ArcElement,
     CategoryScale,
+    ChartData,
+    Chart as ChartJS,
+    ChartOptions,
+    Legend,
+    LineElement,
     LinearScale,
     PointElement,
-    LineElement,
+    RadialLinearScale,
     Title,
     Tooltip,
-    Legend,
-    ChartData,
-    ArcElement,
-    RadialLinearScale,
-    ChartOptions,
 } from 'chart.js';
-import { Line, Pie } from 'react-chartjs-2';
-import { Period } from '../../../components/models/Period';
+import autocolors from 'chartjs-plugin-autocolors';
+import { useEffect, useRef, useState } from 'react';
+import { Line } from 'react-chartjs-2';
 import { Car } from '../../../components/models/Car';
-import { useData } from './Main';
+import { Period } from '../../../components/models/Period';
+import { useData } from './RegisteredCars';
 
 ChartJS.register(
     CategoryScale,
@@ -33,7 +32,7 @@ ChartJS.register(
     autocolors,
 );
 
-function MonthChart(cars: Car[]) {
+function MonthChart(cars: Car[], K: keyof Car) {
     const chartData: ChartData<'line'> = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: []
@@ -43,7 +42,7 @@ function MonthChart(cars: Car[]) {
     let yearsInData = new Array<number>()
 
     cars.forEach(car => {
-        const registrationDate = new Date(car.least_recently_registered!);
+        const registrationDate = new Date(car[K]! as string);
         const registrationMonth = registrationDate.getMonth();
         const registrationYear = registrationDate.getFullYear();
 
@@ -71,40 +70,66 @@ function MonthChart(cars: Car[]) {
             title: {
                 display: true,
                 text: "Số lượng xe đăng kiểm từng tháng qua các năm"
+            },
+            autocolors: {
+                offset: Math.floor(Math.random() * 5)
             }
         }
     }, chartData] as const
 }
 
-// function QuarterChart(cars: Car[]): ChartData<'line'> {
-//     const chartData: ChartData<'line'> = {
-//         labels: ['Quý 1', 'Quý 2', 'Quý 3', 'Quý 4'],
-//         datasets: []
-//     }
-//     const data = Array(4).fill(0);
+function QuarterChart(cars: Car[], K: keyof Car) {
+    const chartData: ChartData<'line'> = {
+        labels: ['Quý 1', 'Quý 2', 'Quý 3', 'Quý 4'],
+        datasets: []
+    }
 
-//     cars.forEach(car => {
-//         if (car.least_recently_registered !== undefined) {
-//             const registrationDate = new Date(car.least_recently_registered);
-//             const registrationMonth = registrationDate.getMonth();
-//             const registrationYear = registrationDate.getFullYear();
-//             const registrationQuarter = Math.floor(registrationMonth / 3);
+    const data = new Map<number, Array<number>>()
+    let yearsInData = new Array<number>()
 
-//             if (registrationYear === 2022) {
-//                 data[registrationQuarter] += 1;
-//             }
-//         }
-//     });
+    cars.forEach(car => {
+        const registrationDate = new Date(car[K]! as string);
+        const registrationMonth = registrationDate.getMonth();
+        const registrationYear = registrationDate.getFullYear();
 
-//     return [labels, data]
-// }
+        if (!data.has(registrationYear)) {
+            data.set(registrationYear, new Array<number>(4).fill(0))
+            yearsInData.push(registrationYear)
+        }
 
-function YearChart(cars: Car[]) {
+        const monthsArr = data.get(registrationYear)!
+        monthsArr[Math.floor(registrationMonth / 3)] += 1
+    });
+
+    yearsInData = yearsInData.sort((a, b) => a - b)
+
+    yearsInData.forEach(function (year) {
+        chartData.datasets.push({
+            label: String(year),
+            data: data.get(year)!,
+        })
+    })
+
+    return [{
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: "Số lượng xe đăng kiểm từng quý qua các năm"
+            },
+            autocolors: {
+                offset: Math.floor(Math.random() * 5)
+            }
+        }
+    }, chartData] as const
+}
+
+function YearChart(cars: Car[], K: keyof Car) {
     const years: number[] = [];
     const carQuantityByYear = new Map<number, number>();
 
     cars.forEach((car) => {
-        const registrationDate = new Date(car.least_recently_registered!);
+        const registrationDate = new Date(car[K]! as string);
         const registrationYear = registrationDate.getFullYear();
 
         if (carQuantityByYear.has(registrationYear)) {
@@ -138,34 +163,38 @@ function YearChart(cars: Car[]) {
             title: {
                 display: true,
                 text: "Số lượng xe đăng kiểm từng năm"
+            },
+            autocolors: {
+                offset: Math.floor(Math.random() * 5)
             }
         }
     }, chartData] as const
 }
 
-function Statistics({ type }: { type: Period }) {
+function Statistics({ type, K }: { type: Period, K: keyof Car }) {
     const [chartData, setChartData] = useState<ChartData<'line'>>()
-    const [options, setOptions] = useState<ChartOptions<'line'>>()
+    const options = useRef<ChartOptions<'line'>>()
     const { data: cars } = useData()
 
     useEffect(() => {
         if (type === Period.Month) {
-            const [o, d] = MonthChart(cars)
-            setOptions(o)
+            const [o, d] = MonthChart(cars, K)
+            options.current = o
+            setChartData(d)
+        } else if (type === Period.Quarter) {
+            const [o, d] = QuarterChart(cars, K)
+            options.current = o
             setChartData(d)
         }
         else if (type === Period.Year) {
-            const [o, d] = YearChart(cars)
-            setOptions(o)
+            const [o, d] = YearChart(cars, K)
+            options.current = o
             setChartData(d)
         }
-        // case Period.Quarter:
-        //     [labels, data] = QuarterChart(cars)
-        //     break
     }, [cars])
 
 
-    if (chartData !== undefined) return <> <Line options={options} data={chartData} /> </>;
+    if (chartData !== undefined) return <> <Line options={options.current} data={chartData} /> </>;
     else return <></>;
 }
 

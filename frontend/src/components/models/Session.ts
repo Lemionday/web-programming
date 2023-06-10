@@ -33,4 +33,4 @@ export function RoleToString(role: Role | undefined) {
 export interface Session {
     token: string;
     account?: Account
-};
+}

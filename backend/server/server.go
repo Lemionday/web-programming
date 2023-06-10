@@ -10,7 +10,9 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/rs/zerolog/log"
 	"github.com/theLemionday/web-programming/cached"
@@ -57,6 +59,15 @@ func Start(cfg *conf.Config) {
 
 	middleware.SetupNanoID(21)
 
+	app.Use(favicon.New())
+
+	app.Use(cache.New(cache.Config{
+		Next: func(c *fiber.Ctx) bool {
+			return c.Query("refresh") == "true"
+		},
+		Expiration:   30 * time.Minute,
+		CacheControl: true,
+	}))
 	// database
 	database.NewConnection(cfg)
 	// database.CheckConnection()
