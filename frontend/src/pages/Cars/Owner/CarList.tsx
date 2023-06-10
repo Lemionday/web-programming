@@ -1,9 +1,9 @@
-import { Fragment, useEffect, useState } from "react";
-import { Car } from "../../../components/models/Car";
-import { useAuth } from "../../../components/hooks/useAuth";
-import { CarInfomation, FetchCarInformation } from "../CarInfomation";
 import { Accordion, AccordionBody, AccordionHeader, Typography } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../../components/hooks/useAuth";
+import { Car } from "../../../components/models/Car";
 import { CapitalizeFirstLetter } from "../../../components/util/util";
+import { CarInfomation, FetchCarInformation } from "../CarInfomation";
 
 export default function CarsListTable({ carsList: carsList }: { carsList: string[] }) {
     const [cars, setCars] = useState<Car[]>([])

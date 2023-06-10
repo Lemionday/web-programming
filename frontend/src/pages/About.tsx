@@ -1,4 +1,4 @@
-import { Avatar, Card, CardBody, CardHeader, Navbar, Typography } from "@material-tailwind/react";
+import { Card, CardBody, CardHeader, Typography } from "@material-tailwind/react";
 import NavBar from "../components/shared/Navbar";
 
 export default function AboutPage() {

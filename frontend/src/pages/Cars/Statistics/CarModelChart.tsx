@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { ChartData, ChartOptions } from 'chart.js';
+import { useEffect, useRef, useState } from 'react';
 import { PolarArea } from 'react-chartjs-2';
 import { Car } from '../../../components/models/Car';
-import { useData } from './RegisteredCars';
 import { CapitalizeFirstLetter } from '../../../components/util/util';
+import { useData } from './RegisteredCars';
 
 
 export function CarModelChart({ T, minPercent, title }: { T: keyof Car; minPercent?: number; title: string; }) {

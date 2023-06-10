@@ -1,11 +1,11 @@
+import { Card, CardBody, CardFooter, CardHeader, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import { config } from "../../../conf/config";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../../components/hooks/useAuth";
-import { Card, CardBody, CardFooter, CardHeader, Typography } from "@material-tailwind/react";
-import OwnerIsPersonProfile from "./Person";
-import OwnerIsCompanyProfile from "./Company";
+import { config } from "../../../conf/config";
 import CarsListTable from "./CarList";
+import OwnerIsCompanyProfile from "./Company";
+import OwnerIsPersonProfile from "./Person";
 
 export default function OwnerProfile() {
     const { ownerId } = useParams()

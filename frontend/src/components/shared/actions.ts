@@ -1,7 +1,3 @@
-import { useAuth } from "../hooks/useAuth"
-import { useLocalStorage } from "../hooks/useLocalStorage"
-import { Session } from "../models/Session"
-
 async function api<T>(url: string, init?: RequestInit): Promise<T> {
     const response = await fetch(url, init)
     if (!response.ok) {

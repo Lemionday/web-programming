@@ -1,22 +1,22 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import ProtectedLayout from './components/layout/Protected';
-import DashboardPage from './pages/Dashboard';
-import { HomePage } from './pages/Home';
-import ErrorPage from './pages/Error';
 import { AuthLayout } from './components/layout/Auth';
-import HomeLayout from './components/layout/Home';
-import RegisterPage from './pages/Signup';
-import LoginPage from './pages/Login';
-import AccountsPage from './pages/Accounts';
 import { BaseLayout } from './components/layout/Base';
-import CentersListPage from './pages/Centers';
+import HomeLayout from './components/layout/Home';
+import ProtectedLayout from './components/layout/Protected';
 import { config } from './conf/config';
 import AboutPage from './pages/About';
-import CarsStatisticsPage, { DataProvider } from './pages/Cars/Statistics/RegisteredCars';
-import CarInformationPage from './pages/Cars/CarInfomation';
+import AccountsPage from './pages/Accounts';
 import CarsListPage from './pages/Cars/AllCarsList';
+import CarInformationPage from './pages/Cars/CarInfomation';
 import OwnerProfile from './pages/Cars/Owner/OwnerProfile';
 import InvalidatedCarsStatisticsPage from './pages/Cars/Statistics/InvalidatedCars';
+import CarsStatisticsPage from './pages/Cars/Statistics/RegisteredCars';
+import CentersListPage from './pages/Centers';
+import DashboardPage from './pages/Dashboard';
+import ErrorPage from './pages/Error';
+import { HomePage } from './pages/Home';
+import LoginPage from './pages/Login';
+import RegisterPage from './pages/Signup';
 
 const router = createBrowserRouter([
   {

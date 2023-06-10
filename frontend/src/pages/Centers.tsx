@@ -1,10 +1,10 @@
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import { Button, Card, CardBody, CardFooter, Typography } from "@material-tailwind/react";
 import * as React from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TableVirtuoso } from 'react-virtuoso';
-import { config } from '../conf/config';
-import { Card, Typography, CardFooter, Button, CardBody } from "@material-tailwind/react";
-import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import NavbarComponent from '../components/shared/Navbar';
+import { config } from '../conf/config';
 interface Center {
     idx: number;
     id: string

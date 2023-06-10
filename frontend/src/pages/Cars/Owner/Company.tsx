@@ -1,7 +1,6 @@
-import { CardBody, Typography } from "@material-tailwind/react";
-import { OwnerIsCompany, OwnerIsPerson } from "../../../components/models/Owner";
-import { CapitalizeFirstLetter, FormatDateToString } from "../../../components/util/util";
-import { useTimelineItem } from "@material-tailwind/react/components/Timeline/TimelineItem";
+import { Typography } from "@material-tailwind/react";
+import { OwnerIsCompany } from "../../../components/models/Owner";
+import { CapitalizeFirstLetter } from "../../../components/util/util";
 import OwnerIsPersonProfile from "./Person";
 
 export default function OwnerIsCompanyProfile({ owner: companyOwner }: { owner: OwnerIsCompany }) {

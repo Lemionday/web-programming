@@ -1,5 +1,4 @@
-import Avatar from "../avatar/Avatar";
-import { OwnerIsCompany, OwnerIsPerson } from "../models/Owner";
+import { OwnerIsPerson } from "../models/Owner";
 
 export default function Profile({ data }: { data: OwnerIsPerson }) {
 

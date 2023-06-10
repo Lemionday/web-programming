@@ -1,13 +1,12 @@
-import React from "react";
 import {
-    Navbar,
-    MobileNav,
-    Typography,
     Button,
-    IconButton,
     Collapse,
+    IconButton,
+    Navbar,
+    Typography
 } from "@material-tailwind/react";
-import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function NavbarComponent() {
     const [openNav, setOpenNav] = React.useState(false);

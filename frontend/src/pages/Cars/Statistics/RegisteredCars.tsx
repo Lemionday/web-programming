@@ -1,13 +1,12 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { Typography } from "@material-tailwind/react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useAuth } from "../../../components/hooks/useAuth";
 import { Car } from "../../../components/models/Car";
 import { Period } from "../../../components/models/Period";
-import { config } from "../../../conf/config";
-import { useAuth } from "../../../components/hooks/useAuth";
-import Statistics from "./RegisteredCharts";
-import { CarModelChart } from './CarModelChart';
-import CarsListPage from "../AllCarsList";
-import { Typography } from "@material-tailwind/react";
 import { Role } from "../../../components/models/Session";
+import { config } from "../../../conf/config";
+import { CarModelChart } from './CarModelChart';
+import Statistics from "./RegisteredCharts";
 
 async function fetchData(token: string, period: Period, center: string): Promise<Car[]> {
     try {
