@@ -6,8 +6,9 @@ import {
     Card,
     Typography
 } from "@material-tailwind/react";
-import NavbarComponent from "../components/shared/Navbar";
 import { useNavigate } from "react-router-dom";
+import NavbarComponent from "../components/shared/Navbar";
+import { config } from "../conf/config";
 
 export function HomePage() {
     const navigate = useNavigate()
@@ -24,9 +25,9 @@ export function HomePage() {
             <div className="mx-auto max-w-screen-md py-12">
                 <Card className="mb-12 overflow-hidden">
                     <img
-                        alt="aston martin"
+                        alt="toyota vios"
                         className="h-full w-full object-cover object-center"
-                        src="./src/assets/images/Toyota-Vios-White.jpg"
+                        src={`${config.baseUrl}/images/Toyota-Vios-White.jpg`}
                     />
                 </Card>
                 <Typography variant="h2" color="blue" className="mb-2">

@@ -40,10 +40,10 @@ export default function LoginPage() {
     }
 
     return (
-        <div className={`flex flex-col items-center justify-center align-middle w-screen h-screen
+        <div className={`flex flex-col justify-center w-screen h-screen
         bg-no-repeat bg-cover bg-center bg-fixed
-        bg-[url('../images/wallpaperflare.com_wallpaper-1-1.jpg')]`}>
-            <Card className="w-1/3 mt-20">
+        bg-[url('../images/pexels-jeerayut-rianwed-144171.jpg')]`}>
+            <Card className="w-1/3 ml-20">
                 <CardHeader
                     variant="gradient"
                     color="blue"
