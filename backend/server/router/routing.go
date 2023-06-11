@@ -8,40 +8,30 @@ import (
 )
 
 func RegisterRoutes(app *fiber.App, jwtSecret string) {
-	// public
-	app.Static("/", "./public")
+	api := app.Group("/api")
 
-	app.Get("/api", func(c *fiber.Ctx) error {
+	api.Get("/api", func(c *fiber.Ctx) error {
 		return c.JSON(&fiber.Map{
 			"message": "Hello from server",
 		})
 	})
 
-	app.Get("/setuptest",
-		// testSetupAddAccounts,
-		TestSetupAddCarres)
-	// app.Post("/add", func(c *fiber.Ctx) error {
-	// 	acc := schematic.Account{
-	// 		Username: "tester",
-	// 		Password: "testerpwd",
-	// 		Role:     schematic.Admin,
-	// 	}
-	// 	schematic.AddAccount(&acc)
-	// 	return nil
-	// })
+	api.Get("/setuptest", TestSetupAddCarres)
+	api.Post("/login", schematic.ValidateAccountDataFromRequest, handler.Login)
+	api.Get("/centers", handler.GetCentersWithPaging)
+	api.Get("/center/getall", handler.GetAllCenters)
 
-	app.Post("/login", schematic.ValidateAccountDataFromRequest, handler.Login)
-	app.Get("/centers", handler.GetCentersWithPaging)
-	app.Get("/center/getall", handler.GetAllCenters)
+	app.Static("/api", "./public")
 
 	// jwt
 	middleware.SetupJWT(app, jwtSecret)
-	app.Use(middleware.AuthRequired)
+	protected := app.Group("/protected", middleware.AuthRequired)
+	// api.Use(middleware.AuthRequired)
 
 	// protected
-	app.Get("/hello", hello)
+	api.Get("/hello", hello)
 
-	account_grp := app.Group("/account", middleware.RoleRequired(schematic.AuthorizedFromMainCenter))
+	account_grp := protected.Group("/account", middleware.RoleRequired(schematic.AuthorizedFromMainCenter))
 	account_grp.Post("/signup", schematic.ValidateAccountDataFromRequest, handler.SignupAccount)
 	account_grp.Get("/page", handler.GetAccountsWithPaging)
 	account_grp.Get("/getall", handler.GetAllAccountsHandler)
@@ -52,10 +42,13 @@ func RegisterRoutes(app *fiber.App, jwtSecret string) {
 	// period: month | quarter | year
 	// center: main | <:center_id>
 	// app.Get("/cars/statistics/invalidated", handler.GetInvalidatedCars)
-	car_grp := app.Group("/car")
+	car_grp := protected.Group("/car")
 	car_grp.Get("/statistics", handler.GetAllCarsStatistics)
 	car_grp.Get("/information/:plate", handler.GetCarInformation)
-	app.Get("/owner/:id", handler.GetOwner)
+
+	protected.Get("/owner/:id", handler.GetOwner)
+
+	// public
 }
 
 func hello(c *fiber.Ctx) error {

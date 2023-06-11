@@ -5,33 +5,29 @@ import { Account, Session } from '../models/Session';
 import { useLocalStorage } from './useLocalStorage';
 
 async function loginAPI(accountData: Account) {
-    try {
-        // console.log(accountData)
-        const result = await fetch(`${config.baseUrl}/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: accountData.username,
-                password: accountData.password,
-            }),
-        });
+    // console.log(accountData)
+    const result = await fetch(`${config.publicUrl}/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: accountData.username,
+            password: accountData.password,
+        }),
+    });
 
-        if (!result.ok) {
-            alert(result);
-            return;
-        }
-
-        return await result.json();
-    } catch (err) {
-        console.log(err);
+    const data = await result.json()
+    if (!result.ok) {
+        return [data.err as string, { token: "", account: undefined }] as const
     }
+
+    return ["", data];
 }
 
 interface AuthContextType {
     session: Session;
-    login: (user: Account) => void;
+    login: (user: Account) => Promise<string>;
     logout: () => void;
 }
 
@@ -43,8 +39,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // call this function when you want to authenticate the user
     const login = async (userData: Account) => {
-        const res = await loginAPI(userData);
+        const [error, res] = await loginAPI(userData);
+        if (error !== "") return error
         setSession({ token: res.token, account: res.account });
+
         navigate("/dashboard");
     };
 

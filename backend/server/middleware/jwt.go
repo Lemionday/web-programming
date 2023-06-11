@@ -4,8 +4,9 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	jwtware "github.com/gofiber/jwt/v3"
-	"github.com/golang-jwt/jwt/v4"
+
+	jwtware "github.com/gofiber/contrib/jwt"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/rs/zerolog/log"
 	"github.com/theLemionday/web-programming/schematic"
 )
@@ -17,7 +18,7 @@ var (
 func SetupJWT(app *fiber.App, jwtSecret string) {
 	JwtSecret = []byte(jwtSecret)
 	app.Use(jwtware.New(jwtware.Config{
-		SigningKey: JwtSecret,
+		SigningKey: jwtware.SigningKey{Key: JwtSecret},
 	}))
 }
 

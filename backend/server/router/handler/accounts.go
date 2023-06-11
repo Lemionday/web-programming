@@ -109,11 +109,11 @@ func Login(c *fiber.Ctx) error {
 	account, err := schematic.Authenticate(c.Locals("username").(string), c.Locals("password").(string))
 	if err == mongo.ErrNoDocuments {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"err": fmt.Sprintf("No account with username %s", c.Locals("username")),
+			"err": fmt.Sprintf("Tài khoản không tồn tại: %s", c.Locals("username")),
 		})
 	} else if err == bcrypt.ErrMismatchedHashAndPassword {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"err": "Wrong password",
+			"err": "Sai mật khẩu",
 		})
 	} else if err != nil {
 		log.Error().Stack().Err(err).Msg("")
@@ -124,7 +124,7 @@ func Login(c *fiber.Ctx) error {
 	if err != nil {
 		log.Error().Err(err).Msg("")
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"err": "Cannot generate token for you!",
+			"err": "Không thể tạo jwt token!",
 		})
 	}
 

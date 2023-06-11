@@ -30,7 +30,7 @@ function AvatarAndUsername({ username, avatar }: { username: string, avatar?: nu
     return (
         <div className="flex items-center gap-3">
             <Avatar
-                src={`${config.baseUrl}/avatar/${String(avatar)}.svg`}
+                src={`${config.publicUrl}/avatar/${String(avatar)}.svg`}
                 alt={username} size="sm" />
             <div className="flex flex-col">
                 <Typography variant="small" color="blue-gray" className="font-normal">
@@ -70,7 +70,7 @@ function AccountsTable() {
     useEffect(() => {
         (async function () {
             try {
-                const data = await GetAllWithAuthentication<Account>({ url: `${config.baseUrl}/account/getall`, token: auth.session.token })
+                const data = await GetAllWithAuthentication<Account>({ url: `${config.protectedUrl}/account/getall`, token: auth.session.token })
                 setAccounts(data);
             }
             catch (error) {
@@ -120,7 +120,7 @@ function AccountsTable() {
                                     return
                                 }
 
-                                const res = await fetch(`${config.baseUrl}/account/delete/${username}`, {
+                                const res = await fetch(`${config.protectedUrl}/account/delete/${username}`, {
                                     method: "DELETE",
                                     headers: {
                                         "Authorization": `Bearer ${auth.session.token}`

@@ -103,7 +103,7 @@ function PagingTable() {
                 id = "";
             }
 
-            const res = await fetch(`${config.baseUrl}/centers?` + new URLSearchParams({
+            const res = await fetch(`${config.publicUrl}/centers?` + new URLSearchParams({
                 last_id: id,
             }));
 

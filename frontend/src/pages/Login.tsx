@@ -17,6 +17,7 @@ export default function LoginPage() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [isShowPassword, setIsShowPassword] = useState(false);
+    const [error, setError] = useState<string>()
 
     function ShowPasswordButton() {
         return <IconButton
@@ -33,10 +34,13 @@ export default function LoginPage() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        auth.login({
-            username: username,
-            password: password,
-        })
+        (async function () {
+            const res = await auth.login({
+                username: username,
+                password: password,
+            })
+            setError(res)
+        })()
     }
 
     return (
@@ -68,6 +72,7 @@ export default function LoginPage() {
                             />
                             <ShowPasswordButton />
                         </div>
+                        <p className="mt-2 text-sm text-red-600 dark:text-red-500">{error}</p>
                         {/* <div className="-ml-2.5">
                         <Checkbox label="Remember Me" />
                     </div> */}

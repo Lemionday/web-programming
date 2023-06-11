@@ -1,26 +1,30 @@
-import { ChartData, ChartOptions } from 'chart.js';
-import { useEffect, useRef, useState } from 'react';
+import { ArcElement, Chart, ChartData, Chart as ChartJS, ChartOptions, Colors, Legend, RadialLinearScale, Tooltip } from 'chart.js';
+import { useEffect, useState } from 'react';
 import { PolarArea } from 'react-chartjs-2';
 import { Car } from '../../../components/models/Car';
 import { CapitalizeFirstLetter } from '../../../components/util/util';
 import { useData } from './RegisteredCars';
 
+ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
+Chart.register(Colors);
+
+const options: ChartOptions<'polarArea'> = {
+    plugins: {
+        colors: {
+            enabled: true
+        }
+        // autocolors: {
+        //     mode: 'dataset',
+        //     offset: Math.floor(Math.random() * 3)
+        // }
+    }
+}
 
 export function CarModelChart({ T, minPercent, title }: { T: keyof Car; minPercent?: number; title: string; }) {
     const [chartData, setChartData] = useState<ChartData<'polarArea'>>({ labels: [], datasets: [] });
     const { data: cars } = useData();
-    const options = useRef<ChartOptions<'polarArea'>>()
 
     useEffect(() => {
-        options.current = {
-            plugins: {
-                autocolors: {
-                    mode: 'data',
-                    offset: Math.floor(Math.random() * 5)
-                }
-            }
-        }
-
         const data = new Map<string, number>();
         if (minPercent === undefined) {
             minPercent = 0;
@@ -57,12 +61,20 @@ export function CarModelChart({ T, minPercent, title }: { T: keyof Car; minPerce
             labels: labels,
             datasets: [{
                 label: title,
-                data: dataValues
+                data: dataValues,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)',
+                ],
             }]
         });
     }, [cars]);
 
     return <div>
-        <PolarArea options={options.current} data={chartData} />
+        <PolarArea options={options} data={chartData} />
     </div>;
 }

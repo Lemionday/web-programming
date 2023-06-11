@@ -15,7 +15,7 @@ export default function OwnerProfile() {
 
     useEffect(() => {
         (async function () {
-            const res = await fetch(`${config.baseUrl}/owner/${ownerId}`, {
+            const res = await fetch(`${config.protectedUrl}/owner/${ownerId}`, {
                 headers: {
                     "Authorization": `Bearer ${auth.session.token}`,
                 },

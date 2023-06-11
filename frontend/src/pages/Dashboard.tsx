@@ -2,9 +2,9 @@ import { Typography } from '@material-tailwind/react';
 
 import {
     Card,
-    CardHeader,
     CardBody,
     CardFooter,
+    CardHeader,
     Tooltip,
 } from "@material-tailwind/react";
 import { useAuth } from '../components/hooks/useAuth';
@@ -16,7 +16,7 @@ function Profile({ account }: { account: Account }) {
         <Card className="w-120">
             <CardHeader floated={false} className="bg-gray-800 h-80 flex flex-col justify-center items-center">
                 <img
-                    src={`${config.baseUrl}/avatar/${account.avatar}.svg`}
+                    src={`${config.publicUrl}/avatar/${account.avatar}.svg`}
                     alt="avatar" />
             </CardHeader>
             <CardBody className="text-center">

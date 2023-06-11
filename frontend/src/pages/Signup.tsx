@@ -10,7 +10,7 @@ import { config } from '../conf/config';
 
 async function signUpAction(auth: string, newUser: { username: string, password: string }) {
     try {
-        const result = await fetch(`${config.baseUrl}/account/signup`, {
+        const result = await fetch(`${config.protectedUrl}/account/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export default function RegisterPage() {
             helperText = "Tên đăng nhập quá dài, cần ngắn hơn 25 ký tự";
         }
 
-        fetch(`${config.baseUrl}/account/check/${username}`, {
+        fetch(`${config.protectedUrl}/account/check/${username}`, {
             headers: {
                 "Authorization": `Bearer ${auth.session.token}`,
             },

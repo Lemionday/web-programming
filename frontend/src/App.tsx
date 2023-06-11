@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             path: '/centers',
             element: <CentersListPage />,
             loader: async function () {
-              return fetch(`${config.baseUrl}/center/getall`);
+              return fetch(`${config.protectedUrl}/center/getall`);
             }
           },
           {
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
                 path: '/account/register',
                 element: <RegisterPage />,
                 loader: async function () {
-                  return fetch(`${config.baseUrl}/center/getall`)
+                  return fetch(`${config.publicUrl}/center/getall`)
                 }
               },
               { path: '/accounts', element: <AccountsPage /> },

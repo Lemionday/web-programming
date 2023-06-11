@@ -1,4 +1,6 @@
+const baseUrl = "http://localhost:8081"
 export const config = {
-    baseUrl: "http://localhost:8081",
+    publicUrl: `${baseUrl}/api`,
+    protectedUrl: `${baseUrl}/protected`,
     // baseUrl: "http://3.1.105.194",
 }

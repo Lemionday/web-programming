@@ -2,3 +2,9 @@ set dotenv-load
 
 start-server:
     go run cmd/rfb/main.go
+
+build:
+    go build -o bin/server cmd/rfb/main.go
+
+start:
+    bin/server

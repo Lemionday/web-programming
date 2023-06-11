@@ -166,7 +166,7 @@ export default function SideBar() {
             <Card className="ml-2 my-2 h-[calc(100vh-1rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
                 <div className="flex items-center mx-auto">
                     <Avatar
-                        src={`${config.baseUrl}/avatar/${String(auth.session.account?.avatar)}.svg`}
+                        src={`${config.publicUrl}/avatar/${String(auth.session.account?.avatar)}.svg`}
                         withBorder={true}
                         color="green"
                         className="p-1"

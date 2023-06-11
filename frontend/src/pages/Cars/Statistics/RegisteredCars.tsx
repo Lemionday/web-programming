@@ -10,7 +10,7 @@ import Statistics from "./RegisteredCharts";
 
 async function fetchData(token: string, period: Period, center: string): Promise<Car[]> {
     try {
-        const res = await fetch(`${config.baseUrl}/car/statistics?` + new URLSearchParams({
+        const res = await fetch(`${config.protectedUrl}/car/statistics?` + new URLSearchParams({
             period: period,
             center: center,
         }), {

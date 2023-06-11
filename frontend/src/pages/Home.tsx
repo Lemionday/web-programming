@@ -27,7 +27,7 @@ export function HomePage() {
                     <img
                         alt="toyota vios"
                         className="h-full w-full object-cover object-center"
-                        src={`${config.baseUrl}/images/Toyota-Vios-White.jpg`}
+                        src={`${config.publicUrl}/images/Toyota-Vios-White.jpg`}
                     />
                 </Card>
                 <Typography variant="h2" color="blue" className="mb-2">

@@ -8,7 +8,7 @@ import { CapitalizeFirstLetter, FormatDateToString } from "../../components/util
 import { config } from "../../conf/config";
 
 export async function FetchCarInformation(token: string, plate: string): Promise<Car> {
-    const res = await fetch(`${config.baseUrl}/car/information/${plate}`, {
+    const res = await fetch(`${config.protectedUrl}/car/information/${plate}`, {
         headers: {
             "Authorization": `Bearer ${token}`,
         },
